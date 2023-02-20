@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Property } from 'src/app/models/property';
 
 @Component({
@@ -9,13 +9,8 @@ import { Property } from 'src/app/models/property';
 
 export class PropertyCardComponent implements OnInit {
 
-  // Property model
-  property: Property = { 
-    id: "1", 
-    name: "Birla House", 
-    type: "House", 
-    price: 12000 
-  };
+  // Received data in property list component
+  @Input() property: Property = new Property();
 
   constructor() { }
 
