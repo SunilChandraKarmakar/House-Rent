@@ -1,8 +1,22 @@
 <div class="card shadow-lg">
-  <img src="../../../../assets/images/house_default.jpg" class="card-img-top">
+  <div class="card-image-wrap">
+    <img src="../../../../assets/images/house_default.jpg" class="card-img-top">
+    <ul class="list-inline text-center member-icon animation-button">
+      <li class="list-inline-item">
+        <button class="btn btn-primary">
+          <i class="fa-regular fa-pen-to-square"></i>
+        </button>
+      </li>
+      <li class="list-inline-item">
+        <button class="btn btn-primary">
+          <i class="fa-regular fa-address-book"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
   <div class="card-body">
-    <h3>{{ property.name }}</h3>
-    <h4>{{ property.type }}</h4>
-    <h5>{{ property.price }}</h5>
+    <h5>{{ property.name }}</h5>
+    <h6>{{ property.type }}</h6>
+    <h6>{{ property.price }}</h6>
   </div>
 </div>
