@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Property } from 'src/app/models/property';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
   selector: 'app-property-list',
@@ -10,17 +11,18 @@ import { Property } from 'src/app/models/property';
 export class PropertyListComponent implements OnInit {
 
   // Data source
-  propertyDataSource: Property[] = [
-    { id: "1", name: "Birla House", type: "House", price: 12000 },
-    { id: "2", name: "Erose Villa", type: "Villa", price: 10000 },
-    { id: "3", name: "Bob Duplex House", type: "Duplex House", price: 15000 },
-    { id: "1", name: "Macro House", type: "House", price: 11000 },
-    { id: "1", name: "Pearl White House", type: "House", price: 16000 }
-  ];
+  propertyDataSource: Property[];
 
-  constructor() { }
+  constructor(private _propertyService: PropertyService) { }
 
   ngOnInit() {
+    this._propertyService.getAll().subscribe((res: Property[]) => {
+      this.propertyDataSource = res;
+    },
+    (error) => {
+      console.log(error);
+    })
+    
   }
 
 }
