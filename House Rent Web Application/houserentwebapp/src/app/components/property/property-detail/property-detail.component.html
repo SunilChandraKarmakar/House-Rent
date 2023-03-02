@@ -1,4 +1,13 @@
 <p>
   property-detail id == {{ propertyId }}.
-  <button class="btn btn-primary" (click)="onBack()">Back</button>
 </p>
+<div class="action-button">
+  <button class="btn btn-primary" (click)="onBack()">Back</button>
+  <button class="btn btn-primary" (click)="onNextPage()" style="margin-left: 3px;">Goto Next Page</button>
+</div>
+<div class="pagination-sm mt-3">
+  <button class="btn btn-primary" routerLink="/property-detail/1">1</button>
+  <button class="btn btn-primary" routerLink="/property-detail/2">2</button>
+  <button class="btn btn-primary" routerLink="/property-detail/3">3</button>
+  <button class="btn btn-primary" routerLink="/property-detail/4">4</button>
+</div>

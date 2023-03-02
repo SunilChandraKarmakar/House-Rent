@@ -1,6 +1,7 @@
 <div class="card shadow-lg">
   <div class="card-image-wrap">
-    <img src="../../../../assets/images/house_default.jpg" class="card-img-top">
+    <img *ngIf="property.image" src="../../../../assets/images/{{property.image}}" class="card-img-top">
+    <img *ngIf="!property.image" src="../../../../assets/images/house_default.jpg" class="card-img-top">
     <ul class="list-inline text-center member-icon animation-button">
       <li class="list-inline-item">
         <button class="btn btn-primary" routerLink="property-detail/{{property.id}}">

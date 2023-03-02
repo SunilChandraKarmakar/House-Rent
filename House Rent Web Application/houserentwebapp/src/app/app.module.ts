@@ -9,6 +9,7 @@ import { PropertyListComponent } from './components/property/property-list/prope
 import { HttpClientModule } from '@angular/common/http';
 import { AddPropertyComponent } from './components/property/add-property/add-property.component';
 import { PropertyDetailComponent } from './components/property/property-detail/property-detail.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PropertyDetailComponent } from './components/property/property-detail/p
     PropertyListComponent,
     NavBarComponent,
     AddPropertyComponent,
-    PropertyDetailComponent
+    PropertyDetailComponent,
+    PageNotFoundComponent
   ],
 
   imports: [

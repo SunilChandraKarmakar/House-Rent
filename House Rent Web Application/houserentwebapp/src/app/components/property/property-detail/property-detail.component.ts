@@ -15,7 +15,10 @@ export class PropertyDetailComponent implements OnInit {
   constructor(private _activatedRoute: ActivatedRoute, private _router: Router) { }
 
   ngOnInit() {
-    this.propertyId = this._activatedRoute.snapshot.params["id"];
+    this.propertyId = +this._activatedRoute.snapshot.params["id"];
+    this._activatedRoute.params.subscribe((res) => {
+      this.propertyId = +res["id"];
+    });
   }
 
 
@@ -23,4 +26,8 @@ export class PropertyDetailComponent implements OnInit {
     this._router.navigate(["/"]);
   }
 
+  onNextPage(): void {
+    this.propertyId = this.propertyId! + 1;
+    this._router.navigate([`property-detail/${this.propertyId}`])
+  }
 }

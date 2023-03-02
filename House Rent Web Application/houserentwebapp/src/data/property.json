@@ -3,29 +3,40 @@
         "id": "1", 
         "name": "Birla House", 
         "type": "House", 
-        "price": 12000 
+        "price": 12000,
+        "sellRent": 1,
+        "image": "house_1.png"
     },
     { 
         "id": "2", 
         "name": "Erose Villa", 
         "type": "Villa", 
-        "price": 10000 
+        "price": 10000,
+        "sellRent": 1,
+        "image": "house_2.png" 
     },
     { 
         "id": "3", 
         "name": "Bob Duplex House", 
         "type": "Duplex House", 
-        "price": 15000 
+        "price": 15000,
+        "sellRent": 2,
+        "image": "house_3.png"
     },
     { 
-        "id": "1", 
+        "id": "4", 
         "name": "Macro House", 
         "type": "House", 
-        "price": 11000 },
+        "price": 11000,
+        "sellRent": 2,
+        "image": "house_4.png" 
+    },
     { 
-        "id": "1", 
+        "id": "5", 
         "name": "Pearl White House", 
         "type": "House", 
-        "price": 16000 
+        "price": 16000,
+        "sellRent": 2,
+        "image": "" 
     }
 ]
