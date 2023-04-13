@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddPropertyComponent } from './components/property/add-property/add-property.component';
 import { PropertyDetailComponent } from './components/property/property-detail/property-detail.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
 
   providers: [],
