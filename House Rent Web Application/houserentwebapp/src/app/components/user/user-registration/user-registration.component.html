@@ -1,0 +1,60 @@
+<!-- This is reactive form module code example -->
+<div class="row justify-content-center align-content-center registration-form">
+  <div class="col-md-6 col-sm-6 col-6">
+    <div class="card shadow-lg">
+      <h5 class="card-header">Register</h5>
+      <div class="card-body">
+        <form class="row g-3" autocomplete="off" [formGroup]="reactiveFormGroup" (ngSubmit)="onSubmit()">
+          <div class="col-md-12">
+            <label for="userName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="userName" formControlName="userName">
+            <span class="text-danger" *ngIf="userName.invalid && userName.touched">
+              Please, provied user name.
+            </span>
+          </div>
+          <div class="col-md-12">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email">
+            <span class="text-danger" *ngIf="email.invalid && email.touched">
+              <span *ngIf="email.hasError('required')">Please, provied email address.</span>
+              <span *ngIf="email.hasError('email')">Please, provied valid email address.</span>
+              <span *ngIf="email.hasError('minlength')">At last enter 10 character.</span>
+            </span>
+          </div>
+          <div class="col-md-12">
+            <label for="mobile" class="form-label">Mobile</label>
+            <input type="number" class="form-control" id="mobile" formControlName="mobile">
+            <span class="text-danger" *ngIf="mobile.invalid && mobile.touched">
+              <span *ngIf="mobile.hasError('required')">Please, provied mobile number.</span>
+              <span *ngIf="mobile.hasError('min')">At last enter 11 numbers.</span>
+            </span>
+          </div>
+          <div class="col-md-12">
+            <label for="password" class="form-label">Passwprd</label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+            <span class="text-danger" *ngIf="password.invalid && password.touched">
+              <span *ngIf="password.hasError('required')">Please, provied password.</span>
+              <span *ngIf="password.hasError('pattern')">At last enter 8 numbers.</span> 
+            </span>
+          </div>
+          <div class="col-md-12">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword">
+            <span class="text-danger" *ngIf="confirmPassword.invalid && confirmPassword.touched">
+              <span *ngIf="confirmPassword.hasError('required')">Please, provied password.</span>
+              <span *ngIf="confirmPassword.hasError('pattern')">At last enter 8 numbers.</span> 
+            </span>
+            <span class="text-danger" 
+              *ngIf="confirmPassword.valid && confirmPassword.hasError('confirmPasswordMatchingValidatior')">
+              Password not match.
+            </span>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-success">Register</button>
+            <a class="btn btn-primary ms-1" href="#">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
