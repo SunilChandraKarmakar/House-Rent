@@ -50,7 +50,7 @@
             </span>
           </div>
           <div class="col-12">
-            <button type="submit" class="btn btn-success">Register</button>
+            <button type="submit" class="btn btn-success" [disabled]="reactiveFormGroup.invalid">Register</button>
             <a class="btn btn-primary ms-1" href="#">Cancel</a>
           </div>
         </form>
