@@ -9,7 +9,7 @@ export class UserService {
 
   constructor() { }
 
-  AddUser(user: User): void {
+  addUser(user: User): void {
     localStorage.setItem("_user", JSON.stringify(user));
   }
 }

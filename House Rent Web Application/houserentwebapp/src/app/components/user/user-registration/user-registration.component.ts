@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-registration',
@@ -17,7 +18,7 @@ export class UserRegistrationComponent implements OnInit {
   // User model
   private _userModel: User = new User();
 
-  constructor(private _formBuilder: FormBuilder, private _userService: UserService) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private tosterService: ToastrService) { }
 
   ngOnInit() {
     this.prepiredRegistrationForm();
@@ -25,7 +26,7 @@ export class UserRegistrationComponent implements OnInit {
 
   // Prepired registration form
   private prepiredRegistrationForm(): void {
-    this.reactiveFormGroup = this._formBuilder.group({
+    this.reactiveFormGroup = this.formBuilder.group({
       userName: [null, Validators.required],
       email: [null, [Validators.required, Validators.email, Validators.minLength(10)]],
       mobile: [null, [Validators.required, Validators.min(1000000000), Validators.max(999999999999)]],
@@ -77,7 +78,8 @@ export class UserRegistrationComponent implements OnInit {
     this._userModel.mobile = this.reactiveFormGroup.get("mobile")?.value;
     this._userModel.password = this.reactiveFormGroup.get("password")?.value;
     
-    this._userService.AddUser(this._userModel);
+    this.userService.addUser(this._userModel);
+    this.tosterService.success("User registration successfull.", "Success");
     this.reactiveFormGroup.reset();
   }
 }
