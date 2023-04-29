@@ -6,10 +6,10 @@
         <h5>Register</h5>
       </div>      
       <div class="card-body">
-        <form class="row g-3" autocomplete="off" [formGroup]="reactiveFormGroup" (ngSubmit)="onSubmit()">
+        <form class="row g-3" autocomplete="off" [formGroup]="registrationFormGroup" (ngSubmit)="onSubmit()">
           <div class="col-md-12">
             <label for="userName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="userName" formControlName="userName">
+            <input type="text" class="form-control" id="userName" name="userName" formControlName="userName">
             <span class="text-danger" *ngIf="userName.invalid && userName.touched">
               Please, provied user name.
             </span>
@@ -25,7 +25,7 @@
           </div>
           <div class="col-md-12">
             <label for="mobile" class="form-label">Mobile</label>
-            <input type="number" class="form-control" id="mobile" formControlName="mobile">
+            <input type="number" class="form-control" id="mobile" name="mobile" formControlName="mobile">
             <span class="text-danger" *ngIf="mobile.invalid && mobile.touched">
               <span *ngIf="mobile.hasError('required')">Please, provied mobile number.</span>
               <span *ngIf="mobile.hasError('min')">At last enter 11 numbers.</span>
@@ -33,7 +33,7 @@
           </div>
           <div class="col-md-12">
             <label for="password" class="form-label">Passwprd</label>
-            <input type="password" class="form-control" id="password" formControlName="password">
+            <input type="password" class="form-control" id="password" name="password" formControlName="password">
             <span class="text-danger" *ngIf="password.invalid && password.touched">
               <span *ngIf="password.hasError('required')">Please, provied password.</span>
               <span *ngIf="password.hasError('pattern')">At last enter 8 numbers.</span> 
@@ -41,7 +41,7 @@
           </div>
           <div class="col-md-12">
             <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword">
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword">
             <span class="text-danger" *ngIf="confirmPassword.invalid && confirmPassword.touched">
               <span *ngIf="confirmPassword.hasError('required')">Please, provied password.</span>
               <span *ngIf="confirmPassword.hasError('pattern')">At last enter 8 numbers.</span> 
@@ -52,7 +52,7 @@
             </span>
           </div>
           <div class="col-12">
-            <button type="submit" class="btn btn-success" [disabled]="reactiveFormGroup.invalid">Register</button>
+            <button type="submit" class="btn btn-success" [disabled]="registrationFormGroup.invalid">Register</button>
             <a class="btn btn-primary ms-1" href="#">Cancel</a>
           </div>
         </form>

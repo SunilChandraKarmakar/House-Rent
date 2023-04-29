@@ -1,3 +1,35 @@
-<p>
-  user-login works!
-</p>
+<!-- This is reactive form module code example -->
+<div class="row justify-content-center align-content-center login-form">
+  <div class="col-md-6 col-sm-6 col-6">
+    <div class="card shadow-lg">
+      <div class="card-header bg-success text-white">
+        <h5>Login</h5>
+      </div>      
+      <div class="card-body">
+        <form class="row g-3" autocomplete="off" [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+          <div class="col-md-12">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" formControlName="email">
+            <span class="text-danger" *ngIf="email.invalid && email.touched">
+              <span *ngIf="email.hasError('required')">Please, provied email address.</span>
+              <span *ngIf="email.hasError('email')"> Please, provied valid email address.</span>
+              <span *ngIf="email.hasError('minlength')"> At last enter 10 character.</span>
+            </span>
+          </div>
+          <div class="col-md-12">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" formControlName="password">
+            <span class="text-danger" *ngIf="password.invalid && password.touched">
+              <span *ngIf="password.hasError('required')">Please, provied password.</span>
+              <span *ngIf="password.hasError('pattern')">At last enter 8 numbers.</span> 
+            </span>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-success" [disabled]="loginFormGroup.invalid">Login</button>
+            <a class="btn btn-primary ms-1" href="#">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

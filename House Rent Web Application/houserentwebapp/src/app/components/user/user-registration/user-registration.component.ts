@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
-import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-registration',
@@ -13,12 +13,12 @@ import { ToastrService } from 'ngx-toastr';
 export class UserRegistrationComponent implements OnInit {
 
   // Registration form
-  reactiveFormGroup: FormGroup;
+  registrationFormGroup: FormGroup;
 
   // User model
   private _userModel: User = new User();
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private tosterService: ToastrService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private tosterService: ToastrService) { }
 
   ngOnInit() {
     this.prepiredRegistrationForm();
@@ -26,7 +26,7 @@ export class UserRegistrationComponent implements OnInit {
 
   // Prepired registration form
   private prepiredRegistrationForm(): void {
-    this.reactiveFormGroup = this.formBuilder.group({
+    this.registrationFormGroup = this.formBuilder.group({
       userName: [null, Validators.required],
       email: [null, [Validators.required, Validators.email, Validators.minLength(10)]],
       mobile: [null, [Validators.required, Validators.min(1000000000), Validators.max(999999999999)]],
@@ -50,36 +50,36 @@ export class UserRegistrationComponent implements OnInit {
 
   // Gatter methods for all form controls
   get userName() {
-    return this.reactiveFormGroup.get("userName") as FormControl;
+    return this.registrationFormGroup.get("userName") as FormControl;
   }
 
   get email() {
-    return this.reactiveFormGroup.get("email") as FormControl;
+    return this.registrationFormGroup.get("email") as FormControl;
   }
 
   get mobile() {
-    return this.reactiveFormGroup.get("mobile") as FormControl;
+    return this.registrationFormGroup.get("mobile") as FormControl;
   }
 
   get password() {
-    return this.reactiveFormGroup.get("password") as FormControl;
+    return this.registrationFormGroup.get("password") as FormControl;
   }
 
   get confirmPassword() {
-    return this.reactiveFormGroup.get("confirmPassword") as FormControl;
+    return this.registrationFormGroup.get("confirmPassword") as FormControl;
   }
 
   // Register a new user
   onSubmit(): void {
     // console.log(this.reactiveFormGroup);
 
-    this._userModel.userName = this.reactiveFormGroup.get("userName")?.value;
-    this._userModel.email = this.reactiveFormGroup.get("email")?.value;
-    this._userModel.mobile = this.reactiveFormGroup.get("mobile")?.value;
-    this._userModel.password = this.reactiveFormGroup.get("password")?.value;
+    this._userModel.userName = this.registrationFormGroup.get("userName")?.value;
+    this._userModel.email = this.registrationFormGroup.get("email")?.value;
+    this._userModel.mobile = this.registrationFormGroup.get("mobile")?.value;
+    this._userModel.password = this.registrationFormGroup.get("password")?.value;
     
-    this.userService.addUser(this._userModel);
+    this.authService.registerUser(this._userModel);
     this.tosterService.success("User registration successfull.", "Success");
-    this.reactiveFormGroup.reset();
+    this.registrationFormGroup.reset();
   }
 }
