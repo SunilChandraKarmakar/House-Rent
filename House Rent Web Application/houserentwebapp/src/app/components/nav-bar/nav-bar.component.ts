@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,7 +10,10 @@ import { Router } from '@angular/router';
 
 export class NavBarComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  // Login user name
+  loginUserName: string | undefined;
+
+  constructor(private router: Router, private toastrService: ToastrService) { }
 
   ngOnInit() {
   }
@@ -18,6 +22,7 @@ export class NavBarComponent implements OnInit {
     let token: string = localStorage.getItem("_token")!;
 
     if(token != null || token != undefined) {
+      this.loginUserName = token;
       return true;
     }
 
@@ -26,6 +31,7 @@ export class NavBarComponent implements OnInit {
 
   onLogout(): void {
     localStorage.removeItem("_token");
-    this.router.navigate(["user/login"]);
+    this.toastrService.info("You are logout.");
+    this.router.navigate(["/user/login"]);
   }
 }

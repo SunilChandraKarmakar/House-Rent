@@ -27,8 +27,23 @@
         <li class="nav-item" *ngIf="!getToken()">
           <a class="nav-link" routerLinkActive="active" routerLink="user/registration">Registration</a>
         </li>
-        <li class="nav-item" *ngIf="getToken()">
+        <!-- <li class="nav-item" *ngIf="getToken()">
           <a class="nav-link" routerLinkActive="active" (click)="onLogout()">Logout</a>
+        </li> -->
+        <li class="nav-item dropdown" *ngIf="getToken()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{loginUserName}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item"><i class="fa-solid fa-gauge"></i>&emsp;View Dashboard</a></li>
+            <li><a class="dropdown-item"><i class="fa-solid fa-user"></i>&emsp;My Profile</a></li>
+            <li><a class="dropdown-item"><i class="fa-solid fa-key"></i>&emsp;Change Password</a></li>
+            <li>
+              <a class="dropdown-item" (click)="onLogout()">
+                <i class="fa-solid fa-right-from-bracket"></i>&emsp;Logout
+              </a>
+            </li>
+          </div>
         </li>
       </ul>
     </div>
