@@ -15,6 +15,13 @@ import { UserLoginComponent } from './components/user/user-login/user-login.comp
 import { UserRegistrationComponent } from './components/user/user-registration/user-registration.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzFormModule } from 'ng-zorro-antd/form';
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -39,6 +46,9 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }), // ToastrModule added
+
+    NzButtonModule,
+    NzFormModule
   ],
 
   providers: [],

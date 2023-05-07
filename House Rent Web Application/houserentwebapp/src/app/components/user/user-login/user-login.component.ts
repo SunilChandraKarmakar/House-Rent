@@ -14,14 +14,22 @@ import { AuthService } from 'src/app/services/auth.service';
 
 export class UserLoginComponent implements OnInit {
 
+  validateForm!: FormGroup;
+
   // Login form
   loginFormGroup: FormGroup;
-  
+
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private toastrService: ToastrService,
-    private router: Router) { }
+    private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.prepiredRegistrationForm();
+
+    this.validateForm = this.fb.group({
+      userName: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      remember: [null, [Validators.required]]
+    });
   }
 
   // Prepired login form
@@ -55,6 +63,19 @@ export class UserLoginComponent implements OnInit {
     }
     else {
       this.toastrService.error("Login failed! Please try again.");
+    }
+  }
+
+  submitForm(): void {
+    if (this.validateForm.valid) {
+      console.log('submit', this.validateForm.value);
+    } else {
+      Object.values(this.validateForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
     }
   }
 }
