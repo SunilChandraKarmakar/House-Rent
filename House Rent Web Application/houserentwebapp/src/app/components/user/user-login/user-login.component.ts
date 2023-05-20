@@ -30,7 +30,7 @@ export class UserLoginComponent implements OnInit {
     this.validateForm = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      remember: [true]
+      rememberMe: [false, Validators.requiredTrue]
     });
   }
 }

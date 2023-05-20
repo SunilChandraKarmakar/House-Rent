@@ -23,6 +23,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 registerLocaleData(en);
 
@@ -52,7 +53,8 @@ registerLocaleData(en);
 
     NzFormModule,
     NzInputModule,
-    NzButtonModule
+    NzButtonModule,
+    NzCardModule
   ],
 
   providers: [{ provide: NZ_I18N, useValue: en_US }],
