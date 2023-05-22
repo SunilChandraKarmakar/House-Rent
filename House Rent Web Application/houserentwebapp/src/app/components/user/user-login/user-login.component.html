@@ -5,16 +5,16 @@
         <h5>Login</h5>
       </div>
       <div class="card-body">
-        <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+        <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="submitForm()">
           <nz-form-item>
-            <nz-form-control nzErrorTip="Please input your username!">
-              <nz-input-group nzPrefixIcon="user">
-                <input type="text" nz-input formControlName="userName" placeholder="Username" />
+            <nz-form-control nzErrorTip="Please input your email!">
+              <nz-input-group nzPrefixIcon="mail">
+                <input type="text" nz-input formControlName="email" placeholder="Email" />
               </nz-input-group>
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
-            <nz-form-control nzErrorTip="Please input your Password!">
+            <nz-form-control nzErrorTip="Please input your password!">
               <nz-input-group nzPrefixIcon="lock">
                 <input type="password" nz-input formControlName="password" placeholder="Password" />
               </nz-input-group>
@@ -23,8 +23,7 @@
           <div nz-row class="login-form-margin">
             <div nz-col [nzSpan]="12">
               <label>
-                <input formControlName="rememberMe" type="checkbox" />
-                &nbsp;<span>Remember me</span>
+                <input formControlName="rememberMe" type="checkbox" />&nbsp;<span>Remember me</span>
               </label>
             </div>
             <div nz-col [nzSpan]="12">

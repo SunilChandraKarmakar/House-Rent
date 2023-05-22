@@ -9,28 +9,30 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class UserLoginComponent implements OnInit {
 
-  validateForm!: FormGroup;
+  // Login form
+  loginForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      email: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      rememberMe: [false, Validators.requiredTrue]
+    });
+  }
 
   submitForm(): void {
-    if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
-    } else {
-      Object.values(this.validateForm.controls).forEach(control => {
+    if (this.loginForm.valid) {
+      console.log('submit', this.loginForm.value);
+    } 
+    else {
+      Object.values(this.loginForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
         }
       });
     }
-  }
-
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      rememberMe: [false, Validators.requiredTrue]
-    });
   }
 }
