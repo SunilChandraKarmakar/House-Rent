@@ -1,60 +1,74 @@
 <!-- This is reactive form module code example -->
-<div class="row justify-content-center align-content-center registration-form">
-  <div class="col-md-6 col-sm-6 col-6">
+<div class="row justify-content-center align-content-center registration-form mt-5">
+  <div class="col-md-8 col-sm-8 col-8">
     <div class="card shadow-lg">
-      <div class="card-header bg-success text-white">
+      <div class="card-header">
         <h5>Register</h5>
-      </div>      
+      </div>
       <div class="card-body">
-        <form class="row g-3" autocomplete="off" [formGroup]="registrationFormGroup" (ngSubmit)="onSubmit()">
-          <div class="col-md-12">
-            <label for="userName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="userName" name="userName" formControlName="userName">
-            <span class="text-danger" *ngIf="userName.invalid && userName.touched">
-              Please, provied user name.
-            </span>
-          </div>
-          <div class="col-md-12">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" formControlName="email">
-            <span class="text-danger" *ngIf="email.invalid && email.touched">
-              <span *ngIf="email.hasError('required')">Please, provied email address.</span>
-              <span *ngIf="email.hasError('email')">Please, provied valid email address.</span>
-              <span *ngIf="email.hasError('minlength')">At last enter 10 character.</span>
-            </span>
-          </div>
-          <div class="col-md-12">
-            <label for="mobile" class="form-label">Mobile</label>
-            <input type="number" class="form-control" id="mobile" name="mobile" formControlName="mobile">
-            <span class="text-danger" *ngIf="mobile.invalid && mobile.touched">
-              <span *ngIf="mobile.hasError('required')">Please, provied mobile number.</span>
-              <span *ngIf="mobile.hasError('min')">At last enter 11 numbers.</span>
-            </span>
-          </div>
-          <div class="col-md-12">
-            <label for="password" class="form-label">Passwprd</label>
-            <input type="password" class="form-control" id="password" name="password" formControlName="password">
-            <span class="text-danger" *ngIf="password.invalid && password.touched">
-              <span *ngIf="password.hasError('required')">Please, provied password.</span>
-              <span *ngIf="password.hasError('pattern')">At last enter 8 numbers.</span> 
-            </span>
-          </div>
-          <div class="col-md-12">
-            <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword">
-            <span class="text-danger" *ngIf="confirmPassword.invalid && confirmPassword.touched">
-              <span *ngIf="confirmPassword.hasError('required')">Please, provied password.</span>
-              <span *ngIf="confirmPassword.hasError('pattern')">At last enter 8 numbers.</span> 
-            </span>
-            <span class="text-danger" 
-              *ngIf="confirmPassword.valid && confirmPassword.hasError('confirmPasswordMatchingValidatior')">
-              Password not match.
-            </span>
-          </div>
-          <div class="col-12">
-            <button type="submit" class="btn btn-success" [disabled]="registrationFormGroup.invalid">Register</button>
-            <a class="btn btn-primary ms-1" href="#">Cancel</a>
-          </div>
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired
+              nzTooltipTitle="What do you want other to call you">
+              <span>Nickname</span>
+            </nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
+              <input nz-input id="nickname" formControlName="nickname" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+              <input nz-input formControlName="email" id="email" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['phoneNumber']"
+              nzErrorTip="Please input your phone number!">
+              <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+                <ng-template #addOnBeforeTemplate>
+                  <nz-select formControlName="phoneNumberPrefix" class="phone-select">
+                    <nz-option nzLabel="+86" nzValue="+86"></nz-option>
+                    <nz-option nzLabel="+87" nzValue="+87"></nz-option>
+                  </nz-select>
+                </ng-template>
+                <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+              <input nz-input type="password" id="password" formControlName="password"
+                (ngModelChange)="updateConfirmValidator()" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+              <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+              <ng-template #errorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">Please confirm your password!</ng-container>
+                <ng-container *ngIf="control.hasError('confirm')">
+                  Two passwords that you enter is inconsistent!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item nz-row class="register-area">
+            <nz-form-control [nzSpan]="14" [nzOffset]="6">
+              <input type="checkbox" nz-checkbox formControlName="agree">&nbsp;
+              <label>
+                <span>I have read the <a routerLink="#">agreement</a></span>
+              </label>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item nz-row class="register-area">
+            <nz-form-control [nzSpan]="14" [nzOffset]="6">
+              <button nz-button nzType="primary">Register</button>
+            </nz-form-control>
+          </nz-form-item>
         </form>
       </div>
     </div>

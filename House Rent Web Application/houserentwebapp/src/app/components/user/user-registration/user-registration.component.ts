@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { User } from 'src/app/models/user';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 
 @Component({
   selector: 'app-user-registration',
@@ -12,74 +13,56 @@ import { AuthService } from 'src/app/services/auth.service';
 
 export class UserRegistrationComponent implements OnInit {
 
-  // Registration form
-  registrationFormGroup: FormGroup;
+  validateForm!: FormGroup;
+  captchaTooltipIcon: NzFormTooltipIcon = {
+    type: 'info-circle',
+    theme: 'twotone'
+  };
 
-  // User model
-  private _userModel: User = new User();
-
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private tosterService: ToastrService) { }
-
-  ngOnInit() {
-    this.prepiredRegistrationForm();
-  }
-
-  // Prepired registration form
-  private prepiredRegistrationForm(): void {
-    this.registrationFormGroup = this.formBuilder.group({
-      userName: [null, Validators.required],
-      email: [null, [Validators.required, Validators.email, Validators.minLength(10)]],
-      mobile: [null, [Validators.required, Validators.min(1000000000), Validators.max(999999999999)]],
-      password: [null, [Validators.required, 
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
-      confirmPassword: [null, [Validators.required, 
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]]
-    }, 
-    
-    {validators: this.confirmPasswordMatchingValidatior});
-  }
-
-  // Check password and confirm password are same or not
-  confirmPasswordMatchingValidatior(formGroup: FormGroup): Validators {
-    if(formGroup != undefined) {
-      return formGroup.get('password')!.value == formGroup.get('confirmPassword')!.value ? false : { notMatch: true };
+  submitForm(): void {
+    if (this.validateForm.valid) {
+      console.log('submit', this.validateForm.value);
+    } else {
+      Object.values(this.validateForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
     }
-
-    return false;
   }
 
-  // Gatter methods for all form controls
-  get userName() {
-    return this.registrationFormGroup.get("userName") as FormControl;
+  updateConfirmValidator(): void {
+    /** wait for refresh value */
+    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
   }
 
-  get email() {
-    return this.registrationFormGroup.get("email") as FormControl;
+  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (!control.value) {
+      return { required: true };
+    } else if (control.value !== this.validateForm.controls.password.value) {
+      return { confirm: true, error: true };
+    }
+    return {};
+  };
+
+  getCaptcha(e: MouseEvent): void {
+    e.preventDefault();
   }
 
-  get mobile() {
-    return this.registrationFormGroup.get("mobile") as FormControl;
-  }
+  constructor(private fb: FormBuilder) {}
 
-  get password() {
-    return this.registrationFormGroup.get("password") as FormControl;
-  }
-
-  get confirmPassword() {
-    return this.registrationFormGroup.get("confirmPassword") as FormControl;
-  }
-
-  // Register a new user
-  onSubmit(): void {
-    // console.log(this.reactiveFormGroup);
-
-    this._userModel.userName = this.registrationFormGroup.get("userName")?.value;
-    this._userModel.email = this.registrationFormGroup.get("email")?.value;
-    this._userModel.mobile = this.registrationFormGroup.get("mobile")?.value;
-    this._userModel.password = this.registrationFormGroup.get("password")?.value;
-    
-    this.authService.registerUser(this._userModel);
-    this.tosterService.success("User registration successfull.", "Success");
-    this.registrationFormGroup.reset();
+  ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      email: [null, [Validators.email, Validators.required]],
+      password: [null, [Validators.required]],
+      checkPassword: [null, [Validators.required, this.confirmationValidator]],
+      nickname: [null, [Validators.required]],
+      phoneNumberPrefix: ['+86'],
+      phoneNumber: [null, [Validators.required]],
+      website: [null, [Validators.required]],
+      captcha: [null, [Validators.required]],
+      agree: [false]
+    });
   }
 }
