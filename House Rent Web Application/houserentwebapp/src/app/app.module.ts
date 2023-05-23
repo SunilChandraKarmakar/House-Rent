@@ -25,6 +25,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 registerLocaleData(en);
 
@@ -56,7 +58,9 @@ registerLocaleData(en);
     NzInputModule,
     NzButtonModule,
     NzCardModule,
-    NzSelectModule
+    NzSelectModule,
+    NzTabsModule,
+    NzIconModule
   ],
 
   providers: [{ provide: NZ_I18N, useValue: en_US }],

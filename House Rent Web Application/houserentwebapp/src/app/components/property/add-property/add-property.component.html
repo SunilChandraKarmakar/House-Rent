@@ -1,33 +1,109 @@
 <!-- This is templete drive form code example -->
-<div class="row justify-content-center align-content-center login-form">
-  <div class="col-md-6 col-sm-6 col-6">
-    <div class="card shadow-lg">
-      <div class="card-header bg-success text-white">
-        <h5 >Add New Properity</h5>
+<div class="row justify-content-center align-content-center mt-3">
+  <div class="col-md-12 col-sm-12 col-12">
+    <div class="card shadow">
+      <div class="card-header">
+        <h5>List Your Properity</h5>
       </div>
       <div class="card-body">
-        <form class="row g-3" autocomplete="off" (ngSubmit)="ngFormSubmit(form)" #form="ngForm">
-          <div class="col-md-6">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel" required minlength="5">
-            <span class="text-danger" *ngIf="name.invalid && name.touched">
-              <span class="text-danger" *ngIf="name.errors!.required">Please, provied name.</span>
-              <span class="text-danger" *ngIf="name.errors!.minlength">Please, provied minimum 5 length.</span>
-            </span>
-          </div>
-          <div class="col-md-6">
-            <label for="type" class="form-label">Type</label>
-            <input type="text" class="form-control" id="type" name="type" ngModel required>
-          </div>
-          <div class="col-md-6">
-            <label for="price" class="form-label">Price</label>
-            <input type="number" min="0" class="form-control" id="price" name="price" ngModel required>
-          </div>
-          <div class="col-12">
-            <button type="submit" class="btn btn-success" [disabled]="!form.valid">Save</button>
-            <a class="btn btn-primary ms-1" href="#">Cancel</a>
-          </div>
-        </form>
+        <nz-tabset [nzSelectedIndex]="nzSelectedTabIndex" (nzSelectedIndexChange)="indexChange($event)">
+          <nz-tab nzTitle="Basic Title">
+            <form class="row g-3" autocomplete="off" (ngSubmit)="ngFormSubmit(form)" #form="ngForm">
+              <div class="col-md-6">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel" required minlength="5">
+                <span class="text-danger" *ngIf="name.invalid && name.touched">
+                  <span class="text-danger" *ngIf="name.errors!.required">Please, provied name.</span>
+                  <span class="text-danger" *ngIf="name.errors!.minlength">Please, provied minimum 5 length.</span>
+                </span>
+              </div>
+              <div class="col-md-6">
+                <label for="type" class="form-label">Type</label>
+                <input type="text" class="form-control" id="type" name="type" ngModel required>
+              </div>
+              <div class="col-md-6">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" min="0" class="form-control" id="price" name="price" ngModel required>
+              </div>
+              <div class="col-12">
+                <nz-button-group>
+                  <button nz-button nzType="primary" [disabled]="true">
+                    <i nz-icon nzType="left"></i>
+                    Go back
+                  </button>
+                  <button nz-button nzType="primary" (click)="onGoForwardTab(1)">
+                    Go forward
+                    <i nz-icon nzType="right"></i>
+                  </button>
+                </nz-button-group>
+              </div>
+            </form>
+          </nz-tab>
+          <nz-tab nzTitle="Pricing Area">
+            <form class="row g-3" autocomplete="off" (ngSubmit)="ngFormSubmit(form)" #form="ngForm">
+              <div class="col-12">
+                <nz-button-group>
+                  <button nz-button nzType="primary" (click)="onGoBackTab(1)">
+                    <i nz-icon nzType="left"></i>
+                    Go back
+                  </button>
+                  <button nz-button nzType="primary" (click)="onGoForwardTab(1)">
+                    Go forward
+                    <i nz-icon nzType="right"></i>
+                  </button>
+                </nz-button-group>
+              </div>
+            </form>
+          </nz-tab>
+          <nz-tab nzTitle="Address Information">
+            <form class="row g-3" autocomplete="off" (ngSubmit)="ngFormSubmit(form)" #form="ngForm">
+              <div class="col-12">
+                <nz-button-group>
+                  <button nz-button nzType="primary" (click)="onGoBackTab(1)">
+                    <i nz-icon nzType="left"></i>
+                    Go back
+                  </button>
+                  <button nz-button nzType="primary" (click)="onGoForwardTab(1)">
+                    Go forward
+                    <i nz-icon nzType="right"></i>
+                  </button>
+                </nz-button-group>
+              </div>
+            </form>
+          </nz-tab>
+          <nz-tab nzTitle="Other Information">
+            <form class="row g-3" autocomplete="off" (ngSubmit)="ngFormSubmit(form)" #form="ngForm">
+              <div class="col-12">
+                <nz-button-group>
+                  <button nz-button nzType="primary" (click)="onGoBackTab(1)">
+                    <i nz-icon nzType="left"></i>
+                    Go back
+                  </button>
+                  <button nz-button nzType="primary" (click)="onGoForwardTab(1)">
+                    Go forward
+                    <i nz-icon nzType="right"></i>
+                  </button>
+                </nz-button-group>
+              </div>
+            </form>
+          </nz-tab>
+          <nz-tab nzTitle="Photo">
+            <form class="row g-3" autocomplete="off" (ngSubmit)="ngFormSubmit(form)" #form="ngForm">
+              <div class="col-12">
+                <nz-button-group>
+                  <button nz-button nzType="primary" (click)="onGoBackTab(1)">
+                    <i nz-icon nzType="left"></i>
+                    Go back
+                  </button>
+                  <button nz-button nzType="primary" [disabled]="true">
+                    Go forward
+                    <i nz-icon nzType="right"></i>
+                  </button>
+                </nz-button-group>
+              </div>
+            </form>
+          </nz-tab>
+        </nz-tabset>
       </div>
     </div>
   </div>

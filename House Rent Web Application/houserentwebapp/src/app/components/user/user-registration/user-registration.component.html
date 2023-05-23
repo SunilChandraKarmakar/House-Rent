@@ -1,7 +1,7 @@
 <!-- This is reactive form module code example -->
 <div class="row justify-content-center align-content-center registration-form mt-5">
-  <div class="col-md-8 col-sm-8 col-8">
-    <div class="card shadow-lg">
+  <div class="col-md-7 col-sm-7 col-7">
+    <div class="card shadow">
       <div class="card-header">
         <h5>Register</h5>
       </div>
@@ -67,6 +67,7 @@
           <nz-form-item nz-row class="register-area">
             <nz-form-control [nzSpan]="14" [nzOffset]="6">
               <button nz-button nzType="primary">Register</button>
+              &nbsp;<label>If already have account, then go <a routerLink="/user/login">Sign In.</a></label>
             </nz-form-control>
           </nz-form-item>
         </form>
