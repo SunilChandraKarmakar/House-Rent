@@ -6,26 +6,66 @@
         <h5>List Your Properity</h5>
       </div>
       <div class="card-body">
-        <nz-tabset [nzSelectedIndex]="nzSelectedTabIndex" (nzSelectedIndexChange)="indexChange($event)">
-          <nz-tab nzTitle="Basic Title">
-            <form class="row g-3" autocomplete="off" (ngSubmit)="ngFormSubmit(form)" #form="ngForm">
-              <div class="col-md-6">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" ngModel #name="ngModel" required minlength="5">
-                <span class="text-danger" *ngIf="name.invalid && name.touched">
-                  <span class="text-danger" *ngIf="name.errors!.required">Please, provied name.</span>
-                  <span class="text-danger" *ngIf="name.errors!.minlength">Please, provied minimum 5 length.</span>
-                </span>
-              </div>
-              <div class="col-md-6">
-                <label for="type" class="form-label">Type</label>
-                <input type="text" class="form-control" id="type" name="type" ngModel required>
-              </div>
-              <div class="col-md-6">
-                <label for="price" class="form-label">Price</label>
-                <input type="number" min="0" class="form-control" id="price" name="price" ngModel required>
-              </div>
-              <div class="col-12">
+        <form autocomplete="off" nz-form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+          <nz-tabset [nzSelectedIndex]="nzSelectedTabIndex" (nzSelectedIndexChange)="indexChange($event)">
+            <nz-tab nzTitle="Basic Title">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">I want to</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+                  <nz-radio-group formControlName="radioValue" nzButtonStyle="solid">
+                    <label nz-radio-button nzValue="Sell">Sell</label>
+                    <label nz-radio-button nzValue="Rent">Rent</label>
+                  </nz-radio-group>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">BHK</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+                  <nz-radio-group formControlName="radioValue" nzButtonStyle="solid">
+                    <label nz-radio-button nzValue="1">1</label>
+                    <label nz-radio-button nzValue="2">2</label>
+                    <label nz-radio-button nzValue="3">3</label>
+                    <label nz-radio-button nzValue="4">4</label>
+                  </nz-radio-group>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">Properity Type</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+                  <nz-radio-group formControlName="radioValue" nzButtonStyle="solid">
+                    <label nz-radio-button nzValue="1">House</label>
+                    <label nz-radio-button nzValue="2">Apartment</label>
+                    <label nz-radio-button nzValue="3">Duplex</label>
+                  </nz-radio-group>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">Furnishing Type</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+                  <nz-radio-group formControlName="radioValue" nzButtonStyle="solid">
+                    <label nz-radio-button nzValue="Fully">Fully</label>
+                    <label nz-radio-button nzValue="Semi">Semi</label>
+                    <label nz-radio-button nzValue="Unfurnished">Unfurnished</label>
+                  </nz-radio-group>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">In Building/Society/Project</nz-form-label>
+                <nz-form-control [nzSm]="6" [nzXs]="15" nzErrorTip="The input is not valid E-mail!">
+                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" formControlName="radioValue">
+                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="20" nzFor="radioValue">City</nz-form-label>
+                <nz-form-control [nzSm]="6" [nzXs]="15" nzErrorTip="The input is not valid E-mail!">
+                  <input nz-input placeholder="Basic usage" formControlName="radioValue" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
                 <nz-button-group>
                   <button nz-button nzType="primary" [disabled]="true">
                     <i nz-icon nzType="left"></i>
@@ -36,11 +76,9 @@
                     <i nz-icon nzType="right"></i>
                   </button>
                 </nz-button-group>
-              </div>
-            </form>
-          </nz-tab>
-          <nz-tab nzTitle="Pricing Area">
-            <form class="row g-3" autocomplete="off" (ngSubmit)="ngFormSubmit(form)" #form="ngForm">
+              </nz-form-item>
+            </nz-tab>
+            <nz-tab nzTitle="Pricing Area">
               <div class="col-12">
                 <nz-button-group>
                   <button nz-button nzType="primary" (click)="onGoBackTab(1)">
@@ -53,10 +91,8 @@
                   </button>
                 </nz-button-group>
               </div>
-            </form>
-          </nz-tab>
-          <nz-tab nzTitle="Address Information">
-            <form class="row g-3" autocomplete="off" (ngSubmit)="ngFormSubmit(form)" #form="ngForm">
+            </nz-tab>
+            <nz-tab nzTitle="Address Information">
               <div class="col-12">
                 <nz-button-group>
                   <button nz-button nzType="primary" (click)="onGoBackTab(1)">
@@ -69,10 +105,8 @@
                   </button>
                 </nz-button-group>
               </div>
-            </form>
-          </nz-tab>
-          <nz-tab nzTitle="Other Information">
-            <form class="row g-3" autocomplete="off" (ngSubmit)="ngFormSubmit(form)" #form="ngForm">
+            </nz-tab>
+            <nz-tab nzTitle="Other Information">
               <div class="col-12">
                 <nz-button-group>
                   <button nz-button nzType="primary" (click)="onGoBackTab(1)">
@@ -85,10 +119,8 @@
                   </button>
                 </nz-button-group>
               </div>
-            </form>
-          </nz-tab>
-          <nz-tab nzTitle="Photo">
-            <form class="row g-3" autocomplete="off" (ngSubmit)="ngFormSubmit(form)" #form="ngForm">
+            </nz-tab>
+            <nz-tab nzTitle="Photo">
               <div class="col-12">
                 <nz-button-group>
                   <button nz-button nzType="primary" (click)="onGoBackTab(1)">
@@ -101,9 +133,9 @@
                   </button>
                 </nz-button-group>
               </div>
-            </form>
-          </nz-tab>
-        </nz-tabset>
+            </nz-tab>
+          </nz-tabset>
+        </form>
       </div>
     </div>
   </div>
