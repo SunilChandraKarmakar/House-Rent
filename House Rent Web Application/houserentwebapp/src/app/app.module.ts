@@ -28,6 +28,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 
 registerLocaleData(en);
 
@@ -62,7 +63,8 @@ registerLocaleData(en);
     NzSelectModule,
     NzTabsModule,
     NzIconModule,
-    NzRadioModule
+    NzRadioModule,
+    NzInputNumberModule
   ],
 
   providers: [{ provide: NZ_I18N, useValue: en_US }],

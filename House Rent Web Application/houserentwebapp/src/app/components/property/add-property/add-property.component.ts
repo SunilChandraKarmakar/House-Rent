@@ -13,6 +13,7 @@ export class AddPropertyComponent implements OnInit {
   nzSelectedTabIndex: number = 0;
 
   radioValue: string = 'A';
+  number: number | undefined;
 
   // Form goup
   formGroup: FormGroup;
@@ -21,7 +22,8 @@ export class AddPropertyComponent implements OnInit {
 
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
-      radioValue: [null, [Validators.required]]
+      radioValue: [null, [Validators.required]],
+      number: [null, [Validators.required]]
     });
   }
 

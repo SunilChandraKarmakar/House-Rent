@@ -79,7 +79,37 @@
               </nz-form-item>
             </nz-tab>
             <nz-tab nzTitle="Pricing Area">
-              <div class="col-12">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="number">Price (In USD)</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="40" nzErrorTip="The input is not valid E-mail!">
+                <nz-input-number formControlName="number" [nzMin]="1" [nzMax]="100000" [nzStep]="1" style="width: 20%;"></nz-input-number>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="number">Security (In USD)</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="40" nzErrorTip="The input is not valid E-mail!">
+                <nz-input-number formControlName="number" [nzMin]="1" [nzMax]="100000" [nzStep]="1" style="width: 20%;"></nz-input-number>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="number">Maiantenance (In USD)</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="40" nzErrorTip="The input is not valid E-mail!">
+                <nz-input-number formControlName="number" [nzMin]="1" [nzMax]="100000" [nzStep]="1" style="width: 20%;"></nz-input-number>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="number">Build Area (In Sqr Feet)</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="40" nzErrorTip="The input is not valid E-mail!">
+                <nz-input-number formControlName="number" [nzMin]="1" [nzMax]="100000" [nzStep]="1" style="width: 20%;"></nz-input-number>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="number">Carpet Area (In Sqr Feet)</nz-form-label>
+                <nz-form-control [nzSm]="20" [nzXs]="40" nzErrorTip="The input is not valid E-mail!">
+                <nz-input-number formControlName="number" [nzMin]="1" [nzMax]="100000" [nzStep]="1" style="width: 20%;"></nz-input-number>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
                 <nz-button-group>
                   <button nz-button nzType="primary" (click)="onGoBackTab(1)">
                     <i nz-icon nzType="left"></i>
@@ -90,7 +120,7 @@
                     <i nz-icon nzType="right"></i>
                   </button>
                 </nz-button-group>
-              </div>
+              </nz-form-item>
             </nz-tab>
             <nz-tab nzTitle="Address Information">
               <div class="col-12">
