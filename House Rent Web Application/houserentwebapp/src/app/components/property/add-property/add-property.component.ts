@@ -14,6 +14,7 @@ export class AddPropertyComponent implements OnInit {
 
   radioValue: string = 'A';
   number: number | undefined;
+  date = null;
 
   // Form goup
   formGroup: FormGroup;
@@ -23,7 +24,8 @@ export class AddPropertyComponent implements OnInit {
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
       radioValue: [null, [Validators.required]],
-      number: [null, [Validators.required]]
+      number: [null, [Validators.required]],
+      date: [null]
     });
   }
 
@@ -44,5 +46,10 @@ export class AddPropertyComponent implements OnInit {
   // Get tab index when tab is change
   indexChange(event: any): void {
     this.nzSelectedTabIndex = event;
+  }
+
+  // Date on change function
+  onChange(result: Date): void {
+    console.log('onChange: ', result);
   }
 }
