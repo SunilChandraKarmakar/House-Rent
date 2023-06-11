@@ -3,7 +3,7 @@
   <div class="col-md-8 col-sm-8 col-8">
     <div class="card shadow">
       <div class="card-header">
-        <h5>List Your Properity</h5>
+        <h5 class="text-center">List Your Properity</h5>
       </div>
       <div class="card-body">
         <form autocomplete="off" nz-form [formGroup]="formGroup" (ngSubmit)="submitForm()">
@@ -38,10 +38,11 @@
                   Properity Type
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-                  <nz-radio-group formControlName="radioValue" nzButtonStyle="solid">
-                    <label nz-radio-button nzValue="1">House</label>
-                    <label nz-radio-button nzValue="2">Apartment</label>
-                    <label nz-radio-button nzValue="3">Duplex</label>
+                  <nz-radio-group formControlName="radioValue" nzButtonStyle="solid" 
+                  [(ngModel)]="previewAddPropertyModel.type">
+                    <label nz-radio-button nzValue="House">House</label>
+                    <label nz-radio-button nzValue="Apartment">Apartment</label>
+                    <label nz-radio-button nzValue="Duplex">Duplex</label>
                   </nz-radio-group>
                 </nz-form-control>
               </nz-form-item>
@@ -58,15 +59,12 @@
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                <nz-form-label [nzSm]="8" [nzXs]="20" nzRequired nzFor="radioValue">
+                <nz-form-label [nzSm]="8" [nzXs]="20" nzFor="radioValue">
                   In Building/Society/Project
                 </nz-form-label>
                 <nz-form-control [nzSm]="6" [nzXs]="15" nzErrorTip="The input is not valid E-mail!">
-                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" formControlName="radioValue">
-                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-                  </nz-select>
+                  <input nz-input placeholder="Basic usage" formControlName="radioValue" 
+                  [(ngModel)]="previewAddPropertyModel.name" />
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
@@ -96,7 +94,8 @@
                   Price (In USD)
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-                  <nz-input-number formControlName="number" [nzMin]="1" [nzMax]="100000" [nzStep]="1" style="width: 40%;">
+                  <nz-input-number formControlName="number" [nzMin]="1" [nzMax]="100000" [nzStep]="1" 
+                  [(ngModel)]="previewAddPropertyModel.price" style="width: 40%;">
                   </nz-input-number>
                 </nz-form-control>
               </nz-form-item>
@@ -131,8 +130,8 @@
                 <nz-form-label [nzSm]="8" [nzXs]="20" nzRequired nzFor="number">
                   Carpet Area (In Sqr Feet)
                 </nz-form-label>
-                <nz-form-control [nzSm]="20" [nzXs]="40" nzErrorTip="The input is not valid E-mail!">
-                  <nz-input-number formControlName="number" [nzMin]="1" [nzMax]="100000" [nzStep]="1" style="width: 20%;">
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+                  <nz-input-number formControlName="number" [nzMin]="1" [nzMax]="100000" [nzStep]="1" style="width: 40%;">
                   </nz-input-number>
                 </nz-form-control>
               </nz-form-item>
@@ -152,26 +151,26 @@
             <nz-tab nzTitle="Address Information">
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">Floor</nz-form-label>
-                <nz-form-control [nzSm]="6" [nzXs]="15" nzErrorTip="The input is not valid E-mail!">
-                  <input nz-input placeholder="Basic usage" formControlName="radioValue" />
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+                  <input nz-input placeholder="Basic usage" formControlName="radioValue" style="width: 50%;" />
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">Total Floor</nz-form-label>
-                <nz-form-control [nzSm]="6" [nzXs]="15" nzErrorTip="The input is not valid E-mail!">
-                  <input nz-input placeholder="Basic usage" formControlName="radioValue" />
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+                  <input nz-input placeholder="Basic usage" formControlName="radioValue" style="width: 50%;" />
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">Address</nz-form-label>
-                <nz-form-control [nzSm]="6" [nzXs]="15" nzErrorTip="The input is not valid E-mail!">
-                  <textarea formControlName="radioValue" nz-input placeholder="write any thing"></textarea>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+                  <textarea formControlName="radioValue" nz-input placeholder="write any thing" style="width: 50%;"></textarea>
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">Landmark</nz-form-label>
-                <nz-form-control [nzSm]="6" [nzXs]="15" nzErrorTip="The input is not valid E-mail!">
-                  <textarea formControlName="radioValue" nz-input placeholder="write any thing"></textarea>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+                  <textarea formControlName="radioValue" nz-input placeholder="write any thing" style="width: 50%;"></textarea>
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
@@ -189,7 +188,7 @@
             </nz-tab>
             <nz-tab nzTitle="Other Details">
               <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">
+                <nz-form-label [nzSm]="8" [nzXs]="20" nzRequired nzFor="radioValue">
                   Ready To Move
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
@@ -200,23 +199,23 @@
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="date">
+                <nz-form-label [nzSm]="8" [nzXs]="20" nzRequired nzFor="date">
                   Possession/Avaialble From
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-                  <nz-date-picker formControlName="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+                  <nz-date-picker formControlName="date" (ngModelChange)="onChange($event)" style="width: 50%;"></nz-date-picker>
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">
+                <nz-form-label [nzSm]="8" [nzXs]="20" nzRequired nzFor="radioValue">
                   Age of Property
                 </nz-form-label>
-                <nz-form-control [nzSm]="4" [nzXs]="10" nzErrorTip="The input is not valid E-mail!">
-                  <input nz-input placeholder="Basic usage" formControlName="radioValue" />
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+                  <input nz-input placeholder="Basic usage" formControlName="radioValue" style="width: 50%;"/>
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">
+                <nz-form-label [nzSm]="8" [nzXs]="20" nzRequired nzFor="radioValue">
                   Gated Community
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
@@ -227,7 +226,7 @@
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">
+                <nz-form-label [nzSm]="8" [nzXs]="20" nzRequired nzFor="radioValue">
                   Ready To Move
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
@@ -240,12 +239,12 @@
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="radioValue">Description</nz-form-label>
-                <nz-form-control [nzSm]="6" [nzXs]="15" nzErrorTip="The input is not valid E-mail!">
-                  <textarea formControlName="radioValue" nz-input placeholder="write any thing"></textarea>
+                <nz-form-label [nzSm]="8" [nzXs]="20" nzRequired nzFor="radioValue">Description</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+                  <textarea formControlName="radioValue" nz-input placeholder="write any thing" style="width: 50%;"></textarea>
                 </nz-form-control>
               </nz-form-item>
-              <div class="col-12">
+              <nz-form-item>
                 <nz-button-group>
                   <button nz-button nzType="primary" (click)="onGoBackTab(1)">
                     <i nz-icon nzType="left"></i>
@@ -256,7 +255,7 @@
                     <i nz-icon nzType="right"></i>
                   </button>
                 </nz-button-group>
-              </div>
+              </nz-form-item>
             </nz-tab>
             <nz-tab nzTitle="Photo">
               <div class="col-12">
@@ -277,5 +276,14 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4 col-sm-4 col-4"></div>
+  <div class="col-md-4 col-sm-4 col-4">
+    <div class="card shadow">
+      <div class="card-header">
+        <h5 class="text-center">Your Property Preview</h5>
+      </div>
+      <div class="card-body">
+        <app-property-card [property]="previewAddPropertyModel"></app-property-card>
+      </div>
+    </div>
+  </div>
 </div>

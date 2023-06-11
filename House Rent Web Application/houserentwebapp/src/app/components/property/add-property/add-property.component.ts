@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Property } from 'src/app/models/property';
 
 @Component({
   selector: 'app-add-property',
@@ -18,6 +19,9 @@ export class AddPropertyComponent implements OnInit {
 
   // Form goup
   formGroup: FormGroup;
+
+  // Perview add property in property card component
+  previewAddPropertyModel: Property = new Property();
 
   constructor(private formBuilder: FormBuilder) { }
 
