@@ -1,8 +1,8 @@
-<div class="card shadow-lg">
+<div class="card" [ngClass]="{'shadow' : showHideShadowInCard}">
   <div class="card-image-wrap text-center">
     <img *ngIf="property.image" src="../../../../assets/images/{{property.image}}" class="card-img-top">
     <img *ngIf="!property.image" src="../../../../assets/images/house_default.jpg" class="card-img-top">
-    <ul class="list-inline text-center member-icon animation-button">
+    <ul [hidden]="showHideEditDeleteButton" class="list-inline text-center member-icon animation-button">
       <li class="list-inline-item">
         <button class="btn btn-primary" routerLink="property-detail/{{property.id}}">
           <i class="fa-regular fa-pen-to-square"></i>
@@ -16,8 +16,13 @@
     </ul>
   </div>
   <div class="card-body">
-    <h5>{{ property.name }}</h5>
-    <h6>{{ property.type }}</h6>
-    <h6>{{ property.price }}</h6>
+    <h5 class="mb-0">{{ property.numberOfBadroom }} BHK {{ property.furnishingType }}</h5>
+    <span>in {{ property.name }}, {{ property.city }}</span>
+    <p>
+      {{ property.propertyType }}
+      <span *ngIf="property.propertyType != 'Unfurnished'">Furnished</span> | {{ property.posession }}
+    </p>
+    <hr class="mt-0 mb-0">
+    <p>Price: {{ property.price }} USD | Area: {{ property.builtArea }} Sq Ft</p>
   </div>
 </div>

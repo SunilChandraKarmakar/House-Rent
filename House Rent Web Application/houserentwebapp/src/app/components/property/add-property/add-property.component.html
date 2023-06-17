@@ -39,7 +39,7 @@
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
                   <nz-radio-group formControlName="radioValue" nzButtonStyle="solid" 
-                  [(ngModel)]="previewAddPropertyModel.type">
+                  [(ngModel)]="previewAddPropertyModel.propertyType">
                     <label nz-radio-button nzValue="House">House</label>
                     <label nz-radio-button nzValue="Apartment">Apartment</label>
                     <label nz-radio-button nzValue="Duplex">Duplex</label>
@@ -282,7 +282,9 @@
         <h5 class="text-center">Your Property Preview</h5>
       </div>
       <div class="card-body">
-        <app-property-card [property]="previewAddPropertyModel"></app-property-card>
+        <app-property-card [property]="previewAddPropertyModel" [showHideEditDeleteButton]="true" 
+          [showHideShadowInCard]="false">
+        </app-property-card>
       </div>
     </div>
   </div>

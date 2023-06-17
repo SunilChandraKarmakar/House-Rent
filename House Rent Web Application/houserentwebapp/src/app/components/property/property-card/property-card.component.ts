@@ -12,6 +12,12 @@ export class PropertyCardComponent implements OnInit {
   // Received data in property list component
   @Input() property: Property = new Property();
 
+  // Show and hide edit/delete button based on condition
+  @Input() showHideEditDeleteButton: boolean = false;
+
+  // Show and hide card shadow
+  @Input() showHideShadowInCard: boolean = true;
+
   constructor() { }
 
   ngOnInit() {
