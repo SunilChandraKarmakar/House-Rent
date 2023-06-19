@@ -1,13 +1,32 @@
-<p>
-  property-detail id == {{ propertyId }}.
-</p>
-<div class="action-button">
-  <button class="btn btn-primary" (click)="onBack()">Back</button>
-  <button class="btn btn-primary" (click)="onNextPage()" style="margin-left: 3px;">Goto Next Page</button>
-</div>
-<div class="pagination-sm mt-3">
-  <button class="btn btn-primary" routerLink="/property-detail/1">1</button>
-  <button class="btn btn-primary" routerLink="/property-detail/2">2</button>
-  <button class="btn btn-primary" routerLink="/property-detail/3">3</button>
-  <button class="btn btn-primary" routerLink="/property-detail/4">4</button>
+<div class="row shadow mt-3">
+  <div class="col-md-4 col-sm-4 col-4 p-0">
+    <div class="card">
+      <div class="card-img-warp text-center mt-3">
+        <img src="../../../../assets/images/house_1.png" class="card-img-top">
+      </div>
+      <div class="card-body mt-2">
+        <h4 class="card-title">Pearl Green</h4>
+        <span>2 BHK partment @ 51200</span><br>
+        <span>in New York</span>
+        <hr>
+        <span><strong>Build Area:</strong> 1200 Sqft</span><br>
+        <span><strong>Carpet Area:</strong> 1000 Sqft</span><br>
+        <span><strong>Furnishing Type:</strong> Fully</span>
+      </div>
+      <div class="card-footer">
+        <nz-button-group class="d-flex">
+          <button nz-button nzType="primary" style="width: 100%">Like</button>
+          <button nz-button nzType="default" style="width: 100%;">Message</button>
+        </nz-button-group>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8 col-8">
+    <nz-tabset>
+      <nz-tab nzTitle="Overview">Content of Tab Pane 1</nz-tab>
+      <nz-tab nzTitle="Address">Content of Tab Pane 2</nz-tab>
+      <nz-tab nzTitle="Photo">Content of Tab Pane 3</nz-tab>
+      <nz-tab nzTitle="Contact">Content of Tab Pane 3</nz-tab>
+    </nz-tabset>
+  </div>
 </div>

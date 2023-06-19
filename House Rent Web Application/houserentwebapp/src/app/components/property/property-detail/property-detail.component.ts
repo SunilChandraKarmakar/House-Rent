@@ -21,7 +21,6 @@ export class PropertyDetailComponent implements OnInit {
     });
   }
 
-
   onBack(): void {
     this._router.navigate(["/"]);
   }

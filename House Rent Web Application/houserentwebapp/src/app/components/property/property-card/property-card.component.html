@@ -16,13 +16,15 @@
     </ul>
   </div>
   <div class="card-body">
-    <h5 class="mb-0">{{ property.numberOfBadroom }} BHK {{ property.furnishingType }}</h5>
+    <h5 class="mb-0 text-primary">{{ property.numberOfBadroom }} BHK {{ property.furnishingType }}</h5>
     <span>in {{ property.name }}, {{ property.city }}</span>
     <p>
       {{ property.propertyType }}
       <span *ngIf="property.propertyType != 'Unfurnished'">Furnished</span> | {{ property.posession }}
     </p>
     <hr class="mt-0 mb-0">
-    <p>Price: {{ property.price }} USD | Area: {{ property.builtArea }} Sq Ft</p>
+    <p>
+      Price: <span class="text-danger fst-italic">{{ property.price }} USD</span> | 
+      Area: <span class="text-danger fst-italic">{{ property.builtArea }} Sq Ft</span></p>
   </div>
 </div>
