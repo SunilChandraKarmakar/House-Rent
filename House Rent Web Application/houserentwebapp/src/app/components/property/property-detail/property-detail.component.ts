@@ -12,6 +12,8 @@ export class PropertyDetailComponent implements OnInit {
   // Property id
   propertyId: number | undefined;
 
+  testData: string = "This is test data.";
+
   constructor(private _activatedRoute: ActivatedRoute, private _router: Router) { }
 
   ngOnInit() {
