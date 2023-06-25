@@ -30,6 +30,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 registerLocaleData(en);
 
@@ -66,7 +67,8 @@ registerLocaleData(en);
     NzIconModule,
     NzRadioModule,
     NzInputNumberModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzImageModule
   ],
 
   providers: [{ provide: NZ_I18N, useValue: en_US }],

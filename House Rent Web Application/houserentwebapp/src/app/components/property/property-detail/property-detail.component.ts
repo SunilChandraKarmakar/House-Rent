@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NzImageService } from 'ng-zorro-antd/image';
 
 @Component({
   selector: 'app-property-detail',
@@ -14,21 +15,40 @@ export class PropertyDetailComponent implements OnInit {
 
   testData: string = "This is test data.";
 
-  constructor(private _activatedRoute: ActivatedRoute, private _router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private nzImageService: NzImageService) { }
 
   ngOnInit() {
-    this.propertyId = +this._activatedRoute.snapshot.params["id"];
-    this._activatedRoute.params.subscribe((res) => {
+    this.propertyId = +this.activatedRoute.snapshot.params["id"];
+    this.activatedRoute.params.subscribe((res) => {
       this.propertyId = +res["id"];
     });
   }
 
   onBack(): void {
-    this._router.navigate(["/"]);
+    this.router.navigate(["/"]);
   }
 
   onNextPage(): void {
     this.propertyId = this.propertyId! + 1;
-    this._router.navigate([`property-detail/${this.propertyId}`])
+    this.router.navigate([`property-detail/${this.propertyId}`])
+  }
+
+  previewAllImages(): void {
+    const images = [
+      {
+        src: 'https://img.alicdn.com/tfs/TB1g.mWZAL0gK0jSZFtXXXQCXXa-200-200.svg',
+        width: '200px',
+        height: '200px',
+        alt: 'ng-zorro'
+      },
+      {
+        src: 'https://img.alicdn.com/tfs/TB1Z0PywTtYBeNjy1XdXXXXyVXa-186-200.svg',
+        width: '200px',
+        height: '200px',
+        alt: 'angular'
+      }
+    ];
+    
+    this.nzImageService.preview(images, { nzZoom: 1.5, nzRotate: 0 });
   }
 }
