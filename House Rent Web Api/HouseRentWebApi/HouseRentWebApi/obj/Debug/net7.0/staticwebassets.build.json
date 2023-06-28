@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "G4fzlw7lmT6xP+VBUDIC5bTMIX2a6zQlCzXzNZHfbOM=",
+  "Source": "HouseRentWebApi",
+  "BasePath": "_content/HouseRentWebApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
