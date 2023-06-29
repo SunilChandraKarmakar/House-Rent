@@ -31,3 +31,15 @@ D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.0\HouseRentWebApi.pdb
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.0\HouseRentWebApi.genruntimeconfig.cache
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.0\ref\HouseRentWebApi.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\Namotion.Reflection.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\Newtonsoft.Json.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\NJsonSchema.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\NJsonSchema.Yaml.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\NSwag.Annotations.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\NSwag.AspNetCore.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\NSwag.Core.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\NSwag.Core.Yaml.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\NSwag.Generation.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\NSwag.Generation.AspNetCore.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\YamlDotNet.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\nswag.json
