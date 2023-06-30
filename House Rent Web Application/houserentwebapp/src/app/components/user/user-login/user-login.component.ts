@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Country, CountryClient } from 'src/app/utility/global-api';
+import { CountryService } from 'src/app/services/country.service';
 
 @Component({
   selector: 'app-user-login',
@@ -16,7 +16,7 @@ export class UserLoginComponent implements OnInit {
   // Login form
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private country: CountryClient) { }
+  constructor(private formBuilder: FormBuilder, private countryService: CountryService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -25,10 +25,9 @@ export class UserLoginComponent implements OnInit {
       rememberMe: [false, Validators.requiredTrue]
     });
 
-    this.country.get(1).catch(res => {
-      console.log("Country Details :- ", res);
-    });
-    
+    this.countryService.getCountries().subscribe((res) => {
+      console.log("Countries :- ", res);
+    })
   }
 
   submitForm(): void {

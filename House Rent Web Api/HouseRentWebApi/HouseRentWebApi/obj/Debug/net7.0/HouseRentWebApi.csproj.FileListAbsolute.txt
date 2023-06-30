@@ -42,4 +42,3 @@ D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\NSwag.Generation.dll
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\NSwag.Generation.AspNetCore.dll
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\YamlDotNet.dll
-D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\nswag.json

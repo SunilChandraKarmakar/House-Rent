@@ -16,8 +16,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 	
-  <Target Name="NSwag" AfterTargets="Build">
-	 <Exec Command="$(NSwagExe_Net70) run nswag.json /variables:Configuration=$(Configuration)" />
-  </Target>
+  <!--   <Target Name="NSwag" AfterTargets="Build"> -->
+	<!-- <Exec Command="$(NSwagExe_Net70) run nswag.json /variables:Configuration=$(Configuration)" /> -->
+  <!-- </Target> -->
 
 </Project>
