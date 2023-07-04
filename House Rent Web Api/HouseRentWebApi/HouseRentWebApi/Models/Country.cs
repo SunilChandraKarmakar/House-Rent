@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Testprop { get; set; }
+        public int Count { get; set; }
+        public int TotalCount { get; set; }
     }
 }

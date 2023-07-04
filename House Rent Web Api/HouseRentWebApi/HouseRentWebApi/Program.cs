@@ -1,10 +1,31 @@
+using HouseRentWebApi.Common;
+using HouseRentWebApi.Domain;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddDbContext<HouseRentContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+});
 
 // Add services to the container.
 builder.Services.AddControllers();
 
-// Add core service
-builder.Services.AddCors();
+// Add CORS
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy("AllowOrigin", policy =>
+    {
+        policy.AllowAnyOrigin();
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+    });
+});
+
+builder.Services.AddIdentity<User, IdentityRole>(option => { }).AddEntityFrameworkStores<HouseRentContext>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -27,9 +48,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(uc => uc.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseCors("AllowOrigin");
 
 app.MapControllers();
 

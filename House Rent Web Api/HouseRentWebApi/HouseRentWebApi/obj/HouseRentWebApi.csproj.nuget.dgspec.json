@@ -4,14 +4,92 @@
     "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi\\HouseRentWebApi.csproj": {}
   },
   "projects": {
-    "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi\\HouseRentWebApi.csproj": {
+    "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Common\\HouseRentWebApi.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi\\HouseRentWebApi.csproj",
-        "projectName": "HouseRentWebApi",
-        "projectPath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi\\HouseRentWebApi.csproj",
+        "projectUniqueName": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Common\\HouseRentWebApi.Common.csproj",
+        "projectName": "HouseRentWebApi.Common",
+        "projectPath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Common\\HouseRentWebApi.Common.csproj",
         "packagesPath": "C:\\Users\\Sunil\\.nuget\\packages\\",
-        "outputPath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi\\obj\\",
+        "outputPath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Sunil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Domain\\HouseRentWebApi.Domain.csproj": {
+                "projectPath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Domain\\HouseRentWebApi.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400-preview.23274.1\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Domain\\HouseRentWebApi.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Domain\\HouseRentWebApi.Domain.csproj",
+        "projectName": "HouseRentWebApi.Domain",
+        "projectPath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Domain\\HouseRentWebApi.Domain.csproj",
+        "packagesPath": "C:\\Users\\Sunil\\.nuget\\packages\\",
+        "outputPath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,9 +123,99 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400-preview.23274.1\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi\\HouseRentWebApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi\\HouseRentWebApi.csproj",
+        "projectName": "HouseRentWebApi",
+        "projectPath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi\\HouseRentWebApi.csproj",
+        "packagesPath": "C:\\Users\\Sunil\\.nuget\\packages\\",
+        "outputPath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Sunil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Common\\HouseRentWebApi.Common.csproj": {
+                "projectPath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Common\\HouseRentWebApi.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.0, )"
             },
             "NSwag.AspNetCore": {
               "target": "Package",
