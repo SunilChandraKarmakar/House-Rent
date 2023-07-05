@@ -10,6 +10,7 @@ builder.Services.AddDbContext<HouseRentContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
+builder.Services.AddIdentity<User, IdentityRole>(option => { }).AddEntityFrameworkStores<HouseRentContext>();
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -24,8 +25,6 @@ builder.Services.AddCors(option =>
         policy.AllowAnyMethod();
     });
 });
-
-builder.Services.AddIdentity<User, IdentityRole>(option => { }).AddEntityFrameworkStores<HouseRentContext>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

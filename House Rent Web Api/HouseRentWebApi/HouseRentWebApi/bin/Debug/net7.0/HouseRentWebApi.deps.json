@@ -1188,7 +1188,8 @@
       },
       "HouseRentWebApi.Common/1.0.0": {
         "dependencies": {
-          "HouseRentWebApi.Domain": "1.0.0"
+          "HouseRentWebApi.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.0"
         },
         "runtime": {
           "HouseRentWebApi.Common.dll": {}

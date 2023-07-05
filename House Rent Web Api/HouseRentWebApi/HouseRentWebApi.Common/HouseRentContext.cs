@@ -7,7 +7,7 @@ namespace HouseRentWebApi.Common
 {
     public class HouseRentContext : IdentityDbContext<User, IdentityRole, string>
     {
-        public HouseRentContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+        public HouseRentContext(DbContextOptions<HouseRentContext> dbContextOptions) : base(dbContextOptions)
         {
             
         }
@@ -15,5 +15,18 @@ namespace HouseRentWebApi.Common
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<User> Users { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            if (!options.IsConfigured)
+            {
+                string connectionString = @"Data Source = DESKTOP-O1NBMET; 
+                                    Initial Catalog = HouseRentDb; 
+                                    Integrated Security = SSPI";
+
+                options.UseSqlServer(connectionString);
+                //options.EnableSensitiveDataLogging();
+            }
+        }
     }
 }
