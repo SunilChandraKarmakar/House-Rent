@@ -22,7 +22,8 @@ namespace HouseRentWebApi.Common
             {
                 string connectionString = @"Data Source = DESKTOP-O1NBMET; 
                                     Initial Catalog = HouseRentDb; 
-                                    Integrated Security = SSPI";
+                                    Integrated Security = True;
+                                    TrustServerCertificate = True";
 
                 options.UseSqlServer(connectionString);
                 //options.EnableSensitiveDataLogging();
