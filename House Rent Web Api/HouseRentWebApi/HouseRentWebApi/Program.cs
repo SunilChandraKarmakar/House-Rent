@@ -1,5 +1,6 @@
 using HouseRentWebApi.Common;
 using HouseRentWebApi.Domain;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,12 @@ builder.Services.AddDbContext<HouseRentContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
 builder.Services.AddIdentity<User, IdentityRole>(option => { }).AddEntityFrameworkStores<HouseRentContext>();
+
+// Add MediatR
+builder.Services.AddMediatR(typeof(Program));
+
+// Add AutoMapper
+builder.Services.AddAutoMapper(typeof(Program));
 
 // Add services to the container.
 builder.Services.AddControllers();

@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HouseRentWebApi.ApplicationLogic\HouseRentWebApi.ApplicationLogic.csproj" />
     <ProjectReference Include="..\HouseRentWebApi.Common\HouseRentWebApi.Common.csproj" />
   </ItemGroup>
 

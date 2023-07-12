@@ -1,4 +1,5 @@
 ﻿using HouseRentWebApi.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HouseRentWebApi.Controllers
@@ -7,6 +8,7 @@ namespace HouseRentWebApi.Controllers
     [ApiController]
     public class CountryController : ControllerBase
     {
+        private readonly IMediator _mediator;
         private ICollection<Country> _countries;
 
         public CountryController()
