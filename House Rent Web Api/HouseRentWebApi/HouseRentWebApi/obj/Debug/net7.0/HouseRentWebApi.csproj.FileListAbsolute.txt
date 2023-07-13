@@ -91,3 +91,12 @@ D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\HouseRentWebApi.Domain.dll
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\HouseRentWebApi.Common.pdb
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\HouseRentWebApi.Domain.pdb
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\MediatR.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\MediatR.Contracts.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\HouseRentWebApi.ApplicationLogic.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\HouseRentWebApi.ApplicationLogic.pdb
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\AutoMapper.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\HouseRentWebApi.Shared.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\HouseRentWebApi.Shared.pdb

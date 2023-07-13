@@ -7,9 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjectionFixed" Version="5.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HouseRentWebApi.Common\HouseRentWebApi.Common.csproj" />
+    <ProjectReference Include="..\HouseRentWebApi.Domain\HouseRentWebApi.Domain.csproj" />
+    <ProjectReference Include="..\HouseRentWebApi.Shared\HouseRentWebApi.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CountryLogic\Command\" />
   </ItemGroup>
 
 </Project>

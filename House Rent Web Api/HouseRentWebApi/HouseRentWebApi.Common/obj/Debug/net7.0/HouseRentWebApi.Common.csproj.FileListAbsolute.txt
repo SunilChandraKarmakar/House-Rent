@@ -15,3 +15,5 @@ D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debu
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debug\net7.0\ref\HouseRentWebApi.Common.dll
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\bin\Debug\net7.0\HouseRentWebApi.Common.runtimeconfig.json
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debug\net7.0\HouseRentWebApi.Common.genruntimeconfig.cache
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\bin\Debug\net7.0\HouseRentWebApi.Shared.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\bin\Debug\net7.0\HouseRentWebApi.Shared.pdb

@@ -35,8 +35,6 @@
     <ProjectReference Include="..\HouseRentWebApi.Common\HouseRentWebApi.Common.csproj" />
   </ItemGroup>
 
-	<Target Name="NSwag" AfterTargets="Build">
-		<Exec Command="$(NSwagExe_Net70) run nswag.json /variables:Configuration=$(Configuration)" />
-	</Target>
+	
 
 </Project>

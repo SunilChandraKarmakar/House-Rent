@@ -10,3 +10,10 @@ D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogi
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\obj\Debug\net7.0\refint\HouseRentWebApi.ApplicationLogic.dll
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\obj\Debug\net7.0\HouseRentWebApi.ApplicationLogic.pdb
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\obj\Debug\net7.0\ref\HouseRentWebApi.ApplicationLogic.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\bin\Debug\net7.0\HouseRentWebApi.Shared.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\bin\Debug\net7.0\HouseRentWebApi.Shared.pdb
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\obj\Debug\net7.0\HouseRentWebApi.ApplicationLogic.csproj.CopyComplete
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\bin\Debug\net7.0\HouseRentWebApi.Domain.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\bin\Debug\net7.0\HouseRentWebApi.Domain.pdb
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\bin\Debug\net7.0\HouseRentWebApi.Common.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\bin\Debug\net7.0\HouseRentWebApi.Common.pdb

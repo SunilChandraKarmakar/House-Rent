@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HouseRentWebApi.Domain\HouseRentWebApi.Domain.csproj" />
+    <ProjectReference Include="..\HouseRentWebApi.Shared\HouseRentWebApi.Shared.csproj" />
   </ItemGroup>
 
 </Project>

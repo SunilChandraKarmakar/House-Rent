@@ -1,20 +1,21 @@
-﻿using HouseRentWebApi.Domain;
+﻿using HouseRentWebApi.Common.Contracts;
+using HouseRentWebApi.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HouseRentWebApi.Common
 {
-    public class HouseRentContext : IdentityDbContext<User, IdentityRole, string>
+    public class HouseRentContext : IdentityDbContext<User, IdentityRole, string>, ICoreDbContext
     {
         public HouseRentContext(DbContextOptions<HouseRentContext> dbContextOptions) : base(dbContextOptions)
         {
             
         }
 
-        public DbSet<Country> Countries { get; set; }
-        public DbSet<City> Cities { get; set; }
-        public DbSet<User> Users { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
