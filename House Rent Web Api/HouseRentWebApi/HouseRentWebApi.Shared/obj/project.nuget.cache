@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "J8TcLVYGlMpcqFJL9AOeiUJgHFItEyHBghKo5JGgg+jZW5Aa727UsZ2+EGnmydrv2Ti3hz130liAcDVa8cNf/A==",
+  "dgSpecHash": "rOfleX5XZqDYFWvGnib3vaRXWgM13vFxpeaIbd8ffs1aU0hfS1Oh/suO5ELg3jSxAbiBTKOXSCERv08AhmfNPg==",
   "success": true,
   "projectFilePath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Shared\\HouseRentWebApi.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Sunil\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
+    "C:\\Users\\Sunil\\.nuget\\packages\\fluentvalidation\\11.6.0\\fluentvalidation.11.6.0.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\microsoft.aspnetcore.ratelimiting\\7.0.0-rc.2.22476.2\\microsoft.aspnetcore.ratelimiting.7.0.0-rc.2.22476.2.nupkg.sha512",

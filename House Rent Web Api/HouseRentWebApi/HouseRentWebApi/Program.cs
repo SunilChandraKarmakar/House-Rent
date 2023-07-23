@@ -1,9 +1,9 @@
+using HouseRentWebApi.ApplicationLogic;
 using HouseRentWebApi.Common;
 using HouseRentWebApi.Domain;
-using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,13 +15,15 @@ builder.Services.AddDbContext<HouseRentContext>(option =>
 builder.Services.AddIdentity<User, IdentityRole>(option => { }).AddEntityFrameworkStores<HouseRentContext>();
 
 // Add MediatR
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+//builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
 // Add AutoMapper
-builder.Services.AddAutoMapper(typeof(Program));
+//builder.Services.AddAutoMapper(typeof(Program));
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddApplication();
+builder.Services.AddPersistence(builder.Configuration);
 
 // Add CORS
 builder.Services.AddCors(option =>

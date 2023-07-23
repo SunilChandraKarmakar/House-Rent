@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kVakZbi208QVBF6Ft58mttCyZUVtnRS4Ft82R7HAdhWN+LAd6seHmO7eONhw2OY2RI/ZZuOWLbFqngkmGXyUFw==",
+  "dgSpecHash": "g7u/xE8jqUy1CXsnM5GSZVzNooF4Gm9mJzsoBkWUckWVzw9DFjq3wvHVUJUEbfwnsETShNl6edA6+AwcCmGwAw==",
   "success": true,
   "projectFilePath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.ApplicationLogic\\HouseRentWebApi.ApplicationLogic.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\Sunil\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\Sunil\\.nuget\\packages\\fluentvalidation\\11.6.0\\fluentvalidation.11.6.0.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjectionfixed\\5.1.2\\mediatr.extensions.microsoft.dependencyinjectionfixed.5.1.2.nupkg.sha512",

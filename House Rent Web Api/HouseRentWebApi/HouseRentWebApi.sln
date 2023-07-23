@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseRentWebApi.Application
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationShared", "ApplicationShared", "{2CD12EDE-C5F2-4CA7-9675-D8AA2A50155F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseRentWebApi.Shared", "HouseRentWebApi.Shared\HouseRentWebApi.Shared.csproj", "{FCBF87FA-F340-4078-BBB2-E642A4B52A68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseRentWebApi.Shared", "HouseRentWebApi.Shared\HouseRentWebApi.Shared.csproj", "{FCBF87FA-F340-4078-BBB2-E642A4B52A68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
