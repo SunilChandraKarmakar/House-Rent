@@ -77,7 +77,7 @@
       "rxJsVersion": 6.0,
       "dateTimeType": "Date",
       "nullValue": "Undefined",
-      "generateClientClasses": false,
+      "generateClientClasses": true,
       "generateClientInterfaces": false,
       "generateOptionalParameters": false,
       "exportTypes": true,
