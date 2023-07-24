@@ -16,7 +16,7 @@ namespace HouseRentWebApi.Shared.Behaviours
         {
             var name = typeof(TRequest).Name;
 
-            _logger.LogInformation("Api Request: {Name} {@UserId} {@Request}", name, request);
+            _logger.LogInformation("Api Request: {Name} {@Request}", name, request);
 
             return Task.CompletedTask;
         }

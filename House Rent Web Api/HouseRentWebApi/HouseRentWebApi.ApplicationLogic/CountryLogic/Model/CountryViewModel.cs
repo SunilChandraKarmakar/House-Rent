@@ -15,7 +15,7 @@ namespace HouseRentWebApi.ApplicationLogic.CountryLogic.Model
     public class CountryModel : IMapFrom<Country>
     {
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -27,7 +27,7 @@ namespace HouseRentWebApi.ApplicationLogic.CountryLogic.Model
     public class CountryGridModel : IMapFrom<Country>
     {
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         public void Mapping(Profile profile)
         {

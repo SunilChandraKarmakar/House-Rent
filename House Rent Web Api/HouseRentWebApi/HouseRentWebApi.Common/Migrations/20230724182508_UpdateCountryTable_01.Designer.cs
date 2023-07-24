@@ -4,6 +4,7 @@ using HouseRentWebApi.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseRentWebApi.Common.Migrations
 {
     [DbContext(typeof(HouseRentContext))]
-    partial class HouseRentContextModelSnapshot : ModelSnapshot
+    [Migration("20230724182508_UpdateCountryTable_01")]
+    partial class UpdateCountryTable01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

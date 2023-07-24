@@ -27,7 +27,7 @@ namespace HouseRentWebApi.Shared.Behaviours
             if (_timer.ElapsedMilliseconds > 100)
             {
                 var name = typeof(TRequest).Name;
-                _logger.LogWarning("Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@Request}",
+                _logger.LogWarning("Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}",
                     name, _timer.ElapsedMilliseconds, request);
             }
 

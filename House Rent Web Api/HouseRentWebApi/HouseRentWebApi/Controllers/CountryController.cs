@@ -1,7 +1,6 @@
 ﻿using HouseRentWebApi.ApplicationLogic.CountryLogic.Model;
 using HouseRentWebApi.ApplicationLogic.CountryLogic.Queries;
 using HouseRentWebApi.Shared.Base;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HouseRentWebApi.Controllers
