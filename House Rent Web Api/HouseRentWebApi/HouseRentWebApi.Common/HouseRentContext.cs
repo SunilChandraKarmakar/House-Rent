@@ -17,6 +17,11 @@ namespace HouseRentWebApi.Common
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {            
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             if (!options.IsConfigured)

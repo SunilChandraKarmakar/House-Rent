@@ -17,8 +17,4 @@
     <ProjectReference Include="..\HouseRentWebApi.Shared\HouseRentWebApi.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CountryLogic\Command\" />
-  </ItemGroup>
-
 </Project>
