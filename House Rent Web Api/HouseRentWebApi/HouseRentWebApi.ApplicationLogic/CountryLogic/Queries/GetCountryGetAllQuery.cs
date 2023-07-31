@@ -19,7 +19,7 @@ namespace HouseRentWebApi.ApplicationLogic.CountryLogic.Queries
             public async Task<ICollection<CountryGridModel>> Handle(GetCountryGetAllQuery request, 
                 CancellationToken cancellationToken)
             {
-                var countries = await _service.Context.Countries.ToListAsync();
+                var countries = await _service.Context.Countries.Where(c => !c.IsDeleted).ToListAsync();
                 var mapCountries = _service.Mapper.Map<ICollection<CountryGridModel>>(countries).ToList();
 
                 return mapCountries;
