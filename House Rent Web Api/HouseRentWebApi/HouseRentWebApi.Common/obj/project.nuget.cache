@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6oTGPFRAQRnN5AupB0EEsrcao0Mh0+TyC2ANCcR20BpLXegeH8MPVzi2p+sKB/XXiwfTzzd86T86mFwNDXue4Q==",
+  "dgSpecHash": "tdlxT9vxEkfwWctC+/p2siwf1gJ9XxA3ud/hbR34LejtqzWnabY23eC4x0UWcSgEp3zsWS2gEWYravoKdG7ibQ==",
   "success": true,
   "projectFilePath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Common\\HouseRentWebApi.Common.csproj",
   "expectedPackageFiles": [
@@ -53,6 +53,7 @@
     "C:\\Users\\Sunil\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\Sunil\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\Sunil\\.nuget\\packages\\system.configuration.configurationmanager\\5.0.0\\system.configuration.configurationmanager.5.0.0.nupkg.sha512",

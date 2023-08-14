@@ -10,3 +10,4 @@ D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Domain\obj\Debu
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Domain\obj\Debug\net7.0\refint\HouseRentWebApi.Domain.dll
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Domain\obj\Debug\net7.0\HouseRentWebApi.Domain.pdb
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Domain\obj\Debug\net7.0\ref\HouseRentWebApi.Domain.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Domain\obj\Debug\net7.0\HouseRentWebApi.Domain.sourcelink.json

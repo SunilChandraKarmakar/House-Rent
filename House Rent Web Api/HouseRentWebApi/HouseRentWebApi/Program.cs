@@ -1,6 +1,7 @@
 using HouseRentWebApi.ApplicationLogic;
 using HouseRentWebApi.Common;
 using HouseRentWebApi.Domain;
+using HouseRentWebApi.Shared.Middlewares;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -49,6 +50,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Apply custom exception handler
+app.UseCustomExceptionHandler();
 
 app.UseAuthentication();
 

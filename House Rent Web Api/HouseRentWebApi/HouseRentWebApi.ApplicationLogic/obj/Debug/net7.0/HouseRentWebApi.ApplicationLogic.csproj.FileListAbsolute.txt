@@ -17,3 +17,4 @@ D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogi
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\bin\Debug\net7.0\HouseRentWebApi.Domain.pdb
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\bin\Debug\net7.0\HouseRentWebApi.Common.dll
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\bin\Debug\net7.0\HouseRentWebApi.Common.pdb
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.ApplicationLogic\obj\Debug\net7.0\HouseRentWebApi.ApplicationLogic.sourcelink.json

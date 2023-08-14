@@ -101,3 +101,4 @@ D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\HouseRentWebApi.Shared.dll
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\HouseRentWebApi.Shared.pdb
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\FluentValidation.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.0\HouseRentWebApi.sourcelink.json

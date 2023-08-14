@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HouseRentWebApi.Domain;
 using HouseRentWebApi.Shared.Contracts;
+using System.ComponentModel.DataAnnotations;
 using System.Dynamic;
 
 namespace HouseRentWebApi.ApplicationLogic.CountryLogic.Model
@@ -15,6 +16,9 @@ namespace HouseRentWebApi.ApplicationLogic.CountryLogic.Model
     public class CountryModel : IMapFrom<Country>
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Provied Country Name.")]
+        [StringLength(30, MinimumLength = 2)]
         public string Name { get; set; }
 
         public void Mapping(Profile profile)
