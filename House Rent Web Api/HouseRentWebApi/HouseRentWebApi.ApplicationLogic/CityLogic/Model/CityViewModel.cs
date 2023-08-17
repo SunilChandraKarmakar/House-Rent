@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HouseRentWebApi.Domain;
 using HouseRentWebApi.Shared.Contracts;
+using System.ComponentModel.DataAnnotations;
 using System.Dynamic;
 
 namespace HouseRentWebApi.ApplicationLogic.CityLogic.Model
@@ -15,7 +16,13 @@ namespace HouseRentWebApi.ApplicationLogic.CityLogic.Model
     public class CityModel : IMapFrom<City>
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Provied City Name.")]
+        [StringLength(30, MinimumLength = 2)]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Select Country.")]
+        [Display(Name = "Country")]
         public int CountryId { get; set; }
 
         public void Mapping(Profile profile)

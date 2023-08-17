@@ -54,11 +54,11 @@ app.UseHttpsRedirection();
 // Apply custom exception handler
 app.UseCustomExceptionHandler();
 
+app.UseCors("AllowOrigin");
+
 app.UseAuthentication();
 
 app.UseAuthorization();
-
-app.UseCors("AllowOrigin");
 
 app.MapControllers();
 

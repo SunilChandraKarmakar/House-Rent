@@ -17,4 +17,8 @@
     <ProjectReference Include="..\HouseRentWebApi.Shared\HouseRentWebApi.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AccountLogic\Queries\" />
+  </ItemGroup>
+
 </Project>
