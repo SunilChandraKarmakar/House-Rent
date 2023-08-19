@@ -18,25 +18,17 @@ export class AccountClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    registration(fullName: string | undefined, email: string | undefined, password: string | undefined): Promise<UserModel> {
-        let url_ = this.baseUrl + "/api/Account/Registration?";
-        if (fullName === null)
-            throw new Error("The parameter 'fullName' cannot be null.");
-        else if (fullName !== undefined)
-            url_ += "FullName=" + encodeURIComponent("" + fullName) + "&";
-        if (email === null)
-            throw new Error("The parameter 'email' cannot be null.");
-        else if (email !== undefined)
-            url_ += "Email=" + encodeURIComponent("" + email) + "&";
-        if (password === null)
-            throw new Error("The parameter 'password' cannot be null.");
-        else if (password !== undefined)
-            url_ += "Password=" + encodeURIComponent("" + password) + "&";
+    registration(command: RegistrationCommand): Promise<UserModel> {
+        let url_ = this.baseUrl + "/api/Account/Registration";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(command);
+
         let options_: RequestInit = {
+            body: content_,
             method: "POST",
             headers: {
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             }
         };
@@ -58,26 +50,25 @@ export class AccountClient {
             });
         } else {
             return response.text().then((_responseText) => {
-            return throwException("A server side error occurred.", status, _responseText, _headers);
+            let resultdefault: any = null;
+            let resultDatadefault = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            resultdefault = ProblemDetails.fromJS(resultDatadefault);
+            return throwException("A server side error occurred.", status, _responseText, _headers, resultdefault);
             });
         }
     }
 
-    login(email: string | undefined, password: string | undefined): Promise<UserModel> {
-        let url_ = this.baseUrl + "/api/Account/Login?";
-        if (email === null)
-            throw new Error("The parameter 'email' cannot be null.");
-        else if (email !== undefined)
-            url_ += "Email=" + encodeURIComponent("" + email) + "&";
-        if (password === null)
-            throw new Error("The parameter 'password' cannot be null.");
-        else if (password !== undefined)
-            url_ += "Password=" + encodeURIComponent("" + password) + "&";
+    login(command: LoginCommand): Promise<UserModel> {
+        let url_ = this.baseUrl + "/api/Account/Login";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(command);
+
         let options_: RequestInit = {
+            body: content_,
             method: "POST",
             headers: {
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             }
         };
@@ -99,7 +90,10 @@ export class AccountClient {
             });
         } else {
             return response.text().then((_responseText) => {
-            return throwException("A server side error occurred.", status, _responseText, _headers);
+            let resultdefault: any = null;
+            let resultDatadefault = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            resultdefault = ProblemDetails.fromJS(resultDatadefault);
+            return throwException("A server side error occurred.", status, _responseText, _headers, resultdefault);
             });
         }
     }
@@ -187,7 +181,10 @@ export class CityClient {
             });
         } else if (status === 404) {
             return response.text().then((_responseText) => {
-            return throwException("A server side error occurred.", status, _responseText, _headers);
+            let result404: any = null;
+            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result404 = ProblemDetails.fromJS(resultData404);
+            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
@@ -197,25 +194,17 @@ export class CityClient {
         return Promise.resolve<CityViewModel>(null as any);
     }
 
-    upsert(id: number | undefined, name: string | undefined, countryId: number | undefined): Promise<number> {
-        let url_ = this.baseUrl + "/api/City/Upsert?";
-        if (id === null)
-            throw new Error("The parameter 'id' cannot be null.");
-        else if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&";
-        if (name === null)
-            throw new Error("The parameter 'name' cannot be null.");
-        else if (name !== undefined)
-            url_ += "Name=" + encodeURIComponent("" + name) + "&";
-        if (countryId === null)
-            throw new Error("The parameter 'countryId' cannot be null.");
-        else if (countryId !== undefined)
-            url_ += "CountryId=" + encodeURIComponent("" + countryId) + "&";
+    upsert(command: UpsertCityCommand): Promise<number> {
+        let url_ = this.baseUrl + "/api/City/Upsert";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(command);
+
         let options_: RequestInit = {
+            body: content_,
             method: "POST",
             headers: {
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             }
         };
@@ -238,7 +227,10 @@ export class CityClient {
             });
         } else {
             return response.text().then((_responseText) => {
-            return throwException("A server side error occurred.", status, _responseText, _headers);
+            let resultdefault: any = null;
+            let resultDatadefault = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            resultdefault = ProblemDetails.fromJS(resultDatadefault);
+            return throwException("A server side error occurred.", status, _responseText, _headers, resultdefault);
             });
         }
     }
@@ -364,7 +356,10 @@ export class CountryClient {
             });
         } else if (status === 404) {
             return response.text().then((_responseText) => {
-            return throwException("A server side error occurred.", status, _responseText, _headers);
+            let result404: any = null;
+            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result404 = ProblemDetails.fromJS(resultData404);
+            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
@@ -374,21 +369,17 @@ export class CountryClient {
         return Promise.resolve<CountryViewModel>(null as any);
     }
 
-    upsert(id: number | undefined, name: string | undefined): Promise<number> {
-        let url_ = this.baseUrl + "/api/Country/Upsert?";
-        if (id === null)
-            throw new Error("The parameter 'id' cannot be null.");
-        else if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&";
-        if (name === null)
-            throw new Error("The parameter 'name' cannot be null.");
-        else if (name !== undefined)
-            url_ += "Name=" + encodeURIComponent("" + name) + "&";
+    upsert(command: UpsertCountryCommand): Promise<number> {
+        let url_ = this.baseUrl + "/api/Country/Upsert";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(command);
+
         let options_: RequestInit = {
+            body: content_,
             method: "POST",
             headers: {
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             }
         };
@@ -411,7 +402,10 @@ export class CountryClient {
             });
         } else {
             return response.text().then((_responseText) => {
-            return throwException("A server side error occurred.", status, _responseText, _headers);
+            let resultdefault: any = null;
+            let resultDatadefault = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            resultdefault = ProblemDetails.fromJS(resultDatadefault);
+            return throwException("A server side error occurred.", status, _responseText, _headers, resultdefault);
             });
         }
     }
@@ -559,6 +553,208 @@ export interface IUserModel {
     token: string;
 }
 
+export class ProblemDetails implements IProblemDetails {
+    type?: string | undefined;
+    title?: string | undefined;
+    status?: number | undefined;
+    detail?: string | undefined;
+    instance?: string | undefined;
+
+    [key: string]: any;
+
+    constructor(data?: IProblemDetails) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.type = _data["type"];
+            this.title = _data["title"];
+            this.status = _data["status"];
+            this.detail = _data["detail"];
+            this.instance = _data["instance"];
+        }
+    }
+
+    static fromJS(data: any): ProblemDetails {
+        data = typeof data === 'object' ? data : {};
+        let result = new ProblemDetails();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["type"] = this.type;
+        data["title"] = this.title;
+        data["status"] = this.status;
+        data["detail"] = this.detail;
+        data["instance"] = this.instance;
+        return data;
+    }
+}
+
+export interface IProblemDetails {
+    type?: string | undefined;
+    title?: string | undefined;
+    status?: number | undefined;
+    detail?: string | undefined;
+    instance?: string | undefined;
+
+    [key: string]: any;
+}
+
+export class RegisterModel implements IRegisterModel {
+    fullName!: string;
+    email!: string;
+    password!: string;
+
+    constructor(data?: IRegisterModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.fullName = _data["fullName"];
+            this.email = _data["email"];
+            this.password = _data["password"];
+        }
+    }
+
+    static fromJS(data: any): RegisterModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new RegisterModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["fullName"] = this.fullName;
+        data["email"] = this.email;
+        data["password"] = this.password;
+        return data;
+    }
+}
+
+export interface IRegisterModel {
+    fullName: string;
+    email: string;
+    password: string;
+}
+
+export class RegistrationCommand extends RegisterModel implements IRegistrationCommand {
+
+    constructor(data?: IRegistrationCommand) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+    }
+
+    static fromJS(data: any): RegistrationCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new RegistrationCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IRegistrationCommand extends IRegisterModel {
+}
+
+export class LoginModel implements ILoginModel {
+    email!: string;
+    password!: string;
+
+    constructor(data?: ILoginModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.email = _data["email"];
+            this.password = _data["password"];
+        }
+    }
+
+    static fromJS(data: any): LoginModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new LoginModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["email"] = this.email;
+        data["password"] = this.password;
+        return data;
+    }
+}
+
+export interface ILoginModel {
+    email: string;
+    password: string;
+}
+
+export class LoginCommand extends LoginModel implements ILoginCommand {
+
+    constructor(data?: ILoginCommand) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+    }
+
+    static fromJS(data: any): LoginCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new LoginCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface ILoginCommand extends ILoginModel {
+}
+
 export class CityGridModel implements ICityGridModel {
     id!: number;
     name!: string;
@@ -695,6 +891,33 @@ export interface ICityModel {
     countryId: number;
 }
 
+export class UpsertCityCommand extends CityModel implements IUpsertCityCommand {
+
+    constructor(data?: IUpsertCityCommand) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+    }
+
+    static fromJS(data: any): UpsertCityCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpsertCityCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IUpsertCityCommand extends ICityModel {
+}
+
 export class CountryGridModel implements ICountryGridModel {
     id!: number;
     name!: string;
@@ -821,6 +1044,33 @@ export class CountryModel implements ICountryModel {
 export interface ICountryModel {
     id: number;
     name: string;
+}
+
+export class UpsertCountryCommand extends CountryModel implements IUpsertCountryCommand {
+
+    constructor(data?: IUpsertCountryCommand) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+    }
+
+    static fromJS(data: any): UpsertCountryCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpsertCountryCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IUpsertCountryCommand extends ICountryModel {
 }
 
 export class WeatherForecast implements IWeatherForecast {

@@ -2,8 +2,11 @@ using HouseRentWebApi.ApplicationLogic;
 using HouseRentWebApi.Common;
 using HouseRentWebApi.Domain;
 using HouseRentWebApi.Shared.Middlewares;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,20 @@ builder.Services.AddDbContext<HouseRentContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
 builder.Services.AddIdentity<User, IdentityRole>(option => { }).AddEntityFrameworkStores<HouseRentContext>();
+
+// Add Jwt Authencation
+var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("top security key..."));
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        IssuerSigningKey = symmetricSecurityKey
+                    };
+                });
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -54,11 +71,11 @@ app.UseHttpsRedirection();
 // Apply custom exception handler
 app.UseCustomExceptionHandler();
 
-app.UseCors("AllowOrigin");
-
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseCors("AllowOrigin");
 
 app.MapControllers();
 

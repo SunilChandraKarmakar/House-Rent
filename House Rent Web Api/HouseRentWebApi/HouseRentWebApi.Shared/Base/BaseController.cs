@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HouseRentWebApi.Shared.Base
 {
     [Route("api/[controller]/[action]")]
+    [ApiController]
     public class BaseController : ControllerBase
     {
         private IMediator _mediator;
