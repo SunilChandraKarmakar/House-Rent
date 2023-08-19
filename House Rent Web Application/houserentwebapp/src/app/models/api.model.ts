@@ -18,8 +18,8 @@ export class AccountClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    userRegister(fullName: string | undefined, email: string | undefined, password: string | undefined): Promise<UserModel> {
-        let url_ = this.baseUrl + "/api/Account/UserRegister?";
+    registration(fullName: string | undefined, email: string | undefined, password: string | undefined): Promise<UserModel> {
+        let url_ = this.baseUrl + "/api/Account/Registration?";
         if (fullName === null)
             throw new Error("The parameter 'fullName' cannot be null.");
         else if (fullName !== undefined)
@@ -42,11 +42,52 @@ export class AccountClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processUserRegister(_response);
+            return this.processRegistration(_response);
         });
     }
 
-    protected processUserRegister(response: Response): Promise<UserModel> {
+    protected processRegistration(response: Response): Promise<UserModel> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = UserModel.fromJS(resultData200);
+            return result200;
+            });
+        } else {
+            return response.text().then((_responseText) => {
+            return throwException("A server side error occurred.", status, _responseText, _headers);
+            });
+        }
+    }
+
+    login(email: string | undefined, password: string | undefined): Promise<UserModel> {
+        let url_ = this.baseUrl + "/api/Account/Login?";
+        if (email === null)
+            throw new Error("The parameter 'email' cannot be null.");
+        else if (email !== undefined)
+            url_ += "Email=" + encodeURIComponent("" + email) + "&";
+        if (password === null)
+            throw new Error("The parameter 'password' cannot be null.");
+        else if (password !== undefined)
+            url_ += "Password=" + encodeURIComponent("" + password) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "POST",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processLogin(_response);
+        });
+    }
+
+    protected processLogin(response: Response): Promise<UserModel> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -471,6 +512,7 @@ export class UserModel implements IUserModel {
     fullName!: string;
     userName!: string;
     email!: string;
+    token!: string;
 
     constructor(data?: IUserModel) {
         if (data) {
@@ -487,6 +529,7 @@ export class UserModel implements IUserModel {
             this.fullName = _data["fullName"];
             this.userName = _data["userName"];
             this.email = _data["email"];
+            this.token = _data["token"];
         }
     }
 
@@ -503,6 +546,7 @@ export class UserModel implements IUserModel {
         data["fullName"] = this.fullName;
         data["userName"] = this.userName;
         data["email"] = this.email;
+        data["token"] = this.token;
         return data;
     }
 }
@@ -512,6 +556,7 @@ export interface IUserModel {
     fullName: string;
     userName: string;
     email: string;
+    token: string;
 }
 
 export class CityGridModel implements ICityGridModel {

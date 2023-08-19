@@ -10,10 +10,19 @@ namespace HouseRentWebApi.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<UserModel>> UserRegister(UserRegisterCommand command)
+        public async Task<ActionResult<UserModel>> Registration(RegistrationCommand command)
         {
             var registerUser = await Mediator.Send(command);
             return Ok(registerUser);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<UserModel>> Login(LoginCommand command)
+        {
+            var loginUser = await Mediator.Send(command);
+            return Ok(loginUser);
         }
     }
 }
