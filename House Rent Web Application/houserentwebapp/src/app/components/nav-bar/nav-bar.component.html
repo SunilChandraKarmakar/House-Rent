@@ -20,16 +20,13 @@
           <a class="nav-link" routerLinkActive="active" routerLink="add-property">List Property (Free)</a>
         </li>
       </ul>
-      <ul class="navbar-nav mb-2 mb-lg-0">
+      <ul class="navbar-nav mb-2 mb-lg-0 user-menu-style">
         <li class="nav-item" *ngIf="!getToken()">
           <a class="nav-link" routerLinkActive="active" routerLink="user/login">Login</a>
         </li>
         <li class="nav-item" *ngIf="!getToken()">
           <a class="nav-link" routerLinkActive="active" routerLink="user/registration">Registration</a>
         </li>
-        <!-- <li class="nav-item" *ngIf="getToken()">
-          <a class="nav-link" routerLinkActive="active" (click)="onLogout()">Logout</a>
-        </li> -->
         <li class="nav-item dropdown" *ngIf="getToken()">
           <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{loginUserName}}

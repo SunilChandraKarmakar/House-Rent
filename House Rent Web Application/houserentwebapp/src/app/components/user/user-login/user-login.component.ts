@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginModel } from 'src/app/models/api.model';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { LoginModel, UserModel } from 'src/app/models/api.model';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-user-login',
@@ -14,19 +17,29 @@ export class UserLoginComponent implements OnInit {
   // Login form
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private accountService: AccountService, 
+    private toastrService: ToastrService, private router: Router) {
+
+  }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       email: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      rememberMe: [false, Validators.requiredTrue]
+      rememberMe: [false]
     });
   }
 
   submitForm(): void {
     if (this.loginForm.valid) {
-      console.log('submit', this.loginForm.value);
+      let loginUser: LoginModel = this.loginForm.value;
+      this.accountService.login(loginUser).subscribe((result: UserModel) => {
+        localStorage.setItem("_loginUserInfo", JSON.stringify(result));
+        this.toastrService.success("User login successfull.", "Successfull.");
+        this.router.navigate(["/"]);
+      },(error: any) => {
+        console.log(error);
+      });
     } 
     else {
       Object.values(this.loginForm.controls).forEach(control => {
@@ -35,14 +48,6 @@ export class UserLoginComponent implements OnInit {
           control.updateValueAndValidity({ onlySelf: true });
         }
       });
-    }
-  }
-
-  testMethod(): void {
-    let loginUser: LoginModel = new LoginModel();
-    loginUser.email = ""
-
-
-    // this.accountService.login()
+    }    
   }
 }

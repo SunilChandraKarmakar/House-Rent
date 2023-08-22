@@ -2,6 +2,7 @@
 using HouseRentWebApi.ApplicationLogic.JwtExtensionsLogic;
 using HouseRentWebApi.Common.Contracts;
 using HouseRentWebApi.Domain;
+using HouseRentWebApi.Shared.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
@@ -38,7 +39,7 @@ namespace HouseRentWebApi.ApplicationLogic.AccountLogic.Command
 
                 // return BadRequest(new ResponseStatusModel(ResponseCode.FormValidateError, "Email and Password can not match, try again.", null));
 
-                return new UserModel();
+                throw new NotFoundException("Error");
             }
         }
     }

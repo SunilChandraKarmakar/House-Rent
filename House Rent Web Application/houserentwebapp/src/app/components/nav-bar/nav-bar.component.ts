@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { UserModel } from 'src/app/models/api.model';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,10 +20,10 @@ export class NavBarComponent implements OnInit {
   }
 
   getToken(): boolean {
-    let token: string = localStorage.getItem("_token")!;
+    let loginUSerInfo: UserModel = JSON.parse(localStorage.getItem("_loginUserInfo")!);
 
-    if(token != null || token != undefined) {
-      this.loginUserName = token;
+    if(loginUSerInfo != null || loginUSerInfo != undefined) {
+      this.loginUserName = loginUSerInfo.fullName;
       return true;
     }
 
@@ -30,7 +31,7 @@ export class NavBarComponent implements OnInit {
   }
 
   onLogout(): void {
-    localStorage.removeItem("_token");
+    localStorage.removeItem("_loginUserInfo");
     this.toastrService.info("You are logout.");
     this.router.navigate(["/user/login"]);
   }

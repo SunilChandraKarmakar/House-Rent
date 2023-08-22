@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class AccountService {
 
   // application base user
-  private _applicationBaseUrl: string = "https://localhost:44378/";
+  private _applicationBaseUrl: string = "https://localhost:44378";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -18,7 +18,7 @@ export class AccountService {
   login(loginModel: LoginModel): Observable<UserModel> {
 
     let loginUserInfo: Observable<UserModel> = 
-      this.httpClient.post<UserModel>(this._applicationBaseUrl + "/api/Login", loginModel);
+      this.httpClient.post<UserModel>(this._applicationBaseUrl + "/api/Account/Login", loginModel);
     
     return loginUserInfo;
   }
