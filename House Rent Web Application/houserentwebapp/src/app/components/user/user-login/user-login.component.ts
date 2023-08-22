@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginModel } from 'src/app/models/api.model';
 
 @Component({
   selector: 'app-user-login',
@@ -35,5 +36,13 @@ export class UserLoginComponent implements OnInit {
         }
       });
     }
+  }
+
+  testMethod(): void {
+    let loginUser: LoginModel = new LoginModel();
+    loginUser.email = ""
+
+
+    // this.accountService.login()
   }
 }

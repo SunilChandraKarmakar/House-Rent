@@ -20,7 +20,9 @@
       "es2018",
       "dom"
     ],
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "noUnusedLocals": true,                /* Report errors on unused locals. */
+    "noUnusedParameters": true             /* Report errors on unused parameters. */
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
