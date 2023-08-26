@@ -2,7 +2,6 @@
 using HouseRentWebApi.ApplicationLogic.JwtExtensionsLogic;
 using HouseRentWebApi.Common.Contracts;
 using HouseRentWebApi.Domain;
-using HouseRentWebApi.Shared.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
@@ -32,14 +31,10 @@ namespace HouseRentWebApi.ApplicationLogic.AccountLogic.Command
                     var existUser = _service.Mapper.Map<UserModel>(await _userManager.FindByEmailAsync(request.Email));
                     existUser.Token = JwtExtensions.CreateJwt(existUser);
 
-                    // return Ok(new ResponseStatusModel(ResponseCode.Ok, "Login successfull", existUser));
-
                     return existUser;
                 }
 
-                // return BadRequest(new ResponseStatusModel(ResponseCode.FormValidateError, "Email and Password can not match, try again.", null));
-
-                throw new NotFoundException("Error");
+                throw new Exception("User email and password cannot matched! Please, try again.");
             }
         }
     }

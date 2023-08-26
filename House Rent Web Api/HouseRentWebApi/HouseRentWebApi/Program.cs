@@ -3,6 +3,7 @@ using HouseRentWebApi.Common;
 using HouseRentWebApi.Domain;
 using HouseRentWebApi.Shared.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -35,6 +36,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddControllers();
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddDistributedMemoryCache();
 
 // Add CORS
 builder.Services.AddCors(option =>
@@ -62,14 +64,20 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    // Apply custom exception handler
+    app.UseCustomExceptionHandler();
     app.UseOpenApi();
     app.UseSwaggerUi3();
 }
 
-app.UseHttpsRedirection();
+app.UseForwardedHeaders(new ForwardedHeadersOptions() 
+{ 
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | 
+    ForwardedHeaders.XForwardedProto | 
+    ForwardedHeaders.All 
+});
 
-// Apply custom exception handler
-app.UseCustomExceptionHandler();
+app.UseHttpsRedirection();
 
 app.UseAuthentication();
 
