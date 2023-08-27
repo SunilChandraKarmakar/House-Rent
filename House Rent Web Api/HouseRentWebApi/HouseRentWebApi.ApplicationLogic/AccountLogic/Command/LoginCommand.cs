@@ -34,7 +34,7 @@ namespace HouseRentWebApi.ApplicationLogic.AccountLogic.Command
                     return existUser;
                 }
 
-                throw new Exception("User email and password cannot matched! Please, try again.");
+                throw new Exception("Email and password cannot matched! Please, try again.");
             }
         }
     }

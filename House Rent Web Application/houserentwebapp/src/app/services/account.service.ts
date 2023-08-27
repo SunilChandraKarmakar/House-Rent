@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginModel, UserModel } from '../models/api.model';
+import { LoginModel, RegisterModel, UserModel } from '../models/api.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,5 +21,13 @@ export class AccountService {
       this.httpClient.post<UserModel>(this._applicationBaseUrl + "/api/Account/Login", loginModel);
     
     return loginUserInfo;
+  }
+
+  // registration method
+  registration(registrationModel: RegisterModel): Observable<UserModel> {
+    let registrationUserInfo: Observable<UserModel> = 
+      this.httpClient.post<UserModel>(this._applicationBaseUrl + "/api/Account/Registration", registrationModel);
+    
+    return registrationUserInfo;
   }
 }

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { ToastrService } from 'ngx-toastr';
+import { RegisterModel, UserModel } from 'src/app/models/api.model';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-user-registration',
@@ -11,14 +15,44 @@ import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 export class UserRegistrationComponent implements OnInit {
 
   validateForm!: FormGroup;
+
   captchaTooltipIcon: NzFormTooltipIcon = {
     type: 'info-circle',
     theme: 'twotone'
   };
 
+  constructor(private fb: FormBuilder, private accountService: AccountService, private toastrService: ToastrService,
+  private router: Router) { }
+
+  ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      fullName: [null, [Validators.required]],
+      userName: [null, [Validators.required]],
+      phoneNumber: [null],
+      email: [null, [Validators.email, Validators.required]],
+      password: [null, [Validators.required]],
+      confirmPassword: [null, [Validators.required, this.confirmationValidator]],
+      phoneNumberPrefix: ['+88'],
+      agree: [false]
+    });
+  }
+
   submitForm(): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
+      let registrationUserInfo: RegisterModel = this.validateForm.value;
+      this.accountService.registration(registrationUserInfo).subscribe((result: UserModel) => {
+        this.toastrService.success("Registration successfull.", "Successfull.");
+        console.log(result);
+        this.router.navigate(["/user/login"]);
+      }, 
+      (error: any) => {
+        if(error.error.errors != null || error.error.errors != undefined) {
+          this.toastrService.error(JSON.stringify(error.error.errors));
+        }
+        else {
+          this.toastrService.error(error.error.errorMessage);
+        }
+      })
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -31,7 +65,7 @@ export class UserRegistrationComponent implements OnInit {
 
   updateConfirmValidator(): void {
     /** wait for refresh value */
-    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
+    Promise.resolve().then(() => this.validateForm.controls.confirmPassword.updateValueAndValidity());
   }
 
   confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
@@ -45,21 +79,5 @@ export class UserRegistrationComponent implements OnInit {
 
   getCaptcha(e: MouseEvent): void {
     e.preventDefault();
-  }
-
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      nickname: [null, [Validators.required]],
-      phoneNumberPrefix: ['+86'],
-      phoneNumber: [null, [Validators.required]],
-      website: [null, [Validators.required]],
-      captcha: [null, [Validators.required]],
-      agree: [false]
-    });
   }
 }

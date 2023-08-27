@@ -619,8 +619,11 @@ export interface IProblemDetails {
 
 export class RegisterModel implements IRegisterModel {
     fullName!: string;
+    userName!: string;
+    phoneNumber!: string;
     email!: string;
     password!: string;
+    confirmPassword!: string;
 
     constructor(data?: IRegisterModel) {
         if (data) {
@@ -634,8 +637,11 @@ export class RegisterModel implements IRegisterModel {
     init(_data?: any) {
         if (_data) {
             this.fullName = _data["fullName"];
+            this.userName = _data["userName"];
+            this.phoneNumber = _data["phoneNumber"];
             this.email = _data["email"];
             this.password = _data["password"];
+            this.confirmPassword = _data["confirmPassword"];
         }
     }
 
@@ -649,16 +655,22 @@ export class RegisterModel implements IRegisterModel {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["fullName"] = this.fullName;
+        data["userName"] = this.userName;
+        data["phoneNumber"] = this.phoneNumber;
         data["email"] = this.email;
         data["password"] = this.password;
+        data["confirmPassword"] = this.confirmPassword;
         return data;
     }
 }
 
 export interface IRegisterModel {
     fullName: string;
+    userName: string;
+    phoneNumber: string;
     email: string;
     password: string;
+    confirmPassword: string;
 }
 
 export class RegistrationCommand extends RegisterModel implements IRegistrationCommand {

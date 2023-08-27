@@ -22,7 +22,8 @@ namespace HouseRentWebApi.ApplicationLogic.AccountLogic.Command
             public async Task<UserModel> Handle(RegistrationCommand request, CancellationToken cancellationToken)
             {
                 var registerUser = _service.Mapper.Map<User>(request);
-                registerUser.UserName = request.Email;
+                registerUser.UserName = request.UserName;
+                registerUser.PhoneNumber = request.PhoneNumber;
                 registerUser.CreatedTime = DateTime.UtcNow;
                 registerUser.LastModifiedTime = DateTime.UtcNow;                
 
@@ -32,7 +33,7 @@ namespace HouseRentWebApi.ApplicationLogic.AccountLogic.Command
                 if (result.Result.Succeeded)
                     return registerCompleteUser;
                 else
-                    return new UserModel();
+                    throw new Exception(result.Result.Errors.Select(s => s.Description).FirstOrDefault());
             }
         }
     }

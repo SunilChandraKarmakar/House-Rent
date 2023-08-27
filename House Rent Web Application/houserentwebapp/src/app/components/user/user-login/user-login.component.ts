@@ -35,11 +35,15 @@ export class UserLoginComponent implements OnInit {
       let loginUser: LoginModel = this.loginForm.value;
       this.accountService.login(loginUser).subscribe((result: UserModel) => {
         localStorage.setItem("_loginUserInfo", JSON.stringify(result));
-        this.toastrService.success("User login successfull.", "Successfull.");
+        this.toastrService.success("Login successfull.", "Successfull.");
         this.router.navigate(["/"]);
-      },(error: any) => {
+      },
+      (error: any) => {
         if(error.error.errors != null || error.error.errors != undefined) {
           this.toastrService.error(JSON.stringify(error.error.errors));
+        }
+        else {
+          this.toastrService.error(error.error.errorMessage);
         }
       });
     } 

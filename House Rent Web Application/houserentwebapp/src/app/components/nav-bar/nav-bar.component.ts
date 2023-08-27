@@ -32,7 +32,7 @@ export class NavBarComponent implements OnInit {
 
   onLogout(): void {
     localStorage.removeItem("_loginUserInfo");
-    this.toastrService.info("You are logout.");
+    this.toastrService.info("Logout successfull.", "Information");
     this.router.navigate(["/user/login"]);
   }
 }
