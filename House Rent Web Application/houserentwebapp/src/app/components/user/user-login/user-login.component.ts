@@ -37,14 +37,6 @@ export class UserLoginComponent implements OnInit {
         localStorage.setItem("_loginUserInfo", JSON.stringify(result));
         this.toastrService.success("Login successfull.", "Successfull.");
         this.router.navigate(["/"]);
-      },
-      (error: any) => {
-        if(error.error.errors != null || error.error.errors != undefined) {
-          this.toastrService.error(JSON.stringify(error.error.errors));
-        }
-        else {
-          this.toastrService.error(error.error.errorMessage);
-        }
       });
     } 
     else {

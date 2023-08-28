@@ -44,14 +44,6 @@ export class UserRegistrationComponent implements OnInit {
         this.toastrService.success("Registration successfull.", "Successfull.");
         console.log(result);
         this.router.navigate(["/user/login"]);
-      }, 
-      (error: any) => {
-        if(error.error.errors != null || error.error.errors != undefined) {
-          this.toastrService.error(JSON.stringify(error.error.errors));
-        }
-        else {
-          this.toastrService.error(error.error.errorMessage);
-        }
       })
     } else {
       Object.values(this.validateForm.controls).forEach(control => {

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { PropertyCardComponent } from './components/property/property-card/property-card.component';
 import { PropertyListComponent } from './components/property/property-list/property-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AddPropertyComponent } from './components/property/add-property/add-property.component';
 import { PropertyDetailComponent } from './components/property/property-detail/property-detail.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -31,6 +31,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { HttpErrorInterceptorService } from './services/http-error-interceptor.service';
 
 registerLocaleData(en);
 
@@ -71,8 +72,13 @@ registerLocaleData(en);
     NzImageModule
   ],
 
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptorService, multi: true }
+  ],
+
   bootstrap: [AppComponent],
+
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],

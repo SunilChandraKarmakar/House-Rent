@@ -3,6 +3,7 @@ using HouseRentWebApi.Common.Contracts;
 using HouseRentWebApi.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace HouseRentWebApi.ApplicationLogic.AccountLogic.Command
 {
@@ -21,6 +22,11 @@ namespace HouseRentWebApi.ApplicationLogic.AccountLogic.Command
 
             public async Task<UserModel> Handle(RegistrationCommand request, CancellationToken cancellationToken)
             {
+                var existUser = await _userManager.Users.Where(u => u.Email == request.Email).FirstOrDefaultAsync();
+
+                if (existUser != null)
+                    throw new Exception("Email allready exist! Try new one.");
+
                 var registerUser = _service.Mapper.Map<User>(request);
                 registerUser.UserName = request.UserName;
                 registerUser.PhoneNumber = request.PhoneNumber;
