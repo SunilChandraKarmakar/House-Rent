@@ -32,6 +32,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { HttpErrorInterceptorService } from './services/http-error-interceptor.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 registerLocaleData(en);
 
@@ -55,6 +56,7 @@ registerLocaleData(en);
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule, // required animations module
+    NgxSpinnerModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }), // ToastrModule added
