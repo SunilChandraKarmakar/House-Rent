@@ -26,7 +26,7 @@ export class UserLoginComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.hide();
     this.loginForm = this.formBuilder.group({
-      email: [null, [Validators.required]],
+      userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
       rememberMe: [false]
     });

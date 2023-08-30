@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { RegisterModel, UserModel } from 'src/app/models/api.model';
+import { RegisterModel } from 'src/app/models/api.model';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -22,7 +23,7 @@ export class UserRegistrationComponent implements OnInit {
   };
 
   constructor(private fb: FormBuilder, private accountService: AccountService, private toastrService: ToastrService,
-  private router: Router) { }
+  private router: Router, private spinnerService: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -39,15 +40,17 @@ export class UserRegistrationComponent implements OnInit {
 
   submitForm(): void {
     if (this.validateForm.valid) {
+      this.spinnerService.show();
       let registrationUserInfo: RegisterModel = this.validateForm.value;
-      this.accountService.registration(registrationUserInfo).subscribe((result: UserModel) => {
+      this.accountService.registration(registrationUserInfo).subscribe(() => {
+        this.spinnerService.hide();
         this.toastrService.success("Registration successfull.", "Successfull.");
-        console.log(result);
         this.router.navigate(["/user/login"]);
       })
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
+          this.spinnerService.hide();
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
         }

@@ -4,6 +4,7 @@
     {
         public Country()
         {
+            Addresses = new HashSet<Address>();
             Cities = new HashSet<City>();
         }
 
@@ -12,6 +13,7 @@
         public bool IsDeleted { get; set; }
         public DateTime? DeletedDateTime { get; set; }
 
+        public ICollection<Address> Addresses { get; set; }
         public ICollection<City> Cities { get; set; }
     }
 }

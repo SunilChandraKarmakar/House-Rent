@@ -24,11 +24,11 @@ namespace HouseRentWebApi.ApplicationLogic.AccountLogic.Command
 
             public async Task<UserModel> Handle(LoginCommand request, CancellationToken cancellationToken)
             {
-                var result = await _signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
+                var result = await _signInManager.PasswordSignInAsync(request.UserName, request.Password, false, false);
 
                 if (result.Succeeded)
                 {
-                    var existUser = _service.Mapper.Map<UserModel>(await _userManager.FindByEmailAsync(request.Email));
+                    var existUser = _service.Mapper.Map<UserModel>(await _userManager.FindByNameAsync(request.UserName));
                     existUser.Token = JwtExtensions.CreateJwt(existUser);
 
                     return existUser;

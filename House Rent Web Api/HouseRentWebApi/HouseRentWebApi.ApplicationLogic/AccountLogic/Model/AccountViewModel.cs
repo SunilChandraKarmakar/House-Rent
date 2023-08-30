@@ -43,9 +43,9 @@ namespace HouseRentWebApi.ApplicationLogic.AccountLogic.Model
 
     public class LoginModel : IMapFrom<User>
     {
-        [Required(ErrorMessage = "Please, provied valid email address.")]
-        [RegularExpression("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", ErrorMessage = "Please, provied valid email address.")]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Please, provied valid user name.")]
+        [StringLength(20, MinimumLength = 2)]
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Please, provied valid password.")]
         public string Password { get; set; }

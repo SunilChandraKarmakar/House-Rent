@@ -701,7 +701,7 @@ export interface IRegistrationCommand extends IRegisterModel {
 }
 
 export class LoginModel implements ILoginModel {
-    email!: string;
+    userName!: string;
     password!: string;
 
     constructor(data?: ILoginModel) {
@@ -715,7 +715,7 @@ export class LoginModel implements ILoginModel {
 
     init(_data?: any) {
         if (_data) {
-            this.email = _data["email"];
+            this.userName = _data["userName"];
             this.password = _data["password"];
         }
     }
@@ -729,14 +729,14 @@ export class LoginModel implements ILoginModel {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["email"] = this.email;
+        data["userName"] = this.userName;
         data["password"] = this.password;
         return data;
     }
 }
 
 export interface ILoginModel {
-    email: string;
+    userName: string;
     password: string;
 }
 
