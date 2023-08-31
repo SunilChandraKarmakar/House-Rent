@@ -120,7 +120,11 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Shared\\HouseRentWebApi.Shared.csproj": {
+                "projectPath": "D:\\House-Rent\\House Rent Web Api\\HouseRentWebApi\\HouseRentWebApi.Shared\\HouseRentWebApi.Shared.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

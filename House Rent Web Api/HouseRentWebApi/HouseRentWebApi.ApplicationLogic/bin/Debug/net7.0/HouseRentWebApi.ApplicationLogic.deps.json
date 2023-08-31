@@ -676,6 +676,7 @@
       },
       "HouseRentWebApi.Domain/1.0.0": {
         "dependencies": {
+          "HouseRentWebApi.Shared": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "7.0.0"
         },
         "runtime": {

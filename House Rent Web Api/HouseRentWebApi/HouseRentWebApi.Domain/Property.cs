@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HouseRentWebApi.Domain
+﻿namespace HouseRentWebApi.Domain
 {
     public class Property
     {
@@ -30,13 +24,15 @@ namespace HouseRentWebApi.Domain
         public int Security { get; set; }
         public bool IsGated { get; set; }
         public int Maintenence { get; set; }
-        public DateTime EstPossessionOn { get; set; }
-        public DateTime PostedOn { get; set; }
+        public DateTime? EstPossessionOn { get; set; }
+        public DateTime? PostedOn { get; set; }
         public int Age { get; set; }
         public string Description { get; set; }
         public string UserId { get; set; }
 
         public Address Address { get; set; }
+        public FurnishingType FurnishingType { get; set; }
+        public PropertyType PropertyType { get; set; }
         public User User { get; set; }
         public ICollection<Photo> Photos { get; set; }
     }

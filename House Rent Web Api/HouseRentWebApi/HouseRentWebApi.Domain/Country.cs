@@ -1,6 +1,8 @@
-﻿namespace HouseRentWebApi.Domain
+﻿using HouseRentWebApi.Shared.Contracts;
+
+namespace HouseRentWebApi.Domain
 {
-    public class Country
+    public class Country : IAuditableEntity
     {
         public Country()
         {

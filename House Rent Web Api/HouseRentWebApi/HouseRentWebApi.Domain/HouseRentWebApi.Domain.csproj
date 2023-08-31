@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HouseRentWebApi.Shared\HouseRentWebApi.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
