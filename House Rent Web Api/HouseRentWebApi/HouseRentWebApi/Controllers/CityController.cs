@@ -3,10 +3,13 @@ using HouseRentWebApi.ApplicationLogic.CityLogic.Model;
 using HouseRentWebApi.ApplicationLogic.CityLogic.Queries;
 using HouseRentWebApi.ApplicationLogic.CountryLogic.Queries;
 using HouseRentWebApi.Shared.Base;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HouseRentWebApi.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CityController : BaseController
     {
         [HttpGet]
