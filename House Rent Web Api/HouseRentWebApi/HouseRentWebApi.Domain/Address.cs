@@ -17,7 +17,7 @@ namespace HouseRentWebApi.Domain
         public bool IsDeleted { get; set; }
         public DateTime? DeletedDateTime { get; set; }
 
-        public City City { get; set; }
+        public PropertyType City { get; set; }
         public Country Country { get; set; }
         public ICollection<Property> Properties { get; set; }
     }
