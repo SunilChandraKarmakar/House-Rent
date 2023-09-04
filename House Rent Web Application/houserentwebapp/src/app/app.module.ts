@@ -33,6 +33,8 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { HttpErrorInterceptorService } from './services/http-error-interceptor.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { PropertyTypeDetailsComponent } from './components/property-type-details/property-type-details.component';
+import { PropertyTypeListComponent } from './components/property-type-list/property-type-list.component';
 
 registerLocaleData(en);
 
@@ -46,7 +48,9 @@ registerLocaleData(en);
     PropertyDetailComponent,
     PageNotFoundComponent,
     UserLoginComponent,
-    UserRegistrationComponent
+    UserRegistrationComponent,
+    PropertyTypeDetailsComponent,
+    PropertyTypeListComponent
   ],
 
   imports: [

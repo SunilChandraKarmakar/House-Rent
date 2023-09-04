@@ -6,14 +6,24 @@ import { PropertyDetailComponent } from './components/property/property-detail/p
 import { PropertyListComponent } from './components/property/property-list/property-list.component';
 import { UserLoginComponent } from './components/user/user-login/user-login.component';
 import { UserRegistrationComponent } from './components/user/user-registration/user-registration.component';
+import { PropertyTypeListComponent } from './components/property-type-list/property-type-list.component';
+import { PropertyTypeDetailsComponent } from './components/property-type-details/property-type-details.component';
 
 const routes: Routes = [
   { path: "", component: PropertyListComponent },
-  { path: "rent-property", component: PropertyListComponent },
-  { path: "add-property", component: AddPropertyComponent },
-  { path: "property-detail/:id", component: PropertyDetailComponent },
-  { path: "user/login", component: UserLoginComponent },
-  { path: "user/registration", component: UserRegistrationComponent },
+  
+  { path: "rent-property", component: PropertyListComponent, pathMatch: "full" },
+
+  { path: "add-property", component: AddPropertyComponent, pathMatch: "full" },
+  { path: "property-detail/:id", component: PropertyDetailComponent, pathMatch: "full" },
+  
+  { path: "user/login", component: UserLoginComponent, pathMatch: "full" },
+  { path: "user/registration", component: UserRegistrationComponent, pathMatch: "full" },
+
+  { path: "property-types", component: PropertyTypeListComponent, pathMatch: "full" },
+  { path: "property-types/details", component: PropertyTypeDetailsComponent, pathMatch: "full" },
+  { path: "property-types/details/:recordId", component: PropertyTypeDetailsComponent, pathMatch: "full" },
+  
   { path: "**", component: PageNotFoundComponent },
 ];
 
