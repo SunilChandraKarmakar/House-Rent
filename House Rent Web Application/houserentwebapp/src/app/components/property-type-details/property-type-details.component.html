@@ -1,3 +1,24 @@
-<p>
-  property-type-details works!
-</p>
+<div class="row justify-content-center mt-3">
+  <div class="col-md-6">
+    <div class="card shadow">
+      <div class="card-header">
+        <h5 class="text-center">Property Type Details</h5>
+      </div>
+      <div class="card-body">
+        <form autocomplete="off">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="5" nzRequired nzFor="note">Name</nz-form-label>
+            <nz-form-control [nzSpan]="12">
+              <input id="name" type="text" nz-input [(ngModel)]="propertyTypeUpsertModel.name" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control [nzSpan]="12" [nzOffset]="5">
+              <button nz-button nzType="primary">Submit</button>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,13 +2,11 @@
 using HouseRentWebApi.ApplicationLogic.PropertyTypeLogic.Model;
 using HouseRentWebApi.ApplicationLogic.PropertyTypeLogic.Queries;
 using HouseRentWebApi.Shared.Base;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HouseRentWebApi.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PropertyTypeController : BaseController
     {
         [HttpGet]

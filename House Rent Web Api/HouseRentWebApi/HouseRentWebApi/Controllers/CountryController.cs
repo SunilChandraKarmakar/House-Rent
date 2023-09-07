@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HouseRentWebApi.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CountryController : BaseController
     {
         [HttpGet]

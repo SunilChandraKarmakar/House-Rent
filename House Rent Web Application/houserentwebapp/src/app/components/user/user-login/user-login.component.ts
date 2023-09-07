@@ -19,7 +19,7 @@ export class UserLoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private accountService: AccountService, 
-    private toastrService: ToastrService, private router: Router, private spinner: NgxSpinnerService) {
+  private toastrService: ToastrService, private router: Router, private spinner: NgxSpinnerService) {
 
   }
 

@@ -1,3 +1,32 @@
-<p>
-  property-type-list works!
-</p>
+<div class="row mt-3">
+  <div class="col-md-12">
+    <h4 class="text-center">Property Types</h4>
+    <hr>
+    <button nz-button nzType="primary" routerLink="/property-types/details">
+      <span nz-icon nzType="plus" nzTheme="outline"></span>
+      Add Property Types
+    </button>
+  </div>
+</div>
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    <nz-table nzShowPagination nzShowSizeChanger #borderedTable nzBordered #propertyTypeList [nzData]="propertyTypes">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let propertyType of propertyTypeList.data">
+          <td>{{ propertyType.name }}</td>
+          <td>
+            <button nz-button nzType="primary" nzDanger><span nz-icon nzType="delete" nzTheme="outline"></span></button>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a>Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
