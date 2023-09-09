@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HouseRentWebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b0ef6f8126e8b36b69b60a09e76c818ab304760")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0afbeb869b1f08fe0b8f1365dad8a736931fd357")]
 [assembly: System.Reflection.AssemblyProductAttribute("HouseRentWebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HouseRentWebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

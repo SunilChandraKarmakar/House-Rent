@@ -21,9 +21,17 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyTypeLogic.Command
             {
                 PropertyType propertyTypeEntity;
                 propertyTypeEntity = await _service.Context.PropertyTypes.FirstOrDefaultAsync(p => p.Id == request.Id);
+                
+                var existPropertyTypeName = await _service.Context.PropertyTypes
+                                            .Where(pt => pt.Name.ToLower() == request.Name.ToLower())
+                                            .Select(s => s.Name)
+                                            .FirstOrDefaultAsync();
 
                 if (propertyTypeEntity == null)
                 {
+                    if (!string.IsNullOrEmpty(existPropertyTypeName))
+                        throw new Exception("Property Type name already exist!");
+
                     propertyTypeEntity = new PropertyType();
                     _service.Context.PropertyTypes.Add(propertyTypeEntity);
                 }

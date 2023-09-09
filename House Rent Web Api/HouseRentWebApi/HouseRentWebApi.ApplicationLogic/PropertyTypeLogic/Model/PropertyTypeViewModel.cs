@@ -21,8 +21,8 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyTypeLogic.Model
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Property, PropertyTypeModel>();
-            profile.CreateMap<PropertyTypeModel, Property>();
+            profile.CreateMap<PropertyType, PropertyTypeModel>();
+            profile.CreateMap<PropertyTypeModel, PropertyType>();
         }
     }
 
@@ -33,8 +33,8 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyTypeLogic.Model
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Property, PropertyTypeGridModel>();
-            profile.CreateMap<PropertyTypeGridModel, Property>();
+            profile.CreateMap<PropertyType, PropertyTypeGridModel>();
+            profile.CreateMap<PropertyTypeGridModel, PropertyType>();
         }
     }
 }
