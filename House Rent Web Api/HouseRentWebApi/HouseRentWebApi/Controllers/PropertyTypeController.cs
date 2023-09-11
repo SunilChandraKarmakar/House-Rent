@@ -38,7 +38,7 @@ namespace HouseRentWebApi.Controllers
             return Ok(id);
         }
 
-        [HttpGet("{id:int}")]
+        [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<int>> Delete(int id)
         {

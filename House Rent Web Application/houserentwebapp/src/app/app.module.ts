@@ -36,6 +36,7 @@ import { HttpErrorInterceptorService } from './services/http-error-interceptor.s
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PropertyTypeDetailsComponent } from './components/property-type-details/property-type-details.component';
 import { PropertyTypeListComponent } from './components/property-type-list/property-type-list.component';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 registerLocaleData(en);
 
@@ -77,7 +78,8 @@ registerLocaleData(en);
     NzRadioModule,
     NzInputNumberModule,
     NzDatePickerModule,
-    NzImageModule
+    NzImageModule,
+    NzPopconfirmModule
   ],
 
   providers: [

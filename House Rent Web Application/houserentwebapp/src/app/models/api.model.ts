@@ -593,7 +593,7 @@ export class PropertyTypeClient {
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
-            method: "GET",
+            method: "DELETE",
             headers: {
                 "Accept": "application/json"
             }

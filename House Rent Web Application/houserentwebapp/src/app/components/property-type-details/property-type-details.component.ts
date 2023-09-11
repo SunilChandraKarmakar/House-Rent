@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { PropertyTypeModel } from 'src/app/models/api.model';
+import { PropertyTypeModel, PropertyTypeViewModel } from 'src/app/models/api.model';
 import { PropertyTypeService } from 'src/app/services/property-type.service';
 
 @Component({
@@ -16,32 +16,63 @@ export class PropertyTypeDetailsComponent implements OnInit {
   // Property type upsert model
   propertyTypeUpsertModel: PropertyTypeModel = new PropertyTypeModel();
 
-  // Property type form
-  propertyTypeForm: FormGroup;
+  // Upsert button name
+  upsertButtonName: string = "Save";
 
-  constructor(private spinnerService: NgxSpinnerService, private formBuilder: FormBuilder, 
-  private propertyTypeService: PropertyTypeService, private toastrService: ToastrService) { }
+  constructor(private spinnerService: NgxSpinnerService, 
+  private propertyTypeService: PropertyTypeService, private toastrService: ToastrService, 
+  private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.spinnerService.show();
-    this.propertyTypeForm = this.formBuilder.group({
-      name: [null, [Validators.required]]
-    });
+
+    // Get property type id
+    let propertyTypeId: number | undefined = this.getExistPropertyTypeId();
+
+    // Check property type id is null or not
+    if(propertyTypeId != null || propertyTypeId != undefined) {
+      this.getExistPropertyTypeById(propertyTypeId);
+    }   
 
     this.spinnerService.hide();
   }
 
   submitPropertyTypeForm(): void {
-    this.spinnerService.show();
-    this.propertyTypeUpsertModel = this.propertyTypeForm.value;
-    this.propertyTypeService.upsert(this.propertyTypeUpsertModel).subscribe(() => {
-      this.spinnerService.hide();
-      this.toastrService.success("Property Type save successfull.", "Successfull");
-      this.rsetPropertyTypeForm();
-    })
+    if(!this.fromValidation()) {
+      this.spinnerService.show();
+      this.propertyTypeService.upsert(this.propertyTypeUpsertModel).subscribe(() => {
+        this.spinnerService.hide();
+        this.toastrService.success(`Property Type ${this.upsertButtonName} successfull.`, "Successfull");
+      });
+    }
   }
 
-  rsetPropertyTypeForm(): void {
-    this.propertyTypeForm.reset();
+  private getExistPropertyTypeId(): number | undefined {
+    let propertyTypeId: number | undefined;
+    this.activatedRoute.params.subscribe((res: any) => {
+      propertyTypeId = res['recordId']; 
+    });
+
+    return propertyTypeId;
+  }
+
+  private getExistPropertyTypeById(propertyTypeId: number): void {
+    this.spinnerService.show();    
+    this.upsertButtonName = "Update";
+
+    this.propertyTypeService.get(propertyTypeId).subscribe((result: PropertyTypeViewModel) => {
+      this.propertyTypeUpsertModel = result.model;
+      this.spinnerService.hide();
+    });
+  }
+
+  // Ckeck from valiadition
+  private fromValidation(): boolean {
+    if(this.propertyTypeUpsertModel.name == undefined || this.propertyTypeUpsertModel.name == null) {
+      this,this.toastrService.error("Please, provied name.");
+      return true;
+    }
+
+    return false;
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { PropertyTypeGridModel } from 'src/app/models/api.model';
 import { PropertyTypeService } from 'src/app/services/property-type.service';
 
@@ -11,7 +13,8 @@ import { PropertyTypeService } from 'src/app/services/property-type.service';
 
 export class PropertyTypeListComponent implements OnInit {
 
-  constructor(private propertyTypeService: PropertyTypeService, private spinner: NgxSpinnerService) { }
+  constructor(private propertyTypeService: PropertyTypeService, private spinner: NgxSpinnerService, 
+  private toastrService: ToastrService, private router: Router) { }
 
   propertyTypes: PropertyTypeGridModel[] = [];
 
@@ -21,5 +24,22 @@ export class PropertyTypeListComponent implements OnInit {
       this.propertyTypes = result;
       this.spinner.hide();
     });
+  }
+
+  deletePropertyType(id: number): void {
+    this.spinner.show();
+    this.propertyTypeService.delete(id).subscribe(() => {
+      this.spinner.hide();
+      this.toastrService.success("Property Type Deleted.", "Successfull");
+      this.ngOnInit();
+    })
+  }
+
+  cancel(): void {
+  }
+
+  updatePropertyType(id: number): void {
+    this.spinner.show();
+    this.router.navigate([`/property-types/details/${id}`]);
   }
 }
