@@ -1,0 +1,47 @@
+<div class="row mt-3">
+  <div class="col-md-12">
+    <h4 class="text-center">Furnishing Types</h4>
+    <hr>
+    <button nz-button nzType="default" nzShape="round" routerLink="/furnishing-type/details">
+      <span nz-icon nzType="plus" nzTheme="outline"></span>
+      Add Furnishing Types
+    </button>
+  </div>
+</div>
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    <nz-table nzShowPagination nzShowSizeChanger #borderedTable nzBordered #furnishingTypeList [nzData]="furnishingTypes">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let furnishingType of furnishingTypeList.data">
+          <td>{{ furnishingType.name }}</td>
+          <td>
+            <button nz-button nzType="default" nzSize="small" nzShape="round" 
+              (click)="updateFurnishingType(furnishingType.id)">
+              <i nz-icon nzType="edit" nzTheme="outline"></i>
+            </button>
+            <button nz-popconfirm nzPopconfirmTitle="Are you sure delete this Furnishing Type?" 
+              nz-button nzType="default" nzSize="small" nzShape="round"
+              (nzOnConfirm)="deleteFurnishingType(furnishingType.id)" (nzOnCancel)="cancel()" [nzIcon]="iconTpl" nzDanger="danger">
+              <i nz-icon nzType="delete" nzTheme="outline"></i>
+            </button>
+            <ng-template #iconTpl>
+              <i nz-icon nzType="question-circle-o" style="color: red;"></i>
+            </ng-template>            
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" 
+  color = "#fff" type = "ball-triangle-path" [fullScreen] = "true">
+  <p style="color: white" > 
+    Loading... 
+  </p>
+</ngx-spinner>

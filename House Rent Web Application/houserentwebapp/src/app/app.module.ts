@@ -37,6 +37,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { PropertyTypeDetailsComponent } from './components/property-type-details/property-type-details.component';
 import { PropertyTypeListComponent } from './components/property-type-list/property-type-list.component';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { FurnishingTypeDetailsComponent } from './components/furnishing-type-details/furnishing-type-details.component';
+import { FurnishingTypeListComponent } from './components/furnishing-type-list/furnishing-type-list.component';
 
 registerLocaleData(en);
 
@@ -52,7 +54,9 @@ registerLocaleData(en);
     UserLoginComponent,
     UserRegistrationComponent,
     PropertyTypeDetailsComponent,
-    PropertyTypeListComponent
+    PropertyTypeListComponent,
+    FurnishingTypeDetailsComponent,
+    FurnishingTypeListComponent
   ],
 
   imports: [
