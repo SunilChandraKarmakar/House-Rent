@@ -29,6 +29,8 @@
         public int Age { get; set; }
         public string Description { get; set; }
         public string UserId { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime? DeletedDateTime { get; set; }
 
         public Address Address { get; set; }
         public FurnishingType FurnishingType { get; set; }

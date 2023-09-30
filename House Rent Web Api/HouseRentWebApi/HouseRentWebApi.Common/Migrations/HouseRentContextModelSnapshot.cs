@@ -187,6 +187,9 @@ namespace HouseRentWebApi.Common.Migrations
                     b.Property<int>("CarpetArea")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("DeletedDateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -199,6 +202,9 @@ namespace HouseRentWebApi.Common.Migrations
 
                     b.Property<int>("FurnishingTypeId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsGated")
                         .HasColumnType("bit");

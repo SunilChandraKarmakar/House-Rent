@@ -799,6 +799,181 @@ export class FurnishingTypeClient {
     }
 }
 
+export class PropertyClient {
+    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
+        this.http = http ? http : window as any;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    getAll(): Promise<PropertyGridModel[]> {
+        let url_ = this.baseUrl + "/api/Property/GetAll";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetAll(_response);
+        });
+    }
+
+    protected processGetAll(response: Response): Promise<PropertyGridModel[]> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(PropertyGridModel.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<PropertyGridModel[]>(null as any);
+    }
+
+    get(id: number): Promise<PropertyViewModel> {
+        let url_ = this.baseUrl + "/api/Property/Get/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGet(_response);
+        });
+    }
+
+    protected processGet(response: Response): Promise<PropertyViewModel> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PropertyViewModel.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            let result404: any = null;
+            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result404 = ProblemDetails.fromJS(resultData404);
+            return throwException("A server side error occurred.", status, _responseText, _headers, result404);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<PropertyViewModel>(null as any);
+    }
+
+    upsert(command: UpsertPropertyCommand): Promise<number> {
+        let url_ = this.baseUrl + "/api/Property/Upsert";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(command);
+
+        let options_: RequestInit = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processUpsert(_response);
+        });
+    }
+
+    protected processUpsert(response: Response): Promise<number> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return result200;
+            });
+        } else {
+            return response.text().then((_responseText) => {
+            let resultdefault: any = null;
+            let resultDatadefault = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            resultdefault = ProblemDetails.fromJS(resultDatadefault);
+            return throwException("A server side error occurred.", status, _responseText, _headers, resultdefault);
+            });
+        }
+    }
+
+    delete(id: number): Promise<number> {
+        let url_ = this.baseUrl + "/api/Property/Delete/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processDelete(_response);
+        });
+    }
+
+    protected processDelete(response: Response): Promise<number> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<number>(null as any);
+    }
+}
+
 export class PropertyTypeClient {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
@@ -1886,6 +2061,1084 @@ export class UpsertFurnishingTypeCommand extends FurnishingTypeModel implements 
 }
 
 export interface IUpsertFurnishingTypeCommand extends IFurnishingTypeModel {
+}
+
+export class PropertyGridModel implements IPropertyGridModel {
+    id!: number;
+    name!: string;
+    sellRent!: number;
+    propertyTypeName!: string;
+    furnishingTypeName!: string;
+    bhk!: number;
+    price!: number;
+    buildArea!: number;
+    carpetArea!: number;
+    floorNo!: number;
+    totalFloor!: number;
+    isReadyToMove!: boolean;
+    mainEntrance!: string;
+    security!: number;
+    isGated!: boolean;
+    maintenence!: number;
+    estPossessionOn?: Date | undefined;
+    postedOn?: Date | undefined;
+    age!: number;
+    description!: string;
+    userName!: string;
+    address!: Address;
+
+    constructor(data?: IPropertyGridModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.address = new Address();
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.sellRent = _data["sellRent"];
+            this.propertyTypeName = _data["propertyTypeName"];
+            this.furnishingTypeName = _data["furnishingTypeName"];
+            this.bhk = _data["bhk"];
+            this.price = _data["price"];
+            this.buildArea = _data["buildArea"];
+            this.carpetArea = _data["carpetArea"];
+            this.floorNo = _data["floorNo"];
+            this.totalFloor = _data["totalFloor"];
+            this.isReadyToMove = _data["isReadyToMove"];
+            this.mainEntrance = _data["mainEntrance"];
+            this.security = _data["security"];
+            this.isGated = _data["isGated"];
+            this.maintenence = _data["maintenence"];
+            this.estPossessionOn = _data["estPossessionOn"] ? new Date(_data["estPossessionOn"].toString()) : <any>undefined;
+            this.postedOn = _data["postedOn"] ? new Date(_data["postedOn"].toString()) : <any>undefined;
+            this.age = _data["age"];
+            this.description = _data["description"];
+            this.userName = _data["userName"];
+            this.address = _data["address"] ? Address.fromJS(_data["address"]) : new Address();
+        }
+    }
+
+    static fromJS(data: any): PropertyGridModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new PropertyGridModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["sellRent"] = this.sellRent;
+        data["propertyTypeName"] = this.propertyTypeName;
+        data["furnishingTypeName"] = this.furnishingTypeName;
+        data["bhk"] = this.bhk;
+        data["price"] = this.price;
+        data["buildArea"] = this.buildArea;
+        data["carpetArea"] = this.carpetArea;
+        data["floorNo"] = this.floorNo;
+        data["totalFloor"] = this.totalFloor;
+        data["isReadyToMove"] = this.isReadyToMove;
+        data["mainEntrance"] = this.mainEntrance;
+        data["security"] = this.security;
+        data["isGated"] = this.isGated;
+        data["maintenence"] = this.maintenence;
+        data["estPossessionOn"] = this.estPossessionOn ? this.estPossessionOn.toISOString() : <any>undefined;
+        data["postedOn"] = this.postedOn ? this.postedOn.toISOString() : <any>undefined;
+        data["age"] = this.age;
+        data["description"] = this.description;
+        data["userName"] = this.userName;
+        data["address"] = this.address ? this.address.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+export interface IPropertyGridModel {
+    id: number;
+    name: string;
+    sellRent: number;
+    propertyTypeName: string;
+    furnishingTypeName: string;
+    bhk: number;
+    price: number;
+    buildArea: number;
+    carpetArea: number;
+    floorNo: number;
+    totalFloor: number;
+    isReadyToMove: boolean;
+    mainEntrance: string;
+    security: number;
+    isGated: boolean;
+    maintenence: number;
+    estPossessionOn?: Date | undefined;
+    postedOn?: Date | undefined;
+    age: number;
+    description: string;
+    userName: string;
+    address: Address;
+}
+
+export class Address implements IAddress {
+    id!: number;
+    addressLineOne!: string;
+    addressLineTwo!: string;
+    countryId!: number;
+    cityId!: number;
+    isDeleted!: boolean;
+    deletedDateTime?: Date | undefined;
+    city!: City;
+    country!: Country;
+    properties!: Property[];
+
+    constructor(data?: IAddress) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.city = new City();
+            this.country = new Country();
+            this.properties = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.addressLineOne = _data["addressLineOne"];
+            this.addressLineTwo = _data["addressLineTwo"];
+            this.countryId = _data["countryId"];
+            this.cityId = _data["cityId"];
+            this.isDeleted = _data["isDeleted"];
+            this.deletedDateTime = _data["deletedDateTime"] ? new Date(_data["deletedDateTime"].toString()) : <any>undefined;
+            this.city = _data["city"] ? City.fromJS(_data["city"]) : new City();
+            this.country = _data["country"] ? Country.fromJS(_data["country"]) : new Country();
+            if (Array.isArray(_data["properties"])) {
+                this.properties = [] as any;
+                for (let item of _data["properties"])
+                    this.properties!.push(Property.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): Address {
+        data = typeof data === 'object' ? data : {};
+        let result = new Address();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["addressLineOne"] = this.addressLineOne;
+        data["addressLineTwo"] = this.addressLineTwo;
+        data["countryId"] = this.countryId;
+        data["cityId"] = this.cityId;
+        data["isDeleted"] = this.isDeleted;
+        data["deletedDateTime"] = this.deletedDateTime ? this.deletedDateTime.toISOString() : <any>undefined;
+        data["city"] = this.city ? this.city.toJSON() : <any>undefined;
+        data["country"] = this.country ? this.country.toJSON() : <any>undefined;
+        if (Array.isArray(this.properties)) {
+            data["properties"] = [];
+            for (let item of this.properties)
+                data["properties"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IAddress {
+    id: number;
+    addressLineOne: string;
+    addressLineTwo: string;
+    countryId: number;
+    cityId: number;
+    isDeleted: boolean;
+    deletedDateTime?: Date | undefined;
+    city: City;
+    country: Country;
+    properties: Property[];
+}
+
+export class City implements ICity {
+    id!: number;
+    name!: string;
+    countryId!: number;
+    isDeleted!: boolean;
+    deletedDateTime?: Date | undefined;
+    country!: Country;
+    address!: Address[];
+
+    constructor(data?: ICity) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.country = new Country();
+            this.address = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.countryId = _data["countryId"];
+            this.isDeleted = _data["isDeleted"];
+            this.deletedDateTime = _data["deletedDateTime"] ? new Date(_data["deletedDateTime"].toString()) : <any>undefined;
+            this.country = _data["country"] ? Country.fromJS(_data["country"]) : new Country();
+            if (Array.isArray(_data["address"])) {
+                this.address = [] as any;
+                for (let item of _data["address"])
+                    this.address!.push(Address.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): City {
+        data = typeof data === 'object' ? data : {};
+        let result = new City();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["countryId"] = this.countryId;
+        data["isDeleted"] = this.isDeleted;
+        data["deletedDateTime"] = this.deletedDateTime ? this.deletedDateTime.toISOString() : <any>undefined;
+        data["country"] = this.country ? this.country.toJSON() : <any>undefined;
+        if (Array.isArray(this.address)) {
+            data["address"] = [];
+            for (let item of this.address)
+                data["address"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface ICity {
+    id: number;
+    name: string;
+    countryId: number;
+    isDeleted: boolean;
+    deletedDateTime?: Date | undefined;
+    country: Country;
+    address: Address[];
+}
+
+export class Country implements ICountry {
+    id!: number;
+    name!: string;
+    isDeleted!: boolean;
+    deletedDateTime?: Date | undefined;
+    addresses!: Address[];
+    cities!: City[];
+
+    constructor(data?: ICountry) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.addresses = [];
+            this.cities = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.isDeleted = _data["isDeleted"];
+            this.deletedDateTime = _data["deletedDateTime"] ? new Date(_data["deletedDateTime"].toString()) : <any>undefined;
+            if (Array.isArray(_data["addresses"])) {
+                this.addresses = [] as any;
+                for (let item of _data["addresses"])
+                    this.addresses!.push(Address.fromJS(item));
+            }
+            if (Array.isArray(_data["cities"])) {
+                this.cities = [] as any;
+                for (let item of _data["cities"])
+                    this.cities!.push(City.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): Country {
+        data = typeof data === 'object' ? data : {};
+        let result = new Country();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["isDeleted"] = this.isDeleted;
+        data["deletedDateTime"] = this.deletedDateTime ? this.deletedDateTime.toISOString() : <any>undefined;
+        if (Array.isArray(this.addresses)) {
+            data["addresses"] = [];
+            for (let item of this.addresses)
+                data["addresses"].push(item.toJSON());
+        }
+        if (Array.isArray(this.cities)) {
+            data["cities"] = [];
+            for (let item of this.cities)
+                data["cities"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface ICountry {
+    id: number;
+    name: string;
+    isDeleted: boolean;
+    deletedDateTime?: Date | undefined;
+    addresses: Address[];
+    cities: City[];
+}
+
+export class Property implements IProperty {
+    id!: number;
+    name!: string;
+    sellRent!: number;
+    propertyTypeId!: number;
+    furnishingTypeId!: number;
+    bhk!: number;
+    price!: number;
+    buildArea!: number;
+    carpetArea!: number;
+    floorNo!: number;
+    totalFloor!: number;
+    addressId!: number;
+    isReadyToMove!: boolean;
+    mainEntrance!: string;
+    security!: number;
+    isGated!: boolean;
+    maintenence!: number;
+    estPossessionOn?: Date | undefined;
+    postedOn?: Date | undefined;
+    age!: number;
+    description!: string;
+    userId!: string;
+    isDeleted!: boolean;
+    deletedDateTime?: Date | undefined;
+    address!: Address;
+    furnishingType!: FurnishingType;
+    propertyType!: PropertyType;
+    user!: User;
+    photos!: Photo[];
+
+    constructor(data?: IProperty) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.address = new Address();
+            this.furnishingType = new FurnishingType();
+            this.propertyType = new PropertyType();
+            this.user = new User();
+            this.photos = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.sellRent = _data["sellRent"];
+            this.propertyTypeId = _data["propertyTypeId"];
+            this.furnishingTypeId = _data["furnishingTypeId"];
+            this.bhk = _data["bhk"];
+            this.price = _data["price"];
+            this.buildArea = _data["buildArea"];
+            this.carpetArea = _data["carpetArea"];
+            this.floorNo = _data["floorNo"];
+            this.totalFloor = _data["totalFloor"];
+            this.addressId = _data["addressId"];
+            this.isReadyToMove = _data["isReadyToMove"];
+            this.mainEntrance = _data["mainEntrance"];
+            this.security = _data["security"];
+            this.isGated = _data["isGated"];
+            this.maintenence = _data["maintenence"];
+            this.estPossessionOn = _data["estPossessionOn"] ? new Date(_data["estPossessionOn"].toString()) : <any>undefined;
+            this.postedOn = _data["postedOn"] ? new Date(_data["postedOn"].toString()) : <any>undefined;
+            this.age = _data["age"];
+            this.description = _data["description"];
+            this.userId = _data["userId"];
+            this.isDeleted = _data["isDeleted"];
+            this.deletedDateTime = _data["deletedDateTime"] ? new Date(_data["deletedDateTime"].toString()) : <any>undefined;
+            this.address = _data["address"] ? Address.fromJS(_data["address"]) : new Address();
+            this.furnishingType = _data["furnishingType"] ? FurnishingType.fromJS(_data["furnishingType"]) : new FurnishingType();
+            this.propertyType = _data["propertyType"] ? PropertyType.fromJS(_data["propertyType"]) : new PropertyType();
+            this.user = _data["user"] ? User.fromJS(_data["user"]) : new User();
+            if (Array.isArray(_data["photos"])) {
+                this.photos = [] as any;
+                for (let item of _data["photos"])
+                    this.photos!.push(Photo.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): Property {
+        data = typeof data === 'object' ? data : {};
+        let result = new Property();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["sellRent"] = this.sellRent;
+        data["propertyTypeId"] = this.propertyTypeId;
+        data["furnishingTypeId"] = this.furnishingTypeId;
+        data["bhk"] = this.bhk;
+        data["price"] = this.price;
+        data["buildArea"] = this.buildArea;
+        data["carpetArea"] = this.carpetArea;
+        data["floorNo"] = this.floorNo;
+        data["totalFloor"] = this.totalFloor;
+        data["addressId"] = this.addressId;
+        data["isReadyToMove"] = this.isReadyToMove;
+        data["mainEntrance"] = this.mainEntrance;
+        data["security"] = this.security;
+        data["isGated"] = this.isGated;
+        data["maintenence"] = this.maintenence;
+        data["estPossessionOn"] = this.estPossessionOn ? this.estPossessionOn.toISOString() : <any>undefined;
+        data["postedOn"] = this.postedOn ? this.postedOn.toISOString() : <any>undefined;
+        data["age"] = this.age;
+        data["description"] = this.description;
+        data["userId"] = this.userId;
+        data["isDeleted"] = this.isDeleted;
+        data["deletedDateTime"] = this.deletedDateTime ? this.deletedDateTime.toISOString() : <any>undefined;
+        data["address"] = this.address ? this.address.toJSON() : <any>undefined;
+        data["furnishingType"] = this.furnishingType ? this.furnishingType.toJSON() : <any>undefined;
+        data["propertyType"] = this.propertyType ? this.propertyType.toJSON() : <any>undefined;
+        data["user"] = this.user ? this.user.toJSON() : <any>undefined;
+        if (Array.isArray(this.photos)) {
+            data["photos"] = [];
+            for (let item of this.photos)
+                data["photos"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IProperty {
+    id: number;
+    name: string;
+    sellRent: number;
+    propertyTypeId: number;
+    furnishingTypeId: number;
+    bhk: number;
+    price: number;
+    buildArea: number;
+    carpetArea: number;
+    floorNo: number;
+    totalFloor: number;
+    addressId: number;
+    isReadyToMove: boolean;
+    mainEntrance: string;
+    security: number;
+    isGated: boolean;
+    maintenence: number;
+    estPossessionOn?: Date | undefined;
+    postedOn?: Date | undefined;
+    age: number;
+    description: string;
+    userId: string;
+    isDeleted: boolean;
+    deletedDateTime?: Date | undefined;
+    address: Address;
+    furnishingType: FurnishingType;
+    propertyType: PropertyType;
+    user: User;
+    photos: Photo[];
+}
+
+export class FurnishingType implements IFurnishingType {
+    id!: number;
+    name!: string;
+    isDeleted!: boolean;
+    deletedDateTime?: Date | undefined;
+    properties!: Property[];
+
+    constructor(data?: IFurnishingType) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.properties = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.isDeleted = _data["isDeleted"];
+            this.deletedDateTime = _data["deletedDateTime"] ? new Date(_data["deletedDateTime"].toString()) : <any>undefined;
+            if (Array.isArray(_data["properties"])) {
+                this.properties = [] as any;
+                for (let item of _data["properties"])
+                    this.properties!.push(Property.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): FurnishingType {
+        data = typeof data === 'object' ? data : {};
+        let result = new FurnishingType();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["isDeleted"] = this.isDeleted;
+        data["deletedDateTime"] = this.deletedDateTime ? this.deletedDateTime.toISOString() : <any>undefined;
+        if (Array.isArray(this.properties)) {
+            data["properties"] = [];
+            for (let item of this.properties)
+                data["properties"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IFurnishingType {
+    id: number;
+    name: string;
+    isDeleted: boolean;
+    deletedDateTime?: Date | undefined;
+    properties: Property[];
+}
+
+export class PropertyType implements IPropertyType {
+    id!: number;
+    name!: string;
+    isDeleted!: boolean;
+    deletedDateTime?: Date | undefined;
+    properties!: Property[];
+
+    constructor(data?: IPropertyType) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.properties = [];
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.isDeleted = _data["isDeleted"];
+            this.deletedDateTime = _data["deletedDateTime"] ? new Date(_data["deletedDateTime"].toString()) : <any>undefined;
+            if (Array.isArray(_data["properties"])) {
+                this.properties = [] as any;
+                for (let item of _data["properties"])
+                    this.properties!.push(Property.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PropertyType {
+        data = typeof data === 'object' ? data : {};
+        let result = new PropertyType();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["isDeleted"] = this.isDeleted;
+        data["deletedDateTime"] = this.deletedDateTime ? this.deletedDateTime.toISOString() : <any>undefined;
+        if (Array.isArray(this.properties)) {
+            data["properties"] = [];
+            for (let item of this.properties)
+                data["properties"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IPropertyType {
+    id: number;
+    name: string;
+    isDeleted: boolean;
+    deletedDateTime?: Date | undefined;
+    properties: Property[];
+}
+
+export class IdentityUserOfString implements IIdentityUserOfString {
+    id!: string;
+    userName?: string | undefined;
+    normalizedUserName?: string | undefined;
+    email?: string | undefined;
+    normalizedEmail?: string | undefined;
+    emailConfirmed!: boolean;
+    passwordHash?: string | undefined;
+    securityStamp?: string | undefined;
+    concurrencyStamp?: string | undefined;
+    phoneNumber?: string | undefined;
+    phoneNumberConfirmed!: boolean;
+    twoFactorEnabled!: boolean;
+    lockoutEnd?: Date | undefined;
+    lockoutEnabled!: boolean;
+    accessFailedCount!: number;
+
+    constructor(data?: IIdentityUserOfString) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.userName = _data["userName"];
+            this.normalizedUserName = _data["normalizedUserName"];
+            this.email = _data["email"];
+            this.normalizedEmail = _data["normalizedEmail"];
+            this.emailConfirmed = _data["emailConfirmed"];
+            this.passwordHash = _data["passwordHash"];
+            this.securityStamp = _data["securityStamp"];
+            this.concurrencyStamp = _data["concurrencyStamp"];
+            this.phoneNumber = _data["phoneNumber"];
+            this.phoneNumberConfirmed = _data["phoneNumberConfirmed"];
+            this.twoFactorEnabled = _data["twoFactorEnabled"];
+            this.lockoutEnd = _data["lockoutEnd"] ? new Date(_data["lockoutEnd"].toString()) : <any>undefined;
+            this.lockoutEnabled = _data["lockoutEnabled"];
+            this.accessFailedCount = _data["accessFailedCount"];
+        }
+    }
+
+    static fromJS(data: any): IdentityUserOfString {
+        data = typeof data === 'object' ? data : {};
+        let result = new IdentityUserOfString();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["userName"] = this.userName;
+        data["normalizedUserName"] = this.normalizedUserName;
+        data["email"] = this.email;
+        data["normalizedEmail"] = this.normalizedEmail;
+        data["emailConfirmed"] = this.emailConfirmed;
+        data["passwordHash"] = this.passwordHash;
+        data["securityStamp"] = this.securityStamp;
+        data["concurrencyStamp"] = this.concurrencyStamp;
+        data["phoneNumber"] = this.phoneNumber;
+        data["phoneNumberConfirmed"] = this.phoneNumberConfirmed;
+        data["twoFactorEnabled"] = this.twoFactorEnabled;
+        data["lockoutEnd"] = this.lockoutEnd ? this.lockoutEnd.toISOString() : <any>undefined;
+        data["lockoutEnabled"] = this.lockoutEnabled;
+        data["accessFailedCount"] = this.accessFailedCount;
+        return data;
+    }
+}
+
+export interface IIdentityUserOfString {
+    id: string;
+    userName?: string | undefined;
+    normalizedUserName?: string | undefined;
+    email?: string | undefined;
+    normalizedEmail?: string | undefined;
+    emailConfirmed: boolean;
+    passwordHash?: string | undefined;
+    securityStamp?: string | undefined;
+    concurrencyStamp?: string | undefined;
+    phoneNumber?: string | undefined;
+    phoneNumberConfirmed: boolean;
+    twoFactorEnabled: boolean;
+    lockoutEnd?: Date | undefined;
+    lockoutEnabled: boolean;
+    accessFailedCount: number;
+}
+
+export class IdentityUser extends IdentityUserOfString implements IIdentityUser {
+
+    constructor(data?: IIdentityUser) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+    }
+
+    static fromJS(data: any): IdentityUser {
+        data = typeof data === 'object' ? data : {};
+        let result = new IdentityUser();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IIdentityUser extends IIdentityUserOfString {
+}
+
+export class User extends IdentityUser implements IUser {
+    fullName!: string;
+    createdTime!: Date;
+    lastModifiedTime!: Date;
+    properties!: Property[];
+
+    constructor(data?: IUser) {
+        super(data);
+        if (!data) {
+            this.properties = [];
+        }
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.fullName = _data["fullName"];
+            this.createdTime = _data["createdTime"] ? new Date(_data["createdTime"].toString()) : <any>undefined;
+            this.lastModifiedTime = _data["lastModifiedTime"] ? new Date(_data["lastModifiedTime"].toString()) : <any>undefined;
+            if (Array.isArray(_data["properties"])) {
+                this.properties = [] as any;
+                for (let item of _data["properties"])
+                    this.properties!.push(Property.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): User {
+        data = typeof data === 'object' ? data : {};
+        let result = new User();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["fullName"] = this.fullName;
+        data["createdTime"] = this.createdTime ? this.createdTime.toISOString() : <any>undefined;
+        data["lastModifiedTime"] = this.lastModifiedTime ? this.lastModifiedTime.toISOString() : <any>undefined;
+        if (Array.isArray(this.properties)) {
+            data["properties"] = [];
+            for (let item of this.properties)
+                data["properties"].push(item.toJSON());
+        }
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IUser extends IIdentityUser {
+    fullName: string;
+    createdTime: Date;
+    lastModifiedTime: Date;
+    properties: Property[];
+}
+
+export class Photo implements IPhoto {
+    id!: number;
+    url!: string;
+    propertyId!: number;
+    isDefault!: boolean;
+    isDeleted!: boolean;
+    deletedDateTime?: Date | undefined;
+    property!: Property;
+
+    constructor(data?: IPhoto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.property = new Property();
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.url = _data["url"];
+            this.propertyId = _data["propertyId"];
+            this.isDefault = _data["isDefault"];
+            this.isDeleted = _data["isDeleted"];
+            this.deletedDateTime = _data["deletedDateTime"] ? new Date(_data["deletedDateTime"].toString()) : <any>undefined;
+            this.property = _data["property"] ? Property.fromJS(_data["property"]) : new Property();
+        }
+    }
+
+    static fromJS(data: any): Photo {
+        data = typeof data === 'object' ? data : {};
+        let result = new Photo();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["url"] = this.url;
+        data["propertyId"] = this.propertyId;
+        data["isDefault"] = this.isDefault;
+        data["isDeleted"] = this.isDeleted;
+        data["deletedDateTime"] = this.deletedDateTime ? this.deletedDateTime.toISOString() : <any>undefined;
+        data["property"] = this.property ? this.property.toJSON() : <any>undefined;
+        return data;
+    }
+}
+
+export interface IPhoto {
+    id: number;
+    url: string;
+    propertyId: number;
+    isDefault: boolean;
+    isDeleted: boolean;
+    deletedDateTime?: Date | undefined;
+    property: Property;
+}
+
+export class PropertyViewModel implements IPropertyViewModel {
+    model!: PropertyModel;
+    gridModel!: PropertyGridModel;
+    optionsDataSources!: any;
+
+    constructor(data?: IPropertyViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.model = new PropertyModel();
+            this.gridModel = new PropertyGridModel();
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.model = _data["model"] ? PropertyModel.fromJS(_data["model"]) : new PropertyModel();
+            this.gridModel = _data["gridModel"] ? PropertyGridModel.fromJS(_data["gridModel"]) : new PropertyGridModel();
+            this.optionsDataSources = _data["optionsDataSources"];
+        }
+    }
+
+    static fromJS(data: any): PropertyViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new PropertyViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["model"] = this.model ? this.model.toJSON() : <any>undefined;
+        data["gridModel"] = this.gridModel ? this.gridModel.toJSON() : <any>undefined;
+        data["optionsDataSources"] = this.optionsDataSources;
+        return data;
+    }
+}
+
+export interface IPropertyViewModel {
+    model: PropertyModel;
+    gridModel: PropertyGridModel;
+    optionsDataSources: any;
+}
+
+export class PropertyModel implements IPropertyModel {
+    id!: number;
+    name!: string;
+    sellRent!: number;
+    propertyTypeId!: number;
+    furnishingTypeId!: number;
+    bhk!: number;
+    price!: number;
+    buildArea!: number;
+    carpetArea!: number;
+    floorNo!: number;
+    totalFloor!: number;
+    addressId!: number;
+    isReadyToMove!: boolean;
+    mainEntrance!: string;
+    security!: number;
+    isGated!: boolean;
+    maintenence!: number;
+    estPossessionOn?: Date | undefined;
+    postedOn?: Date | undefined;
+    age!: number;
+    description!: string;
+    userId!: string;
+
+    constructor(data?: IPropertyModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.sellRent = _data["sellRent"];
+            this.propertyTypeId = _data["propertyTypeId"];
+            this.furnishingTypeId = _data["furnishingTypeId"];
+            this.bhk = _data["bhk"];
+            this.price = _data["price"];
+            this.buildArea = _data["buildArea"];
+            this.carpetArea = _data["carpetArea"];
+            this.floorNo = _data["floorNo"];
+            this.totalFloor = _data["totalFloor"];
+            this.addressId = _data["addressId"];
+            this.isReadyToMove = _data["isReadyToMove"];
+            this.mainEntrance = _data["mainEntrance"];
+            this.security = _data["security"];
+            this.isGated = _data["isGated"];
+            this.maintenence = _data["maintenence"];
+            this.estPossessionOn = _data["estPossessionOn"] ? new Date(_data["estPossessionOn"].toString()) : <any>undefined;
+            this.postedOn = _data["postedOn"] ? new Date(_data["postedOn"].toString()) : <any>undefined;
+            this.age = _data["age"];
+            this.description = _data["description"];
+            this.userId = _data["userId"];
+        }
+    }
+
+    static fromJS(data: any): PropertyModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new PropertyModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["sellRent"] = this.sellRent;
+        data["propertyTypeId"] = this.propertyTypeId;
+        data["furnishingTypeId"] = this.furnishingTypeId;
+        data["bhk"] = this.bhk;
+        data["price"] = this.price;
+        data["buildArea"] = this.buildArea;
+        data["carpetArea"] = this.carpetArea;
+        data["floorNo"] = this.floorNo;
+        data["totalFloor"] = this.totalFloor;
+        data["addressId"] = this.addressId;
+        data["isReadyToMove"] = this.isReadyToMove;
+        data["mainEntrance"] = this.mainEntrance;
+        data["security"] = this.security;
+        data["isGated"] = this.isGated;
+        data["maintenence"] = this.maintenence;
+        data["estPossessionOn"] = this.estPossessionOn ? this.estPossessionOn.toISOString() : <any>undefined;
+        data["postedOn"] = this.postedOn ? this.postedOn.toISOString() : <any>undefined;
+        data["age"] = this.age;
+        data["description"] = this.description;
+        data["userId"] = this.userId;
+        return data;
+    }
+}
+
+export interface IPropertyModel {
+    id: number;
+    name: string;
+    sellRent: number;
+    propertyTypeId: number;
+    furnishingTypeId: number;
+    bhk: number;
+    price: number;
+    buildArea: number;
+    carpetArea: number;
+    floorNo: number;
+    totalFloor: number;
+    addressId: number;
+    isReadyToMove: boolean;
+    mainEntrance: string;
+    security: number;
+    isGated: boolean;
+    maintenence: number;
+    estPossessionOn?: Date | undefined;
+    postedOn?: Date | undefined;
+    age: number;
+    description: string;
+    userId: string;
+}
+
+export class UpsertPropertyCommand extends PropertyModel implements IUpsertPropertyCommand {
+
+    constructor(data?: IUpsertPropertyCommand) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+    }
+
+    static fromJS(data: any): UpsertPropertyCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpsertPropertyCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IUpsertPropertyCommand extends IPropertyModel {
 }
 
 export class PropertyTypeGridModel implements IPropertyTypeGridModel {
