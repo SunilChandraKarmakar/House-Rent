@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Property } from 'src/app/models/property';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+import { PropertyGridModel } from 'src/app/models/api.model';
 import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
@@ -11,13 +13,14 @@ import { PropertyService } from 'src/app/services/property.service';
 
 export class PropertyListComponent implements OnInit {
 
-  // Data source
-  propertyDataSource: Property[];
+  // Properity data source
+  properities: PropertyGridModel[];
 
   // Property type
   private _sellRent: number = 1;
 
-  constructor(private _propertyService: PropertyService, private _activatedRoute: ActivatedRoute) { }
+  constructor(private propertyService: PropertyService, private activatedRoute: ActivatedRoute, 
+    private spinnerService: NgxSpinnerService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.checkUrlIsChanged();
@@ -25,16 +28,19 @@ export class PropertyListComponent implements OnInit {
   }
 
   private getProperties(sellRentType: number): void {
-    this._propertyService.getAll().subscribe((res: Property[]) => {
-      this.propertyDataSource = res.filter(x => x.sellRent == sellRentType);
+    this.spinnerService.show();
+    this.propertyService.getAll().subscribe((res: PropertyGridModel[]) => {
+      this.properities = res.filter(x => x.sellRent == sellRentType);
+      this.spinnerService.hide();
     },
     (error) => {
-      console.log(error);
+      this.spinnerService.hide();
+      this.toastrService.error(error, "Error");
     });
   }
 
   private checkUrlIsChanged(): void {
-    if(this._activatedRoute.snapshot.url.toString()) {
+    if(this.activatedRoute.snapshot.url.toString()) {
       this._sellRent = 2;
     }
   }

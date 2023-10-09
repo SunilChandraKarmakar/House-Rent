@@ -13,11 +13,12 @@ export class PropertyDetailComponent implements OnInit {
   // Property id
   propertyId: number | undefined;
 
-  testData: string = "This is test data.";
+  testData: string = "This is test data";
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private nzImageService: NzImageService) { }
 
   ngOnInit() {
+    // Get and set property id
     this.propertyId = +this.activatedRoute.snapshot.params["id"];
     this.activatedRoute.params.subscribe((res) => {
       this.propertyId = +res["id"];

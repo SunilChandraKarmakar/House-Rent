@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Property } from '../models/property';
+import { PropertyGridModel } from '../models/api.model';
+import { ApplicationBaseUrl } from '../utility/application-base-url';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,17 @@ import { Property } from '../models/property';
 
 export class PropertyService {
 
-  constructor(private _httpClient: HttpClient) { }
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
-  getAll(): Observable<Property[]> {
-    return this._httpClient.get<Property[]>("data/property.json");
+  constructor(private httpClient: HttpClient) { }
+
+  // Get all property
+  getAll(): Observable<PropertyGridModel[]> {
+    let getAllProperties: Observable<PropertyGridModel[]> = 
+      this.httpClient.get<PropertyGridModel[]>(ApplicationBaseUrl.baseUrl + "/api/Property/GetAll");
+
+    return getAllProperties;
   }
 }

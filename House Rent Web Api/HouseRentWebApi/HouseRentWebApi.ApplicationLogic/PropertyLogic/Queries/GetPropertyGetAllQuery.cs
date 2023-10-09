@@ -25,8 +25,9 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Queries
                                 .Include(p => p.Address)
                                     .ThenInclude(a => a.City)
                                 .Include(p => p.Address)
-                                    .ThenInclude(a => a.CountryId)
+                                    .ThenInclude(a => a.Country)
                                 .Include(p => p.User)
+                                .Include(p => p.Photos)
                                 .Where(c => !c.IsDeleted)
                                 .ToListAsync();
 

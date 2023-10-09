@@ -1,7 +1,7 @@
 <div class="card" [ngClass]="{'shadow' : showHideShadowInCard}">
   <div class="card-image-wrap text-center">
-    <img *ngIf="property.image" src="../../../../assets/images/{{property.image}}" class="card-img-top">
-    <img *ngIf="!property.image" src="../../../../assets/images/house_default.jpg" class="card-img-top">
+    <img *ngIf="propertyFeaturedPhoto" src="{{ propertyFeaturedPhoto }}" class="card-img-top">
+    <img src="../../../../assets/images/house_default.jpg" class="card-img-top">
     <ul [hidden]="showHideEditDeleteButton" class="list-inline text-center member-icon animation-button">
       <li class="list-inline-item">
         <button class="btn btn-primary" routerLink="property-detail/{{property.id}}">
@@ -16,15 +16,21 @@
     </ul>
   </div>
   <div class="card-body">
-    <h5 class="mb-0 text-primary">{{ property.numberOfBadroom }} BHK {{ property.furnishingType }}</h5>
-    <span>in {{ property.name }}, {{ property.city }}</span>
+    <h5 class="text-primary">{{ property.bhk }} BHK {{ property.propertyTypeName }}</h5>
+    <span>in {{ property.name }}, {{ property.address.cityName }}</span>
     <p>
-      {{ property.propertyType }}
-      <span *ngIf="property.propertyType != 'Unfurnished'">Furnished</span> | {{ property.posession }}
+      {{ property.propertyTypeName }}
+      <span>{{ property.furnishingTypeName }}</span>
     </p>
     <hr class="mt-0 mb-0">
     <p>
       Price: <span class="text-danger fst-italic">{{ property.price }} USD</span> | 
-      Area: <span class="text-danger fst-italic">{{ property.builtArea }} Sq Ft</span></p>
+      Area: <span class="text-danger fst-italic">{{ property.buildArea }} Sq Ft</span></p>
   </div>
 </div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" 
+  color = "#fff" type = "ball-triangle-path" [fullScreen] = "true">
+  <p style="color: white" > 
+    Loading... 
+  </p>
+</ngx-spinner>

@@ -68,7 +68,8 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Model
         public string Description { get; set; }
         public string UserName { get; set; }
 
-        public Address Address { get; set; }
+        public AddressViewModel Address { get; set; }
+        public ICollection<PhotoViewModel> Photos { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -76,7 +77,38 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Model
                 .ForMember(d => d.PropertyTypeName, s => s.MapFrom(m => m.PropertyType.Name))
                 .ForMember(d => d.FurnishingTypeName, s => s.MapFrom(m => m.FurnishingType.Name))
                 .ForMember(d => d.Address, s => s.MapFrom(m => m.Address))
-                .ForMember(d => d.UserName, s => s.MapFrom(m => m.User.FullName));
+                .ForMember(d => d.UserName, s => s.MapFrom(m => m.User.FullName))
+                .ForMember(d => d.Photos, s => s.MapFrom(m => m.Photos));
+        }
+
+        public class AddressViewModel : IMapFrom<Address>
+        {
+            public int Id { get; set; }
+            public string AddressLineOne { get; set; }
+            public string AddressLineTwo { get; set; }
+            public string CountryName { get; set; }
+            public string CityName { get; set; }
+
+            public void Mapping(Profile profile)
+            {
+                profile.CreateMap<Address, AddressViewModel>()
+                    .ForMember(d => d.CountryName, s => s.MapFrom(m => m.Country.Name))
+                    .ForMember(d => d.CityName, s => s.MapFrom(m => m.City.Name));
+            }
+        }
+
+        public class PhotoViewModel : IMapFrom<Photo>
+        {
+            public int Id { get; set; }
+            public string Url { get; set; }
+            public int PropertyId { get; set; }
+            public bool IsDefault { get; set; }
+
+            public void Mapping(Profile profile)
+            {
+                profile.CreateMap<Photo, PhotoViewModel>();
+                profile.CreateMap<PhotoViewModel, Photo>();
+            }
         }
     }
 }
