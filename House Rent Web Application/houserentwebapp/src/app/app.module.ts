@@ -39,6 +39,8 @@ import { PropertyTypeListComponent } from './components/property-type-list/prope
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { FurnishingTypeDetailsComponent } from './components/furnishing-type-details/furnishing-type-details.component';
 import { FurnishingTypeListComponent } from './components/furnishing-type-list/furnishing-type-list.component';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 registerLocaleData(en);
 
@@ -83,7 +85,9 @@ registerLocaleData(en);
     NzInputNumberModule,
     NzDatePickerModule,
     NzImageModule,
-    NzPopconfirmModule
+    NzPopconfirmModule,
+    NzUploadModule,
+    NzMessageModule
   ],
 
   providers: [

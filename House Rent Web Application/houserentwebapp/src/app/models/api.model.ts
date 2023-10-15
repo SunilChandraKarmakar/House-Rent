@@ -2370,6 +2370,7 @@ export class PropertyModel implements IPropertyModel {
     age!: number;
     description!: string;
     userId!: string;
+    address!: AddressModel;
 
     constructor(data?: IPropertyModel) {
         if (data) {
@@ -2377,6 +2378,9 @@ export class PropertyModel implements IPropertyModel {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
+        }
+        if (!data) {
+            this.address = new AddressModel();
         }
     }
 
@@ -2404,6 +2408,7 @@ export class PropertyModel implements IPropertyModel {
             this.age = _data["age"];
             this.description = _data["description"];
             this.userId = _data["userId"];
+            this.address = _data["address"] ? AddressModel.fromJS(_data["address"]) : new AddressModel();
         }
     }
 
@@ -2438,6 +2443,7 @@ export class PropertyModel implements IPropertyModel {
         data["age"] = this.age;
         data["description"] = this.description;
         data["userId"] = this.userId;
+        data["address"] = this.address ? this.address.toJSON() : <any>undefined;
         return data;
     }
 }
@@ -2465,6 +2471,7 @@ export interface IPropertyModel {
     age: number;
     description: string;
     userId: string;
+    address: AddressModel;
 }
 
 export class UpsertPropertyCommand extends PropertyModel implements IUpsertPropertyCommand {

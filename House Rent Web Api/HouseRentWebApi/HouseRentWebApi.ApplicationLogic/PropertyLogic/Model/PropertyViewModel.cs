@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HouseRentWebApi.ApplicationLogic.AddressLogic.Model;
 using HouseRentWebApi.Domain;
 using HouseRentWebApi.Shared.Contracts;
 using System.Dynamic;
@@ -36,6 +37,8 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Model
         public int Age { get; set; }
         public string Description { get; set; }
         public string UserId { get; set; }
+
+        public AddressModel Address { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -79,6 +82,21 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Model
                 .ForMember(d => d.Address, s => s.MapFrom(m => m.Address))
                 .ForMember(d => d.UserName, s => s.MapFrom(m => m.User.FullName))
                 .ForMember(d => d.Photos, s => s.MapFrom(m => m.Photos));
+        }
+
+        public class AddressModel : IMapFrom<Address>
+        {
+            public int Id { get; set; }
+            public string AddressLineOne { get; set; }
+            public string AddressLineTwo { get; set; }
+            public int CountryId { get; set; }
+            public int CityId { get; set; }
+
+            public void Mapping(Profile profile)
+            {
+                profile.CreateMap<Address, AddressModel>();
+                profile.CreateMap<AddressModel, Address>();
+            }
         }
 
         public class AddressViewModel : IMapFrom<Address>

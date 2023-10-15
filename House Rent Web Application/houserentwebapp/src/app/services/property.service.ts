@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PropertyGridModel } from '../models/api.model';
+import { PropertyGridModel, PropertyViewModel } from '../models/api.model';
 import { ApplicationBaseUrl } from '../utility/application-base-url';
 
 @Injectable({
@@ -22,5 +22,13 @@ export class PropertyService {
       this.httpClient.get<PropertyGridModel[]>(ApplicationBaseUrl.baseUrl + "/api/Property/GetAll");
 
     return getAllProperties;
+  }
+
+  // Get property by id
+  get(id: number): Observable<PropertyViewModel> {
+    let getProperty: Observable<PropertyViewModel> = 
+      this.httpClient.get<PropertyViewModel>(ApplicationBaseUrl.baseUrl + `/api/Property/Get/${id}`);
+    
+    return getProperty;
   }
 }

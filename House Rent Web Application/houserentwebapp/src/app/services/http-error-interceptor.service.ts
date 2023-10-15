@@ -22,7 +22,10 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
           this.toastrService.error(JSON.stringify(error.error.errors));
         }
         else {
-          this.toastrService.error(error.error.errorMessage);
+          console.log("Error Message :- ", error.error.errorMessage);
+          if(error.error.errorMessage != undefined) {
+            this.toastrService.error(error.error.errorMessage);
+          }
         }
 
         return throwError("");
