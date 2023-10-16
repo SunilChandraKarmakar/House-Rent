@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PropertyGridModel, PropertyViewModel } from '../models/api.model';
+import { PropertyGridModel, PropertyModel, PropertyViewModel } from '../models/api.model';
 import { ApplicationBaseUrl } from '../utility/application-base-url';
 
 @Injectable({
@@ -30,5 +30,13 @@ export class PropertyService {
       this.httpClient.get<PropertyViewModel>(ApplicationBaseUrl.baseUrl + `/api/Property/Get/${id}`);
     
     return getProperty;
+  }
+
+  // Upsert property
+  upsert(model: PropertyModel): Observable<number> {
+    let upsertProperty: Observable<number> = 
+      this.httpClient.post<number>(ApplicationBaseUrl.baseUrl + "/api/Property/Upsert", model, this.httpOptions);
+
+    return upsertProperty;
   }
 }

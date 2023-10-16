@@ -9,6 +9,15 @@
           <nz-tabset [nzSelectedIndex]="nzSelectedTabIndex" (nzSelectedIndexChange)="indexChange($event)">
             <nz-tab nzTitle="Basic Information">
               <nz-form-item>
+                <nz-form-label [nzSm]="8" [nzXs]="20" nzFor="name" nzRequired>
+                  In Building/Society/Project
+                </nz-form-label>
+                <nz-form-control [nzSm]="8" [nzXs]="24">
+                  <input nz-input placeholder="In Building/Society/Project name" 
+                    [(ngModel)]="propertyModel.name" name="name" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
                 <nz-form-label [nzSm]="8" [nzXs]="20" nzRequired nzFor="sellRent">
                   I want to
                 </nz-form-label>
@@ -57,14 +66,6 @@
                   </nz-radio-group>
                 </nz-form-control>
               </nz-form-item>
-              <!-- <nz-form-item>
-                <nz-form-label [nzSm]="8" [nzXs]="20" nzFor="radioValue">
-                  In Building/Society/Project
-                </nz-form-label>
-                <nz-form-control [nzSm]="6" [nzXs]="15">
-                  <input nz-input placeholder="Basic usage" [(ngModel)]="previewAddPropertyModel.name" name="name" />
-                </nz-form-control>
-              </nz-form-item> -->
               <nz-form-item>
                 <nz-button-group>
                   <button nz-button nzType="primary" [disabled]="true">
@@ -174,25 +175,26 @@
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="20" nzFor="countryId" nzRequired>
+                  Country
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a country" 
+                    (ngModelChange)="onChangeCountry($event)" [(ngModel)]="propertyModel.address.countryId" 
+                    name="countryId" style="width: 60%;"> 
+                    <nz-option nzLabel="{{ country.name }}" nzValue="{{ country.id }}" *ngFor="let country of countries">
+                    </nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="20" nzFor="cityId" nzRequired>
                   City
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                   <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a city" 
                     [(ngModel)]="propertyModel.address.cityId" name="cityId" style="width: 60%;"> 
-                    <nz-option nzLabel="{{ city.name }}" nzValue="{{ city.id }}" *ngFor="let city of cities">
-                    </nz-option>
-                  </nz-select>
-                </nz-form-control>
-              </nz-form-item>
-              <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="20" nzFor="countryId" nzRequired>
-                  Country
-                </nz-form-label>
-                <nz-form-control [nzSm]="14" [nzXs]="24">
-                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a country" 
-                    [(ngModel)]="propertyModel.address.countryId" name="countryId" style="width: 60%;"> 
-                    <nz-option nzLabel="{{ country.name }}" nzValue="{{ country.id }}" *ngFor="let country of countries">
+                    <nz-option nzLabel="{{ city.name }}" nzValue="{{ city.id }}" *ngFor="let city of cascadingCities">
                     </nz-option>
                   </nz-select>
                 </nz-form-control>

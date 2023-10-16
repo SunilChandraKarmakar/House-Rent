@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { CityGridModel, CountryGridModel, PropertyModel } from 'src/app/models/api.model';
+import { CityGridModel, CityModel, CountryGridModel, PropertyModel, UserModel } from 'src/app/models/api.model';
 import { CityService } from 'src/app/services/city.service';
 import { CountryService } from 'src/app/services/country.service';
+import { PropertyService } from 'src/app/services/property.service';
 import { PropertyAddTab } from 'src/app/utility/system-enum-collection.enum';
 
 @Component({
@@ -15,11 +16,16 @@ import { PropertyAddTab } from 'src/app/utility/system-enum-collection.enum';
 
 export class AddPropertyComponent implements OnInit {
 
+  // Set true or false value in html
+  true: boolean = true;
+  false: boolean = false;
+
   // Property model
   propertyModel: PropertyModel = new PropertyModel(); 
 
   // City list model
   cities: CityGridModel[] = [];
+  cascadingCities: CityModel[] = [];
 
   // country list model
   countries: CountryGridModel[] = [];
@@ -28,7 +34,8 @@ export class AddPropertyComponent implements OnInit {
   nzSelectedTabIndex: number = 0;
 
   constructor(private cityService: CityService, private countryService: CountryService, 
-    private spinnerService: NgxSpinnerService, private toastrService: ToastrService) { }
+    private spinnerService: NgxSpinnerService, private toastrService: ToastrService, 
+    private propertyService: PropertyService) { }
 
   ngOnInit() {
     // Get cities
@@ -36,6 +43,8 @@ export class AddPropertyComponent implements OnInit {
 
     // Get countries
     this.getCountries();
+
+    console.log("User Id :- ", this.getCurrentUserId());
   }
 
   // Get cities
@@ -66,7 +75,11 @@ export class AddPropertyComponent implements OnInit {
 
   // Basci information tab validation
   private basicInfoTabValidation(): boolean {
-    if(this.propertyModel.sellRent == undefined || this.propertyModel.sellRent == null) {
+    if(this.propertyModel.name == undefined || this.propertyModel.name == null) {
+      this.toastrService.warning("Please, provied your project name.", "Warning");
+      return false;
+    }
+    else if(this.propertyModel.sellRent == undefined || this.propertyModel.sellRent == null) {
       this.toastrService.warning("Please, select sell or rent.", "Warning");
       return false;
     }
@@ -217,7 +230,30 @@ export class AddPropertyComponent implements OnInit {
     this.nzSelectedTabIndex = event;
   }
 
+  // Get current user id
+  private getCurrentUserId(): string | undefined {
+    let loginUserInfo: UserModel = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+    let userId: string | undefined;
+
+    if(loginUserInfo != null || loginUserInfo != undefined) {
+      userId = loginUserInfo.id;
+    }
+
+    return userId;
+  }
+
+  // Cascading city based on country
+  onChangeCountry(event: any): void {
+    this.cascadingCities = this.cities.filter((x: CityGridModel) => x.countryId == event);
+  }
+
   submitForm(): void {
-    console.log("Saved Data :- ", this.propertyModel);
+    this.propertyModel.userId = this.getCurrentUserId()!;
+
+    this.spinnerService.show();
+    this.propertyService.upsert(this.propertyModel).subscribe(() => {
+      this.spinnerService.hide();
+      this.toastrService.success("Property saved.", "Successfull");
+    });
   }
 }

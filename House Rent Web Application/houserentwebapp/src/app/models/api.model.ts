@@ -1597,6 +1597,7 @@ export interface IUpsertAddressCommand extends IAddressModel {
 export class CityGridModel implements ICityGridModel {
     id!: number;
     name!: string;
+    countryId!: number;
     countryName!: string;
 
     constructor(data?: ICityGridModel) {
@@ -1612,6 +1613,7 @@ export class CityGridModel implements ICityGridModel {
         if (_data) {
             this.id = _data["id"];
             this.name = _data["name"];
+            this.countryId = _data["countryId"];
             this.countryName = _data["countryName"];
         }
     }
@@ -1627,6 +1629,7 @@ export class CityGridModel implements ICityGridModel {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["name"] = this.name;
+        data["countryId"] = this.countryId;
         data["countryName"] = this.countryName;
         return data;
     }
@@ -1635,6 +1638,7 @@ export class CityGridModel implements ICityGridModel {
 export interface ICityGridModel {
     id: number;
     name: string;
+    countryId: number;
     countryName: string;
 }
 

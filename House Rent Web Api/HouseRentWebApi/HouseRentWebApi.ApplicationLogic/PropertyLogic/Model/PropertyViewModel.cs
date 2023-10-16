@@ -2,6 +2,7 @@
 using HouseRentWebApi.ApplicationLogic.AddressLogic.Model;
 using HouseRentWebApi.Domain;
 using HouseRentWebApi.Shared.Contracts;
+using System.ComponentModel.DataAnnotations;
 using System.Dynamic;
 
 namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Model
@@ -16,6 +17,9 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Model
     public class PropertyModel : IMapFrom<Property>
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Please, provied project name.")]
+        [StringLength(30, MinimumLength = 2)]
         public string Name { get; set; }
         public int SellRent { get; set; }
         public int PropertyTypeId { get; set; }
