@@ -2,7 +2,7 @@
   <div class="col-md-8 col-sm-8 col-8">
     <div class="card shadow">
       <div class="card-header">
-        <h5 class="text-center">List Your Properity</h5>
+        <h5 class="text-center">Add Your Properity</h5>
       </div>
       <div class="card-body">
         <form autocomplete="off">
@@ -47,7 +47,8 @@
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                   <nz-radio-group [(ngModel)]="propertyModel.propertyTypeId" name="propertyTypeId" 
-                    nzButtonStyle="solid" [(ngModel)]="propertyModel.propertyTypeId">
+                    nzButtonStyle="solid" [(ngModel)]="propertyModel.propertyTypeId" 
+                    (ngModelChange)="onPropertyTypeModelChange($event)">
                     <label nz-radio-button nzValue="1">House</label>
                     <label nz-radio-button nzValue="2">Apartment</label>
                     <label nz-radio-button nzValue="3">Duplex</label>
@@ -59,7 +60,8 @@
                   Furnishing Type
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                  <nz-radio-group [(ngModel)]="propertyModel.furnishingTypeId" name="furnishingTypeId" nzButtonStyle="solid">
+                  <nz-radio-group [(ngModel)]="propertyModel.furnishingTypeId" name="furnishingTypeId" 
+                  (ngModelChange)="onFurnishingTypeModelChange($event)" nzButtonStyle="solid">
                     <label nz-radio-button nzValue="1">Fully</label>
                     <label nz-radio-button nzValue="2">Semi</label>
                     <label nz-radio-button nzValue="3">Unfurnished</label>
@@ -193,7 +195,8 @@
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                   <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a city" 
-                    [(ngModel)]="propertyModel.address.cityId" name="cityId" style="width: 60%;"> 
+                    [(ngModel)]="propertyModel.address.cityId" name="cityId"
+                    (ngModelChange)="onCityModelChange($event)" style="width: 60%;"> 
                     <nz-option nzLabel="{{ city.name }}" nzValue="{{ city.id }}" *ngFor="let city of cascadingCities">
                     </nz-option>
                   </nz-select>
@@ -219,8 +222,8 @@
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                   <nz-radio-group [(ngModel)]="propertyModel.isReadyToMove" name="isReadyToMove" nzButtonStyle="solid">
-                    <label nz-radio-button nzValue="true">Yes</label>
-                    <label nz-radio-button nzValue="false">No</label>
+                    <label nz-radio nzValue="true">Yes</label>
+                    <label nz-radio nzValue="false">No</label>
                   </nz-radio-group>
                 </nz-form-control>
               </nz-form-item>
@@ -230,8 +233,8 @@
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                   <nz-radio-group [(ngModel)]="propertyModel.isGated" name="isGated" nzButtonStyle="solid">
-                    <label nz-radio-button nzValue="true">Yes</label>
-                    <label nz-radio-button nzValue="false">No</label>
+                    <label nz-radio nzValue="true">Yes</label>
+                    <label nz-radio nzValue="false">No</label>
                   </nz-radio-group>
                 </nz-form-control>
               </nz-form-item>
@@ -313,9 +316,22 @@
         <h5 class="text-center">Your Property Preview</h5>
       </div>
       <div class="card-body">
-        <!-- <app-property-card [property]="previewAddPropertyModel" [showHideEditDeleteButton]="true" 
-          [showHideShadowInCard]="false">
-        </app-property-card> -->
+        <div class="card">
+          <div class="card-image-wrap text-center">
+            <img src="../../../../assets/images/house_default.jpg" class="card-img-top">
+          </div>
+          <div class="card-body">
+            <h5 class="text-primary">{{ propertyModel.bhk }} BHK {{ propertyTypeName }}</h5>
+            <span>in {{ propertyModel.name }}, {{ cityName }}</span>
+            <p>
+              <span>{{ furnishingTypeName }}</span>
+            </p>
+            <hr class="mt-0 mb-0">
+            <p>
+              Price: <span class="text-danger fst-italic">{{ propertyModel.price }} USD</span> | 
+              Area: <span class="text-danger fst-italic">{{ propertyModel.buildArea }} Sq Ft</span></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

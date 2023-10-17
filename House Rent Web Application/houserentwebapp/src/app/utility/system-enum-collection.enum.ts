@@ -9,3 +9,15 @@ export enum PropertyAddTab {
     OtherDetails = 3,
     Photo = 4
 }
+
+export enum PropertyType {
+    House = 1,
+    Apartment = 2,
+    Duplex = 3
+}
+
+export enum FurnishingType {
+    Fully = 1,
+    Semi = 2,
+    Unfurnished = 3
+}

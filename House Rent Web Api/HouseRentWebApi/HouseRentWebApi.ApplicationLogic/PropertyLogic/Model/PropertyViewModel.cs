@@ -21,21 +21,47 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Model
         [Required(ErrorMessage = "Please, provied project name.")]
         [StringLength(30, MinimumLength = 2)]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Please, select sell rent.")]
         public int SellRent { get; set; }
+
+        [Required(ErrorMessage = "Please, select property type.")]
         public int PropertyTypeId { get; set; }
+
+        [Required(ErrorMessage = "Please, select furnishing type.")]
         public int FurnishingTypeId { get; set; }
+
+        [Required(ErrorMessage = "Please, provied bhk.")]
         public int Bhk { get; set; }
+
+        [Required(ErrorMessage = "Please, provied price.")]
         public double Price { get; set; }
+
+        [Required(ErrorMessage = "Please, provied build area.")]
         public int BuildArea { get; set; }
+
+        [Required(ErrorMessage = "Please, provied carpet area.")]
         public int CarpetArea { get; set; }
+
+        [Required(ErrorMessage = "Please, provied floor no.")]
         public int FloorNo { get; set; }
+
+        [Required(ErrorMessage = "Please, provied total floor.")]
         public int TotalFloor { get; set; }
         public int AddressId { get; set; }
+
+        [Required(ErrorMessage = "Please, select ready to move or not.")]
         public bool IsReadyToMove { get; set; }
-        public string MainEntrance { get; set; }
+
         public int Security { get; set; }
+
+        [Required(ErrorMessage = "Please, select gated.")]
         public bool IsGated { get; set; }
+
+        [Required(ErrorMessage = "Please, provied maintenence.")]
         public int Maintenence { get; set; }
+
+        [Required(ErrorMessage = "Please, select date.")]
         public DateTime? EstPossessionOn { get; set; }
         public DateTime? PostedOn { get; set; }
         public int Age { get; set; }
@@ -47,7 +73,8 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Model
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Property, PropertyModel>();
-            profile.CreateMap<PropertyModel, Property>();
+            profile.CreateMap<PropertyModel, Property>()
+                .ForMember(d => d.Address, s => s.MapFrom(m => m.Address));
         }
     }
 
@@ -91,9 +118,16 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Model
         public class AddressModel : IMapFrom<Address>
         {
             public int Id { get; set; }
+
+            [Required(ErrorMessage = "Please, provied address line one.")]
+            [StringLength(200, MinimumLength = 2)]
             public string AddressLineOne { get; set; }
             public string AddressLineTwo { get; set; }
+
+            [Required(ErrorMessage = "Please, select country.")]
             public int CountryId { get; set; }
+
+            [Required(ErrorMessage = "Please, select city.")]
             public int CityId { get; set; }
 
             public void Mapping(Profile profile)

@@ -2365,11 +2365,10 @@ export class PropertyModel implements IPropertyModel {
     totalFloor!: number;
     addressId!: number;
     isReadyToMove!: boolean;
-    mainEntrance!: string;
     security!: number;
     isGated!: boolean;
     maintenence!: number;
-    estPossessionOn?: Date | undefined;
+    estPossessionOn!: Date;
     postedOn?: Date | undefined;
     age!: number;
     description!: string;
@@ -2403,7 +2402,6 @@ export class PropertyModel implements IPropertyModel {
             this.totalFloor = _data["totalFloor"];
             this.addressId = _data["addressId"];
             this.isReadyToMove = _data["isReadyToMove"];
-            this.mainEntrance = _data["mainEntrance"];
             this.security = _data["security"];
             this.isGated = _data["isGated"];
             this.maintenence = _data["maintenence"];
@@ -2438,7 +2436,6 @@ export class PropertyModel implements IPropertyModel {
         data["totalFloor"] = this.totalFloor;
         data["addressId"] = this.addressId;
         data["isReadyToMove"] = this.isReadyToMove;
-        data["mainEntrance"] = this.mainEntrance;
         data["security"] = this.security;
         data["isGated"] = this.isGated;
         data["maintenence"] = this.maintenence;
@@ -2466,11 +2463,10 @@ export interface IPropertyModel {
     totalFloor: number;
     addressId: number;
     isReadyToMove: boolean;
-    mainEntrance: string;
     security: number;
     isGated: boolean;
     maintenence: number;
-    estPossessionOn?: Date | undefined;
+    estPossessionOn: Date;
     postedOn?: Date | undefined;
     age: number;
     description: string;

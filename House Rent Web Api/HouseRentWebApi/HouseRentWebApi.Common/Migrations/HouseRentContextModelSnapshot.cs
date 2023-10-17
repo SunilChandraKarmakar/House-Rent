@@ -212,10 +212,6 @@ namespace HouseRentWebApi.Common.Migrations
                     b.Property<bool>("IsReadyToMove")
                         .HasColumnType("bit");
 
-                    b.Property<string>("MainEntrance")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Maintenence")
                         .HasColumnType("int");
 

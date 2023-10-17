@@ -6,7 +6,7 @@ import { CityGridModel, CityModel, CountryGridModel, PropertyModel, UserModel } 
 import { CityService } from 'src/app/services/city.service';
 import { CountryService } from 'src/app/services/country.service';
 import { PropertyService } from 'src/app/services/property.service';
-import { PropertyAddTab } from 'src/app/utility/system-enum-collection.enum';
+import { FurnishingType, PropertyAddTab, PropertyType } from 'src/app/utility/system-enum-collection.enum';
 
 @Component({
   selector: 'app-add-property',
@@ -33,6 +33,11 @@ export class AddPropertyComponent implements OnInit {
   // Selected tab index
   nzSelectedTabIndex: number = 0;
 
+  // Property preview
+  cityName: string | undefined;
+  propertyTypeName: string | undefined;
+  furnishingTypeName: string | undefined;
+
   constructor(private cityService: CityService, private countryService: CountryService, 
     private spinnerService: NgxSpinnerService, private toastrService: ToastrService, 
     private propertyService: PropertyService) { }
@@ -43,8 +48,6 @@ export class AddPropertyComponent implements OnInit {
 
     // Get countries
     this.getCountries();
-
-    console.log("User Id :- ", this.getCurrentUserId());
   }
 
   // Get cities
@@ -165,7 +168,12 @@ export class AddPropertyComponent implements OnInit {
       this.toastrService.warning("Please, select possession/avaialble from.", "Warning");
       return false;
     }
-    else {
+    else {      
+      let readyToMove: any = this.propertyModel.isReadyToMove;
+      let isGated: any = this.propertyModel.isGated;
+
+      this.propertyModel.isReadyToMove = readyToMove == "true" ? true : false;
+      this.propertyModel.isGated = isGated == "true" ? true : false;
       return true;
     }  
   }
@@ -245,6 +253,45 @@ export class AddPropertyComponent implements OnInit {
   // Cascading city based on country
   onChangeCountry(event: any): void {
     this.cascadingCities = this.cities.filter((x: CityGridModel) => x.countryId == event);
+  }
+
+  // Get property type name name based on selected property type id
+  onPropertyTypeModelChange(event: any): void {
+    let selectedValue: number = +event;
+
+    switch(selectedValue) {
+      case 1:
+        this.propertyTypeName = PropertyType[PropertyType.House];
+        break;
+      case 2:
+        this.propertyTypeName = PropertyType[PropertyType.Apartment];
+        break;
+      default:
+        this.propertyTypeName = PropertyType[PropertyType.Duplex];
+        break;
+    }
+  }
+
+  // Get furnishing type name name based on selected furnishing type id
+  onFurnishingTypeModelChange(event: any): void {
+    let selectedValue: number = +event;
+
+    switch(selectedValue) {
+      case 1:
+        this.furnishingTypeName = FurnishingType[FurnishingType.Fully];
+        break;
+      case 2:
+        this.furnishingTypeName = FurnishingType[FurnishingType.Semi];
+        break;
+      default:
+        this.furnishingTypeName = FurnishingType[FurnishingType.Unfurnished];
+        break;
+    }
+  }
+
+  // Get city name based on selecte city id
+  onCityModelChange(event: any): void {
+    this.cityName = this.cascadingCities.find((x: CityModel) => x.id == event)?.name;
   }
 
   submitForm(): void {

@@ -20,7 +20,6 @@
         public int TotalFloor { get; set; }
         public int AddressId { get; set; }
         public bool IsReadyToMove { get; set; }
-        public string MainEntrance { get; set; }
         public int Security { get; set; }
         public bool IsGated { get; set; }
         public int Maintenence { get; set; }
