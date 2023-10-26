@@ -23,8 +23,10 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Queries
                 if (int.IsNegative(request.Id))
                     return new PropertyModel();
 
-                var existProperty = await _service.Context.PropertyTypes.FirstOrDefaultAsync(p => p.Id == request.Id);
-                return _service.Mapper.Map<PropertyModel>(existProperty);
+                var existProperty = await _service.Context.Properties.Include(p => p.Address).FirstOrDefaultAsync(p => p.Id == request.Id);
+                var mapExistProperty = _service.Mapper.Map<PropertyModel>(existProperty);
+
+                return mapExistProperty;
             }
         }
     }

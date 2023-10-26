@@ -72,7 +72,8 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Model
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Property, PropertyModel>();
+            profile.CreateMap<Property, PropertyModel>()
+                .ForMember(m => m.Address, s => s.MapFrom(m => m.Address));
             profile.CreateMap<PropertyModel, Property>()
                 .ForMember(d => d.Address, s => s.MapFrom(m => m.Address));
         }

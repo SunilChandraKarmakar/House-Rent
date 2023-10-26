@@ -20,7 +20,7 @@ export class PropertyListComponent implements OnInit {
   private _sellRent: number = 1;
 
   constructor(private propertyService: PropertyService, private activatedRoute: ActivatedRoute, 
-    private spinnerService: NgxSpinnerService, private toastrService: ToastrService) { }
+  private spinnerService: NgxSpinnerService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.checkUrlIsChanged();

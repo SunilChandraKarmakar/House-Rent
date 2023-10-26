@@ -11,18 +11,21 @@ import { NzImageService } from 'ng-zorro-antd/image';
 export class PropertyDetailComponent implements OnInit {
 
   // Property id
-  propertyId: number | undefined;
+  private _propertyId: number | undefined;
 
   testData: string = "This is test data";
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private nzImageService: NzImageService) { }
 
   ngOnInit() {
-    // Get and set property id
-    this.propertyId = +this.activatedRoute.snapshot.params["id"];
-    this.activatedRoute.params.subscribe((res) => {
-      this.propertyId = +res["id"];
-    });
+    this.getSelectedPropertyId();
+
+    console.log("Property Id :- ", this._propertyId)
+  }
+
+  // Get property id based on selected property
+  private getSelectedPropertyId(): void {
+    this._propertyId = +this.activatedRoute.snapshot.params["id"];
   }
 
   onBack(): void {
@@ -30,8 +33,8 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   onNextPage(): void {
-    this.propertyId = this.propertyId! + 1;
-    this.router.navigate([`property-detail/${this.propertyId}`])
+    this._propertyId = this._propertyId! + 1;
+    this.router.navigate([`property-detail/${this._propertyId}`])
   }
 
   previewAllImages(): void {
