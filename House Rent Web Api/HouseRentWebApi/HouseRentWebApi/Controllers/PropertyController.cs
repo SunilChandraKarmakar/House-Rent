@@ -25,7 +25,7 @@ namespace HouseRentWebApi.Controllers
         {
             var vm = new PropertyViewModel
             {
-                Model = await Mediator.Send(new GetPropertyDetailQuery { Id = id }),
+                GridModel = await Mediator.Send(new GetPropertyDetailQuery { Id = id }),
             };
 
             vm.optionsDataSources.PropertyTypeSelectList = Mediator.Send(new SelectListPropertyTypeQuery()).Result;

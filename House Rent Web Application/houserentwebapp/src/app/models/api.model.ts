@@ -2080,7 +2080,6 @@ export class PropertyGridModel implements IPropertyGridModel {
     floorNo!: number;
     totalFloor!: number;
     isReadyToMove!: boolean;
-    mainEntrance!: string;
     security!: number;
     isGated!: boolean;
     maintenence!: number;
@@ -2119,7 +2118,6 @@ export class PropertyGridModel implements IPropertyGridModel {
             this.floorNo = _data["floorNo"];
             this.totalFloor = _data["totalFloor"];
             this.isReadyToMove = _data["isReadyToMove"];
-            this.mainEntrance = _data["mainEntrance"];
             this.security = _data["security"];
             this.isGated = _data["isGated"];
             this.maintenence = _data["maintenence"];
@@ -2158,7 +2156,6 @@ export class PropertyGridModel implements IPropertyGridModel {
         data["floorNo"] = this.floorNo;
         data["totalFloor"] = this.totalFloor;
         data["isReadyToMove"] = this.isReadyToMove;
-        data["mainEntrance"] = this.mainEntrance;
         data["security"] = this.security;
         data["isGated"] = this.isGated;
         data["maintenence"] = this.maintenence;
@@ -2190,7 +2187,6 @@ export interface IPropertyGridModel {
     floorNo: number;
     totalFloor: number;
     isReadyToMove: boolean;
-    mainEntrance: string;
     security: number;
     isGated: boolean;
     maintenence: number;

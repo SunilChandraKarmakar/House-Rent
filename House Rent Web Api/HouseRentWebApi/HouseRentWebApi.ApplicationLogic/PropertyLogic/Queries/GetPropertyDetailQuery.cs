@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Queries
 {
-    public class GetPropertyDetailQuery : IRequest<PropertyModel>
+    public class GetPropertyDetailQuery : IRequest<PropertyGridModel>
     {
         public int Id { get; set; }
 
-        public class Handler : IRequestHandler<GetPropertyDetailQuery, PropertyModel>
+        public class Handler : IRequestHandler<GetPropertyDetailQuery, PropertyGridModel>
         {
             private readonly ICoreService _service;
 
@@ -18,14 +18,21 @@ namespace HouseRentWebApi.ApplicationLogic.PropertyLogic.Queries
                 _service = coreService;
             }
 
-            public async Task<PropertyModel> Handle(GetPropertyDetailQuery request, CancellationToken cancellationToken)
+            public async Task<PropertyGridModel> Handle(GetPropertyDetailQuery request, CancellationToken cancellationToken)
             {
                 if (int.IsNegative(request.Id))
-                    return new PropertyModel();
+                    return new PropertyGridModel();
 
-                var existProperty = await _service.Context.Properties.Include(p => p.Address).FirstOrDefaultAsync(p => p.Id == request.Id);
-                var mapExistProperty = _service.Mapper.Map<PropertyModel>(existProperty);
+                var existProperty = await _service.Context.Properties
+                                    .Include(p => p.PropertyType)
+                                    .Include(p => p.FurnishingType)
+                                    .Include(p => p.Address)
+                                        .ThenInclude(a => a.City)
+                                    .Include(p => p.Address)
+                                        .ThenInclude(a => a.Country)
+                                    .FirstOrDefaultAsync(p => p.Id == request.Id);
 
+                var mapExistProperty = _service.Mapper.Map<PropertyGridModel>(existProperty);
                 return mapExistProperty;
             }
         }

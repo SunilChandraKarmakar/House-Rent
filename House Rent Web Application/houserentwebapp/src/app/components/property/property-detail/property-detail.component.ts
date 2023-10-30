@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzImageService } from 'ng-zorro-antd/image';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+import { PropertyGridModel, PropertyViewModel } from 'src/app/models/api.model';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
   selector: 'app-property-detail',
@@ -13,14 +17,15 @@ export class PropertyDetailComponent implements OnInit {
   // Property id
   private _propertyId: number | undefined;
 
-  testData: string = "This is test data";
+  // Property model
+  propertyModel: PropertyGridModel = new PropertyGridModel();
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private nzImageService: NzImageService) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private nzImageService: NzImageService,
+  private toastrService: ToastrService, private spinnerService: NgxSpinnerService, private propertyService: PropertyService) { }
 
   ngOnInit() {
     this.getSelectedPropertyId();
-
-    console.log("Property Id :- ", this._propertyId)
+    this.getPropertyDetails();
   }
 
   // Get property id based on selected property
@@ -30,11 +35,6 @@ export class PropertyDetailComponent implements OnInit {
 
   onBack(): void {
     this.router.navigate(["/"]);
-  }
-
-  onNextPage(): void {
-    this._propertyId = this._propertyId! + 1;
-    this.router.navigate([`property-detail/${this._propertyId}`])
   }
 
   previewAllImages(): void {
@@ -54,5 +54,18 @@ export class PropertyDetailComponent implements OnInit {
     ];
     
     this.nzImageService.preview(images, { nzZoom: 1.5, nzRotate: 0 });
+  }
+
+  // Get property details based on selected property id
+  private getPropertyDetails(): void {
+    this.spinnerService.show();
+    this.propertyService.get(this._propertyId!).subscribe((result: PropertyViewModel) => {
+      this.propertyModel = result.gridModel;
+      this.spinnerService.hide();
+    },
+    (error: any) => {
+      this.spinnerService.hide();
+      this.toastrService.error("Selected property details cannot find!", "Error");
+    })
   }
 }

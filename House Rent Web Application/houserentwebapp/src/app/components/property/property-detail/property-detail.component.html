@@ -4,14 +4,18 @@
       <div class="card-img-warp text-center mt-3">
         <img src="../../../../assets/images/house_1.png" class="card-img-top">
       </div>
-      <div class="card-body mt-2">
-        <h4 class="card-title text-primary">Pearl Green</h4>
-        <span>2 BHK partment @ 51200</span><br>
-        <span>in New York</span>
+      <div class="card-body mt-3">
+        <h3 class="card-title text-primary">{{ propertyModel.name }}</h3>
+        <span>
+          {{ propertyModel.bhk }} BHK {{ propertyModel.propertyTypeName }} @ ${{ propertyModel.price }}
+        </span>
+        <br>
+        <span>in {{ propertyModel.address.cityName }}</span>
         <hr>
-        <span><strong>Build Area:</strong> 1200 Sqft</span><br>
-        <span><strong>Carpet Area:</strong> 1000 Sqft</span><br>
-        <span><strong>Furnishing Type:</strong> Fully</span>
+        <span><strong>Build Area:</strong> &nbsp; {{ propertyModel.buildArea }} Sqft</span><br>
+        <span><strong>Carpet Area:</strong> &nbsp; {{ propertyModel.carpetArea }} Sqft</span><br>
+        <span><strong>Furnishing Type:</strong> &nbsp; {{ propertyModel.furnishingTypeName }}</span><br>
+        <span><strong>Available For:</strong> &nbsp; {{ propertyModel.sellRent == 1 ? "Buy" : "Rent" }}</span>
       </div>
       <div class="card-footer">
         <nz-button-group class="d-flex">
@@ -27,39 +31,48 @@
         <form class="row g-3">
           <div class="col-md-6">
             <label for="projectName" class="form-label">Project Name</label>
-            <input nz-input name="projectName" [(ngModel)]="testData" type="text" id="projectName" [disabled]="true">
+            <input nz-input name="projectName" [(ngModel)]="propertyModel.name" type="text" id="projectName" [disabled]="true">
           </div>
-          <div class="col-md-6">
-            <label for="mainEntrance" class="form-label">Main Entrance</label>
-            <input nz-input name="mainEntrance" [(ngModel)]="testData" type="text" id="mainEntrance" [disabled]="true">
-          </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <label for="floorNumber" class="form-label">Floor Number</label>
-            <input nz-input name="floorNumber" [(ngModel)]="testData" type="text" id="floorNumber" [disabled]="true">
+            <input nz-input name="floorNumber" [(ngModel)]="propertyModel.floorNo" type="text" id="floorNumber" 
+              [disabled]="true">
           </div>
-          <div class="col-md-6">
-            <label for="gatedCommunity" class="form-label">Gated Community</label>
-            <input nz-input name="gatedCommunity" [(ngModel)]="testData" type="text" id="gatedCommunity" [disabled]="true">
+          <div class="col-md-3">
+            <label for="totalFloor" class="form-label">Total Floor</label>
+            <input nz-input name="totalFloor" [(ngModel)]="propertyModel.totalFloor" type="number" id="floorNumber" 
+              [disabled]="true">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <label for="ageOfProperty" class="form-label">Age of Property</label>
-            <input nz-input name="ageOfProperty" [(ngModel)]="testData" type="text" id="ageOfProperty" [disabled]="true">
+            <input nz-input name="ageOfProperty" [(ngModel)]="propertyModel.age" type="text" id="ageOfProperty" [disabled]="true">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <label for="securityDeposit" class="form-label">Security Deposit</label>
-            <input nz-input name="securityDeposit" [(ngModel)]="testData" type="text" id="securityDeposit" [disabled]="true">
+            <input nz-input name="securityDeposit" [(ngModel)]="propertyModel.security" type="number" id="securityDeposit" 
+              [disabled]="true">
           </div>
           <div class="col-md-6">
             <label for="posession" class="form-label">Posession</label>
-            <input nz-input name="posession" [(ngModel)]="testData" type="text" id="posession" [disabled]="true">
+            <input nz-input name="posession" [ngModel]="propertyModel.estPossessionOn  | date: 'EEEE, MMMM d, y'" 
+              type="text" id="posession" [disabled]="true">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <label for="maintenance" class="form-label">Maintenance</label>
-            <input nz-input name="maintenance" [(ngModel)]="testData" type="text" id="maintenance" [disabled]="true">
+            <input nz-input name="maintenance" [(ngModel)]="propertyModel.maintenence" type="text" id="maintenance" 
+              [disabled]="true">
+          </div>
+          <div class="col-md-3">
+            <label for="gatedCommunity" class="form-label">Gated Community</label>
+            <input nz-input name="gatedCommunity" 
+              [ngModel]="propertyModel.isGated == true ? 'Yes' : 'No'" type="text" id="gatedCommunity" 
+              [disabled]="true">
           </div>
           <div class="col-md-12">
             <label for="abboutProperty" class="form-label">About Property</label>
-            <textarea nz-input name="abboutProperty" [(ngModel)]="testData" id="maintenance" [disabled]="true"></textarea>
+            <textarea nz-input name="abboutProperty" [(ngModel)]="propertyModel.description" id="maintenance" 
+              [disabled]="true">
+            </textarea>
           </div>
         </form>
       </nz-tab>
@@ -67,7 +80,10 @@
         <form class="row g-3">
           <div class="col-md-12">
             <label for="fullAddress" class="form-label">Full Address</label>
-            <textarea nz-input name="fullAddress" [(ngModel)]="testData" id="fullAddress" [disabled]="true"></textarea>
+            <textarea nz-input name="fullAddress" id="fullAddress" [disabled]="true" 
+              [(ngModel)]="propertyModel.address.addressLineOne + ', ' 
+                + propertyModel.address.cityName + ', ' + propertyModel.address.countryName">
+            </textarea>
           </div>
         </form>
       </nz-tab>
@@ -84,7 +100,7 @@
         <form class="row g-3">
           <div class="col-md-12">
             <label for="contactInformation" class="form-label">Contact Information</label>
-            <textarea nz-input name="contactInformation" [(ngModel)]="testData" id="contactInformation" [disabled]="true">
+            <textarea nz-input name="contactInformation" id="contactInformation" [disabled]="true">
             </textarea>
           </div>
         </form>
