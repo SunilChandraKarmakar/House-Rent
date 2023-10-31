@@ -19,8 +19,8 @@
     <h5 class="text-primary">{{ property.bhk }} BHK {{ property.propertyTypeName }}</h5>
     <span>in {{ property.name }}, {{ property.address.cityName }}</span>
     <p>
-      {{ property.propertyTypeName }}
-      <span>{{ property.furnishingTypeName }}</span>
+      {{ property.furnishingTypeName }} | 
+      <span> Posession: {{ property.estPossessionOn | date }} </span>
     </p>
     <hr class="mt-0 mb-0">
     <p>
@@ -28,8 +28,8 @@
       Area: <span class="text-danger fst-italic">{{ property.buildArea }} Sq Ft</span></p>
   </div>
 </div>
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" 
-  color = "#fff" type = "ball-triangle-path" [fullScreen] = "true">
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "ball-clip-rotate-multiple" 
+  [fullScreen] = "true">
   <p style="color: white" > 
     Loading... 
   </p>
