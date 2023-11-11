@@ -61,7 +61,7 @@ export class PropertyTypeDetailsComponent implements OnInit {
     this.upsertButtonName = "Update";
 
     this.propertyTypeService.get(propertyTypeId).subscribe((result: PropertyTypeViewModel) => {
-      this.propertyTypeUpsertModel = result.model;
+      this.propertyTypeUpsertModel = result.model!;
       this.spinnerService.hide();
     });
   }

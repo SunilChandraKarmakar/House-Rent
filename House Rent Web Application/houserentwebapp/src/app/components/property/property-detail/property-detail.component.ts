@@ -60,7 +60,7 @@ export class PropertyDetailComponent implements OnInit {
   private getPropertyDetails(): void {
     this.spinnerService.show();
     this.propertyService.get(this._propertyId!).subscribe((result: PropertyViewModel) => {
-      this.propertyModel = result.gridModel;
+      this.propertyModel = result.gridModel!;
       this.spinnerService.hide();
     },
     (error: any) => {

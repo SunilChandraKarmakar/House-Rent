@@ -20,7 +20,7 @@ export class PropertyCardComponent implements OnInit {
   @Input() showHideShadowInCard: boolean = true;
 
   // Property featured photo
-  propertyFeaturedPhoto: string | undefined = this.property.photos.find((x: PhotoViewModel) => x.isDefault)?.url;
+  propertyFeaturedPhoto: string | undefined = this.property.photos?.find((x: PhotoViewModel) => x.isDefault)?.url;
 
   constructor(private spinnerService: NgxSpinnerService) { }
 

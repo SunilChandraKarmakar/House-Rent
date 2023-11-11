@@ -10,7 +10,7 @@
           {{ propertyModel.bhk }} BHK {{ propertyModel.propertyTypeName }} @ ${{ propertyModel.price }}
         </span>
         <br>
-        <span>in {{ propertyModel.address.cityName }}</span>
+        <span>in {{ propertyModel.address!.cityName }}</span>
         <hr>
         <span><strong>Build Area:</strong> &nbsp; {{ propertyModel.buildArea }} Sqft</span><br>
         <span><strong>Carpet Area:</strong> &nbsp; {{ propertyModel.carpetArea }} Sqft</span><br>
@@ -81,8 +81,8 @@
           <div class="col-md-12">
             <label for="fullAddress" class="form-label">Full Address</label>
             <textarea nz-input name="fullAddress" id="fullAddress" [disabled]="true" 
-              [(ngModel)]="propertyModel.address.addressLineOne + ', ' 
-                + propertyModel.address.cityName + ', ' + propertyModel.address.countryName">
+              [(ngModel)]="propertyModel.address!.addressLineOne + ', ' 
+                + propertyModel.address!.cityName + ', ' + propertyModel.address!.countryName">
             </textarea>
           </div>
         </form>

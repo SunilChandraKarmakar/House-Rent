@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { FurnishingTypeModel, FurnishingTypeViewModel } from 'src/app/models/api.model';
 import { FurnishingTypeService } from 'src/app/services/furnishing-type.service';
+import { CheckValidLoginUser } from 'src/app/utility/check-valid-login-user';
 
 @Component({
   selector: 'app-furnishing-type-details',
@@ -24,6 +25,8 @@ export class FurnishingTypeDetailsComponent implements OnInit {
   private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
+
     this.spinnerService.show();
 
     // Get furnishing type id
@@ -61,7 +64,7 @@ export class FurnishingTypeDetailsComponent implements OnInit {
     this.upsertButtonName = "Update";
 
     this.furnishingTypeService.get(propertyTypeId).subscribe((result: FurnishingTypeViewModel) => {
-      this.furnishingTypeUpsertModel = result.model;
+      this.furnishingTypeUpsertModel = result.model!;
       this.spinnerService.hide();
     });
   }
@@ -74,5 +77,14 @@ export class FurnishingTypeDetailsComponent implements OnInit {
     }
 
     return false;
+  }
+
+  // Checl user is login or not
+  private checkUserIsLoginOrNot(): void {
+    let isLogin: boolean | undefined = CheckValidLoginUser.isLoginUser();
+
+    if(isLogin) {
+      return 
+    }
   }
 }

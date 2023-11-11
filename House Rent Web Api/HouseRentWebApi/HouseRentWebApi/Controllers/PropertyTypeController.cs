@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HouseRentWebApi.Controllers
 {
-    // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PropertyTypeController : BaseController
     {
         [HttpGet]

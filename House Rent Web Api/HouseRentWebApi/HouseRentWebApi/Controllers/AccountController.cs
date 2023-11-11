@@ -1,10 +1,12 @@
 ﻿using HouseRentWebApi.ApplicationLogic.AccountLogic.Command;
 using HouseRentWebApi.ApplicationLogic.AccountLogic.Model;
 using HouseRentWebApi.Shared.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HouseRentWebApi.Controllers
 {
+    [AllowAnonymous]
     public class AccountController : BaseController
     {
         [HttpPost]

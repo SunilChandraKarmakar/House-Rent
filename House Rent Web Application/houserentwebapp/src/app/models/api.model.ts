@@ -1150,11 +1150,11 @@ export class PropertyTypeClient {
 }
 
 export class UserModel implements IUserModel {
-    id!: string;
-    fullName!: string;
-    userName!: string;
-    email!: string;
-    token!: string;
+    id?: string;
+    fullName?: string;
+    userName?: string;
+    email?: string;
+    token?: string;
 
     constructor(data?: IUserModel) {
         if (data) {
@@ -1194,11 +1194,11 @@ export class UserModel implements IUserModel {
 }
 
 export interface IUserModel {
-    id: string;
-    fullName: string;
-    userName: string;
-    email: string;
-    token: string;
+    id?: string;
+    fullName?: string;
+    userName?: string;
+    email?: string;
+    token?: string;
 }
 
 export class ProblemDetails implements IProblemDetails {
@@ -1268,7 +1268,7 @@ export interface IProblemDetails {
 export class RegisterModel implements IRegisterModel {
     fullName!: string;
     userName!: string;
-    phoneNumber!: string;
+    phoneNumber?: string;
     email!: string;
     password!: string;
     confirmPassword!: string;
@@ -1315,7 +1315,7 @@ export class RegisterModel implements IRegisterModel {
 export interface IRegisterModel {
     fullName: string;
     userName: string;
-    phoneNumber: string;
+    phoneNumber?: string;
     email: string;
     password: string;
     confirmPassword: string;
@@ -1416,11 +1416,11 @@ export interface ILoginCommand extends ILoginModel {
 }
 
 export class AddressGridModel implements IAddressGridModel {
-    id!: number;
-    addressLineOne!: string;
-    addressLineTwo!: string;
-    countryName!: string;
-    cityName!: string;
+    id?: number;
+    addressLineOne?: string;
+    addressLineTwo?: string;
+    countryName?: string;
+    cityName?: string;
 
     constructor(data?: IAddressGridModel) {
         if (data) {
@@ -1460,17 +1460,17 @@ export class AddressGridModel implements IAddressGridModel {
 }
 
 export interface IAddressGridModel {
-    id: number;
-    addressLineOne: string;
-    addressLineTwo: string;
-    countryName: string;
-    cityName: string;
+    id?: number;
+    addressLineOne?: string;
+    addressLineTwo?: string;
+    countryName?: string;
+    cityName?: string;
 }
 
 export class AddressViewModel implements IAddressViewModel {
-    model!: AddressModel;
-    gridModel!: AddressGridModel;
-    optionsDataSources!: any;
+    model?: AddressModel;
+    gridModel?: AddressGridModel;
+    optionsDataSources?: any;
 
     constructor(data?: IAddressViewModel) {
         if (data) {
@@ -1479,16 +1479,12 @@ export class AddressViewModel implements IAddressViewModel {
                     (<any>this)[property] = (<any>data)[property];
             }
         }
-        if (!data) {
-            this.model = new AddressModel();
-            this.gridModel = new AddressGridModel();
-        }
     }
 
     init(_data?: any) {
         if (_data) {
-            this.model = _data["model"] ? AddressModel.fromJS(_data["model"]) : new AddressModel();
-            this.gridModel = _data["gridModel"] ? AddressGridModel.fromJS(_data["gridModel"]) : new AddressGridModel();
+            this.model = _data["model"] ? AddressModel.fromJS(_data["model"]) : <any>undefined;
+            this.gridModel = _data["gridModel"] ? AddressGridModel.fromJS(_data["gridModel"]) : <any>undefined;
             this.optionsDataSources = _data["optionsDataSources"];
         }
     }
@@ -1510,17 +1506,17 @@ export class AddressViewModel implements IAddressViewModel {
 }
 
 export interface IAddressViewModel {
-    model: AddressModel;
-    gridModel: AddressGridModel;
-    optionsDataSources: any;
+    model?: AddressModel;
+    gridModel?: AddressGridModel;
+    optionsDataSources?: any;
 }
 
 export class AddressModel implements IAddressModel {
-    id!: number;
-    addressLineOne!: string;
-    addressLineTwo!: string;
-    countryId!: number;
-    cityId!: number;
+    id?: number;
+    addressLineOne?: string;
+    addressLineTwo?: string;
+    countryId?: number;
+    cityId?: number;
 
     constructor(data?: IAddressModel) {
         if (data) {
@@ -1560,11 +1556,11 @@ export class AddressModel implements IAddressModel {
 }
 
 export interface IAddressModel {
-    id: number;
-    addressLineOne: string;
-    addressLineTwo: string;
-    countryId: number;
-    cityId: number;
+    id?: number;
+    addressLineOne?: string;
+    addressLineTwo?: string;
+    countryId?: number;
+    cityId?: number;
 }
 
 export class UpsertAddressCommand extends AddressModel implements IUpsertAddressCommand {
@@ -1595,10 +1591,10 @@ export interface IUpsertAddressCommand extends IAddressModel {
 }
 
 export class CityGridModel implements ICityGridModel {
-    id!: number;
-    name!: string;
-    countryId!: number;
-    countryName!: string;
+    id?: number;
+    name?: string;
+    countryId?: number;
+    countryName?: string;
 
     constructor(data?: ICityGridModel) {
         if (data) {
@@ -1636,16 +1632,16 @@ export class CityGridModel implements ICityGridModel {
 }
 
 export interface ICityGridModel {
-    id: number;
-    name: string;
-    countryId: number;
-    countryName: string;
+    id?: number;
+    name?: string;
+    countryId?: number;
+    countryName?: string;
 }
 
 export class CityViewModel implements ICityViewModel {
-    model!: CityModel;
-    gridModel!: CityGridModel;
-    optionsDataSources!: any;
+    model?: CityModel;
+    gridModel?: CityGridModel;
+    optionsDataSources?: any;
 
     constructor(data?: ICityViewModel) {
         if (data) {
@@ -1654,16 +1650,12 @@ export class CityViewModel implements ICityViewModel {
                     (<any>this)[property] = (<any>data)[property];
             }
         }
-        if (!data) {
-            this.model = new CityModel();
-            this.gridModel = new CityGridModel();
-        }
     }
 
     init(_data?: any) {
         if (_data) {
-            this.model = _data["model"] ? CityModel.fromJS(_data["model"]) : new CityModel();
-            this.gridModel = _data["gridModel"] ? CityGridModel.fromJS(_data["gridModel"]) : new CityGridModel();
+            this.model = _data["model"] ? CityModel.fromJS(_data["model"]) : <any>undefined;
+            this.gridModel = _data["gridModel"] ? CityGridModel.fromJS(_data["gridModel"]) : <any>undefined;
             this.optionsDataSources = _data["optionsDataSources"];
         }
     }
@@ -1685,13 +1677,13 @@ export class CityViewModel implements ICityViewModel {
 }
 
 export interface ICityViewModel {
-    model: CityModel;
-    gridModel: CityGridModel;
-    optionsDataSources: any;
+    model?: CityModel;
+    gridModel?: CityGridModel;
+    optionsDataSources?: any;
 }
 
 export class CityModel implements ICityModel {
-    id!: number;
+    id?: number;
     name!: string;
     countryId!: number;
 
@@ -1729,7 +1721,7 @@ export class CityModel implements ICityModel {
 }
 
 export interface ICityModel {
-    id: number;
+    id?: number;
     name: string;
     countryId: number;
 }
@@ -1762,8 +1754,8 @@ export interface IUpsertCityCommand extends ICityModel {
 }
 
 export class CountryGridModel implements ICountryGridModel {
-    id!: number;
-    name!: string;
+    id?: number;
+    name?: string;
 
     constructor(data?: ICountryGridModel) {
         if (data) {
@@ -1797,14 +1789,14 @@ export class CountryGridModel implements ICountryGridModel {
 }
 
 export interface ICountryGridModel {
-    id: number;
-    name: string;
+    id?: number;
+    name?: string;
 }
 
 export class CountryViewModel implements ICountryViewModel {
-    model!: CountryModel;
-    gridModel!: CountryGridModel;
-    optionsDataSources!: any;
+    model?: CountryModel;
+    gridModel?: CountryGridModel;
+    optionsDataSources?: any;
 
     constructor(data?: ICountryViewModel) {
         if (data) {
@@ -1813,16 +1805,12 @@ export class CountryViewModel implements ICountryViewModel {
                     (<any>this)[property] = (<any>data)[property];
             }
         }
-        if (!data) {
-            this.model = new CountryModel();
-            this.gridModel = new CountryGridModel();
-        }
     }
 
     init(_data?: any) {
         if (_data) {
-            this.model = _data["model"] ? CountryModel.fromJS(_data["model"]) : new CountryModel();
-            this.gridModel = _data["gridModel"] ? CountryGridModel.fromJS(_data["gridModel"]) : new CountryGridModel();
+            this.model = _data["model"] ? CountryModel.fromJS(_data["model"]) : <any>undefined;
+            this.gridModel = _data["gridModel"] ? CountryGridModel.fromJS(_data["gridModel"]) : <any>undefined;
             this.optionsDataSources = _data["optionsDataSources"];
         }
     }
@@ -1844,13 +1832,13 @@ export class CountryViewModel implements ICountryViewModel {
 }
 
 export interface ICountryViewModel {
-    model: CountryModel;
-    gridModel: CountryGridModel;
-    optionsDataSources: any;
+    model?: CountryModel;
+    gridModel?: CountryGridModel;
+    optionsDataSources?: any;
 }
 
 export class CountryModel implements ICountryModel {
-    id!: number;
+    id?: number;
     name!: string;
 
     constructor(data?: ICountryModel) {
@@ -1885,7 +1873,7 @@ export class CountryModel implements ICountryModel {
 }
 
 export interface ICountryModel {
-    id: number;
+    id?: number;
     name: string;
 }
 
@@ -1917,8 +1905,8 @@ export interface IUpsertCountryCommand extends ICountryModel {
 }
 
 export class FurnishingTypeGridModel implements IFurnishingTypeGridModel {
-    id!: number;
-    name!: string;
+    id?: number;
+    name?: string;
 
     constructor(data?: IFurnishingTypeGridModel) {
         if (data) {
@@ -1952,13 +1940,13 @@ export class FurnishingTypeGridModel implements IFurnishingTypeGridModel {
 }
 
 export interface IFurnishingTypeGridModel {
-    id: number;
-    name: string;
+    id?: number;
+    name?: string;
 }
 
 export class FurnishingTypeViewModel implements IFurnishingTypeViewModel {
-    model!: FurnishingTypeModel;
-    gridModel!: FurnishingTypeGridModel;
+    model?: FurnishingTypeModel;
+    gridModel?: FurnishingTypeGridModel;
 
     constructor(data?: IFurnishingTypeViewModel) {
         if (data) {
@@ -1967,16 +1955,12 @@ export class FurnishingTypeViewModel implements IFurnishingTypeViewModel {
                     (<any>this)[property] = (<any>data)[property];
             }
         }
-        if (!data) {
-            this.model = new FurnishingTypeModel();
-            this.gridModel = new FurnishingTypeGridModel();
-        }
     }
 
     init(_data?: any) {
         if (_data) {
-            this.model = _data["model"] ? FurnishingTypeModel.fromJS(_data["model"]) : new FurnishingTypeModel();
-            this.gridModel = _data["gridModel"] ? FurnishingTypeGridModel.fromJS(_data["gridModel"]) : new FurnishingTypeGridModel();
+            this.model = _data["model"] ? FurnishingTypeModel.fromJS(_data["model"]) : <any>undefined;
+            this.gridModel = _data["gridModel"] ? FurnishingTypeGridModel.fromJS(_data["gridModel"]) : <any>undefined;
         }
     }
 
@@ -1996,13 +1980,13 @@ export class FurnishingTypeViewModel implements IFurnishingTypeViewModel {
 }
 
 export interface IFurnishingTypeViewModel {
-    model: FurnishingTypeModel;
-    gridModel: FurnishingTypeGridModel;
+    model?: FurnishingTypeModel;
+    gridModel?: FurnishingTypeGridModel;
 }
 
 export class FurnishingTypeModel implements IFurnishingTypeModel {
-    id!: number;
-    name!: string;
+    id?: number;
+    name?: string;
 
     constructor(data?: IFurnishingTypeModel) {
         if (data) {
@@ -2036,8 +2020,8 @@ export class FurnishingTypeModel implements IFurnishingTypeModel {
 }
 
 export interface IFurnishingTypeModel {
-    id: number;
-    name: string;
+    id?: number;
+    name?: string;
 }
 
 export class UpsertFurnishingTypeCommand extends FurnishingTypeModel implements IUpsertFurnishingTypeCommand {
@@ -2068,28 +2052,28 @@ export interface IUpsertFurnishingTypeCommand extends IFurnishingTypeModel {
 }
 
 export class PropertyGridModel implements IPropertyGridModel {
-    id!: number;
-    name!: string;
-    sellRent!: number;
-    propertyTypeName!: string;
-    furnishingTypeName!: string;
-    bhk!: number;
-    price!: number;
-    buildArea!: number;
-    carpetArea!: number;
-    floorNo!: number;
-    totalFloor!: number;
-    isReadyToMove!: boolean;
-    security!: number;
-    isGated!: boolean;
-    maintenence!: number;
+    id?: number;
+    name?: string;
+    sellRent?: number;
+    propertyTypeName?: string;
+    furnishingTypeName?: string;
+    bhk?: number;
+    price?: number;
+    buildArea?: number;
+    carpetArea?: number;
+    floorNo?: number;
+    totalFloor?: number;
+    isReadyToMove?: boolean;
+    security?: number;
+    isGated?: boolean;
+    maintenence?: number;
     estPossessionOn?: Date | undefined;
     postedOn?: Date | undefined;
-    age!: number;
-    description!: string;
-    userName!: string;
-    address!: AddressViewModel2;
-    photos!: PhotoViewModel[];
+    age?: number;
+    description?: string;
+    userName?: string;
+    address?: AddressViewModel2;
+    photos?: PhotoViewModel[];
 
     constructor(data?: IPropertyGridModel) {
         if (data) {
@@ -2097,10 +2081,6 @@ export class PropertyGridModel implements IPropertyGridModel {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
-        }
-        if (!data) {
-            this.address = new AddressViewModel2();
-            this.photos = [];
         }
     }
 
@@ -2126,7 +2106,7 @@ export class PropertyGridModel implements IPropertyGridModel {
             this.age = _data["age"];
             this.description = _data["description"];
             this.userName = _data["userName"];
-            this.address = _data["address"] ? AddressViewModel2.fromJS(_data["address"]) : new AddressViewModel2();
+            this.address = _data["address"] ? AddressViewModel2.fromJS(_data["address"]) : <any>undefined;
             if (Array.isArray(_data["photos"])) {
                 this.photos = [] as any;
                 for (let item of _data["photos"])
@@ -2175,36 +2155,36 @@ export class PropertyGridModel implements IPropertyGridModel {
 }
 
 export interface IPropertyGridModel {
-    id: number;
-    name: string;
-    sellRent: number;
-    propertyTypeName: string;
-    furnishingTypeName: string;
-    bhk: number;
-    price: number;
-    buildArea: number;
-    carpetArea: number;
-    floorNo: number;
-    totalFloor: number;
-    isReadyToMove: boolean;
-    security: number;
-    isGated: boolean;
-    maintenence: number;
+    id?: number;
+    name?: string;
+    sellRent?: number;
+    propertyTypeName?: string;
+    furnishingTypeName?: string;
+    bhk?: number;
+    price?: number;
+    buildArea?: number;
+    carpetArea?: number;
+    floorNo?: number;
+    totalFloor?: number;
+    isReadyToMove?: boolean;
+    security?: number;
+    isGated?: boolean;
+    maintenence?: number;
     estPossessionOn?: Date | undefined;
     postedOn?: Date | undefined;
-    age: number;
-    description: string;
-    userName: string;
-    address: AddressViewModel2;
-    photos: PhotoViewModel[];
+    age?: number;
+    description?: string;
+    userName?: string;
+    address?: AddressViewModel2;
+    photos?: PhotoViewModel[];
 }
 
 export class AddressViewModel2 implements IAddressViewModel2 {
-    id!: number;
-    addressLineOne!: string;
-    addressLineTwo!: string;
-    countryName!: string;
-    cityName!: string;
+    id?: number;
+    addressLineOne?: string;
+    addressLineTwo?: string;
+    countryName?: string;
+    cityName?: string;
 
     constructor(data?: IAddressViewModel2) {
         if (data) {
@@ -2244,18 +2224,18 @@ export class AddressViewModel2 implements IAddressViewModel2 {
 }
 
 export interface IAddressViewModel2 {
-    id: number;
-    addressLineOne: string;
-    addressLineTwo: string;
-    countryName: string;
-    cityName: string;
+    id?: number;
+    addressLineOne?: string;
+    addressLineTwo?: string;
+    countryName?: string;
+    cityName?: string;
 }
 
 export class PhotoViewModel implements IPhotoViewModel {
-    id!: number;
-    url!: string;
-    propertyId!: number;
-    isDefault!: boolean;
+    id?: number;
+    url?: string;
+    propertyId?: number;
+    isDefault?: boolean;
 
     constructor(data?: IPhotoViewModel) {
         if (data) {
@@ -2293,16 +2273,16 @@ export class PhotoViewModel implements IPhotoViewModel {
 }
 
 export interface IPhotoViewModel {
-    id: number;
-    url: string;
-    propertyId: number;
-    isDefault: boolean;
+    id?: number;
+    url?: string;
+    propertyId?: number;
+    isDefault?: boolean;
 }
 
 export class PropertyViewModel implements IPropertyViewModel {
-    model!: PropertyModel;
-    gridModel!: PropertyGridModel;
-    optionsDataSources!: any;
+    model?: PropertyModel;
+    gridModel?: PropertyGridModel;
+    optionsDataSources?: any;
 
     constructor(data?: IPropertyViewModel) {
         if (data) {
@@ -2311,16 +2291,12 @@ export class PropertyViewModel implements IPropertyViewModel {
                     (<any>this)[property] = (<any>data)[property];
             }
         }
-        if (!data) {
-            this.model = new PropertyModel();
-            this.gridModel = new PropertyGridModel();
-        }
     }
 
     init(_data?: any) {
         if (_data) {
-            this.model = _data["model"] ? PropertyModel.fromJS(_data["model"]) : new PropertyModel();
-            this.gridModel = _data["gridModel"] ? PropertyGridModel.fromJS(_data["gridModel"]) : new PropertyGridModel();
+            this.model = _data["model"] ? PropertyModel.fromJS(_data["model"]) : <any>undefined;
+            this.gridModel = _data["gridModel"] ? PropertyGridModel.fromJS(_data["gridModel"]) : <any>undefined;
             this.optionsDataSources = _data["optionsDataSources"];
         }
     }
@@ -2342,13 +2318,13 @@ export class PropertyViewModel implements IPropertyViewModel {
 }
 
 export interface IPropertyViewModel {
-    model: PropertyModel;
-    gridModel: PropertyGridModel;
-    optionsDataSources: any;
+    model?: PropertyModel;
+    gridModel?: PropertyGridModel;
+    optionsDataSources?: any;
 }
 
 export class PropertyModel implements IPropertyModel {
-    id!: number;
+    id?: number;
     name!: string;
     sellRent!: number;
     propertyTypeId!: number;
@@ -2359,17 +2335,17 @@ export class PropertyModel implements IPropertyModel {
     carpetArea!: number;
     floorNo!: number;
     totalFloor!: number;
-    addressId!: number;
+    addressId?: number;
     isReadyToMove!: boolean;
-    security!: number;
+    security?: number;
     isGated!: boolean;
     maintenence!: number;
     estPossessionOn!: Date;
     postedOn?: Date | undefined;
-    age!: number;
-    description!: string;
-    userId!: string;
-    address!: AddressModel;
+    age?: number;
+    description?: string;
+    userId?: string;
+    address?: AddressModel;
 
     constructor(data?: IPropertyModel) {
         if (data) {
@@ -2377,9 +2353,6 @@ export class PropertyModel implements IPropertyModel {
                 if (data.hasOwnProperty(property))
                     (<any>this)[property] = (<any>data)[property];
             }
-        }
-        if (!data) {
-            this.address = new AddressModel();
         }
     }
 
@@ -2406,7 +2379,7 @@ export class PropertyModel implements IPropertyModel {
             this.age = _data["age"];
             this.description = _data["description"];
             this.userId = _data["userId"];
-            this.address = _data["address"] ? AddressModel.fromJS(_data["address"]) : new AddressModel();
+            this.address = _data["address"] ? AddressModel.fromJS(_data["address"]) : <any>undefined;
         }
     }
 
@@ -2446,7 +2419,7 @@ export class PropertyModel implements IPropertyModel {
 }
 
 export interface IPropertyModel {
-    id: number;
+    id?: number;
     name: string;
     sellRent: number;
     propertyTypeId: number;
@@ -2457,17 +2430,17 @@ export interface IPropertyModel {
     carpetArea: number;
     floorNo: number;
     totalFloor: number;
-    addressId: number;
+    addressId?: number;
     isReadyToMove: boolean;
-    security: number;
+    security?: number;
     isGated: boolean;
     maintenence: number;
     estPossessionOn: Date;
     postedOn?: Date | undefined;
-    age: number;
-    description: string;
-    userId: string;
-    address: AddressModel;
+    age?: number;
+    description?: string;
+    userId?: string;
+    address?: AddressModel;
 }
 
 export class UpsertPropertyCommand extends PropertyModel implements IUpsertPropertyCommand {
@@ -2498,8 +2471,8 @@ export interface IUpsertPropertyCommand extends IPropertyModel {
 }
 
 export class PropertyTypeGridModel implements IPropertyTypeGridModel {
-    id!: number;
-    name!: string;
+    id?: number;
+    name?: string;
 
     constructor(data?: IPropertyTypeGridModel) {
         if (data) {
@@ -2533,13 +2506,13 @@ export class PropertyTypeGridModel implements IPropertyTypeGridModel {
 }
 
 export interface IPropertyTypeGridModel {
-    id: number;
-    name: string;
+    id?: number;
+    name?: string;
 }
 
 export class PropertyTypeViewModel implements IPropertyTypeViewModel {
-    model!: PropertyTypeModel;
-    gridModel!: PropertyTypeGridModel;
+    model?: PropertyTypeModel;
+    gridModel?: PropertyTypeGridModel;
 
     constructor(data?: IPropertyTypeViewModel) {
         if (data) {
@@ -2548,16 +2521,12 @@ export class PropertyTypeViewModel implements IPropertyTypeViewModel {
                     (<any>this)[property] = (<any>data)[property];
             }
         }
-        if (!data) {
-            this.model = new PropertyTypeModel();
-            this.gridModel = new PropertyTypeGridModel();
-        }
     }
 
     init(_data?: any) {
         if (_data) {
-            this.model = _data["model"] ? PropertyTypeModel.fromJS(_data["model"]) : new PropertyTypeModel();
-            this.gridModel = _data["gridModel"] ? PropertyTypeGridModel.fromJS(_data["gridModel"]) : new PropertyTypeGridModel();
+            this.model = _data["model"] ? PropertyTypeModel.fromJS(_data["model"]) : <any>undefined;
+            this.gridModel = _data["gridModel"] ? PropertyTypeGridModel.fromJS(_data["gridModel"]) : <any>undefined;
         }
     }
 
@@ -2577,12 +2546,12 @@ export class PropertyTypeViewModel implements IPropertyTypeViewModel {
 }
 
 export interface IPropertyTypeViewModel {
-    model: PropertyTypeModel;
-    gridModel: PropertyTypeGridModel;
+    model?: PropertyTypeModel;
+    gridModel?: PropertyTypeGridModel;
 }
 
 export class PropertyTypeModel implements IPropertyTypeModel {
-    id!: number;
+    id?: number;
     name!: string;
 
     constructor(data?: IPropertyTypeModel) {
@@ -2617,7 +2586,7 @@ export class PropertyTypeModel implements IPropertyTypeModel {
 }
 
 export interface IPropertyTypeModel {
-    id: number;
+    id?: number;
     name: string;
 }
 

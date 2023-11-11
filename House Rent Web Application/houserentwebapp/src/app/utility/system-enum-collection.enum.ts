@@ -17,7 +17,7 @@ export enum PropertyType {
 }
 
 export enum FurnishingType {
-    Fully = 1,
-    Semi = 2,
+    FullyFurnished = 1,
+    SemiFurnished = 2,
     Unfurnished = 3
 }

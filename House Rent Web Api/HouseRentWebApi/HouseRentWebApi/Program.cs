@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,10 +55,21 @@ builder.Services.AddCors(option =>
 builder.Services.AddEndpointsApiExplorer();
 
 // Swagger configuration 
-builder.Services.AddSwaggerDocument((configuration =>
+builder.Services.AddOpenApiDocument((configuration =>
 {
     configuration.Version = "v1";
     configuration.Title = "House Rent Web API";
+
+    configuration.AddSecurity("Bearer", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+    {
+        Type = OpenApiSecuritySchemeType.Http,
+        Scheme = JwtBearerDefaults.AuthenticationScheme,
+        BearerFormat = "JWT",
+        Description = "Type into the textbox: {your JWT token}."
+    });
+
+    configuration.OperationProcessors.Add(
+        new AspNetCoreOperationSecurityScopeProcessor("Bearer"));
 }));
 
 var app = builder.Build();

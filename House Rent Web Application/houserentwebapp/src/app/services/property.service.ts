@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PropertyGridModel, PropertyModel, PropertyViewModel } from '../models/api.model';
+import { PropertyGridModel, PropertyModel, PropertyViewModel, UserModel } from '../models/api.model';
 import { ApplicationBaseUrl } from '../utility/application-base-url';
 
 @Injectable({
@@ -10,8 +10,14 @@ import { ApplicationBaseUrl } from '../utility/application-base-url';
 
 export class PropertyService {
 
+  // Get current user token
+  private _loginUSerInfo: UserModel = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+    
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${ this._loginUSerInfo.token }`
+    })
   };
 
   constructor(private httpClient: HttpClient) { }
@@ -19,7 +25,7 @@ export class PropertyService {
   // Get all property
   getAll(): Observable<PropertyGridModel[]> {
     let getAllProperties: Observable<PropertyGridModel[]> = 
-      this.httpClient.get<PropertyGridModel[]>(ApplicationBaseUrl.baseUrl + "/api/Property/GetAll");
+      this.httpClient.get<PropertyGridModel[]>(ApplicationBaseUrl.baseUrl + "/api/Property/GetAll", this.httpOptions);
 
     return getAllProperties;
   }
@@ -27,7 +33,7 @@ export class PropertyService {
   // Get property by id
   get(id: number): Observable<PropertyViewModel> {
     let getProperty: Observable<PropertyViewModel> = 
-      this.httpClient.get<PropertyViewModel>(ApplicationBaseUrl.baseUrl + `/api/Property/Get/${id}`);
+      this.httpClient.get<PropertyViewModel>(ApplicationBaseUrl.baseUrl + `/api/Property/Get/${id}`, this.httpOptions);
     
     return getProperty;
   }

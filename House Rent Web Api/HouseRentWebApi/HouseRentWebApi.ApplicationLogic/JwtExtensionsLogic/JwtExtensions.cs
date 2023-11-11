@@ -21,7 +21,7 @@ namespace HouseRentWebApi.ApplicationLogic.JwtExtensionsLogic
             var securityTokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(2),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = signingCredentials
             };
 

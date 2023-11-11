@@ -62,8 +62,8 @@
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                   <nz-radio-group [(ngModel)]="propertyModel.furnishingTypeId" name="furnishingTypeId" 
                   (ngModelChange)="onFurnishingTypeModelChange($event)" nzButtonStyle="solid">
-                    <label nz-radio-button nzValue="1">Fully</label>
-                    <label nz-radio-button nzValue="2">Semi</label>
+                    <label nz-radio-button nzValue="1">Fully Furnished</label>
+                    <label nz-radio-button nzValue="2">Semi Furnished</label>
                     <label nz-radio-button nzValue="3">Unfurnished</label>
                   </nz-radio-group>
                 </nz-form-control>
@@ -163,7 +163,7 @@
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="20" nzRequired nzFor="addressLineOne">Address Line One</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                  <textarea nz-input placeholder="Address Line One" [(ngModel)]="propertyModel.address.addressLineOne"
+                  <textarea nz-input placeholder="Address Line One" [(ngModel)]="propertyModel.address!.addressLineOne"
                     name="addressLineOne" style="width: 60%;">
                   </textarea>
                 </nz-form-control>
@@ -171,7 +171,7 @@
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="20" nzFor="addressLineTwo">Address Line Two</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                  <textarea nz-input placeholder="Address Line Two" [(ngModel)]="propertyModel.address.addressLineTwo"
+                  <textarea nz-input placeholder="Address Line Two" [(ngModel)]="propertyModel.address!.addressLineTwo"
                     name="addressLineTwo" style="width: 60%;">
                   </textarea>
                 </nz-form-control>
@@ -182,7 +182,7 @@
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                   <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a country" 
-                    (ngModelChange)="onChangeCountry($event)" [(ngModel)]="propertyModel.address.countryId" 
+                    (ngModelChange)="onChangeCountry($event)" [(ngModel)]="propertyModel.address!.countryId" 
                     name="countryId" style="width: 60%;"> 
                     <nz-option nzLabel="{{ country.name }}" nzValue="{{ country.id }}" *ngFor="let country of countries">
                     </nz-option>
@@ -195,7 +195,7 @@
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                   <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a city" 
-                    [(ngModel)]="propertyModel.address.cityId" name="cityId"
+                    [(ngModel)]="propertyModel.address!.cityId" name="cityId"
                     (ngModelChange)="onCityModelChange($event)" style="width: 60%;"> 
                     <nz-option nzLabel="{{ city.name }}" nzValue="{{ city.id }}" *ngFor="let city of cascadingCities">
                     </nz-option>

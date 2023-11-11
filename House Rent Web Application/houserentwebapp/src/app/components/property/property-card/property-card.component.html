@@ -17,7 +17,7 @@
   </div>
   <div class="card-body">
     <h5 class="text-primary">{{ property.bhk }} BHK {{ property.propertyTypeName }}</h5>
-    <span>in {{ property.name }}, {{ property.address.cityName }}</span>
+    <span>in {{ property.name }}, {{ property.address!.cityName }}</span>
     <p>
       {{ property.furnishingTypeName }} | 
       <span> Posession: {{ property.estPossessionOn | date }} </span>

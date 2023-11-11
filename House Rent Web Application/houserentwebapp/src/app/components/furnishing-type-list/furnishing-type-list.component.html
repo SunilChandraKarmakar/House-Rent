@@ -22,12 +22,12 @@
           <td>{{ furnishingType.name }}</td>
           <td>
             <button nz-button nzType="default" nzSize="small" nzShape="round" 
-              (click)="updateFurnishingType(furnishingType.id)">
+              (click)="updateFurnishingType(furnishingType.id!)">
               <i nz-icon nzType="edit" nzTheme="outline"></i>
             </button>
             <button nz-popconfirm nzPopconfirmTitle="Are you sure delete this Furnishing Type?" 
               nz-button nzType="default" nzSize="small" nzShape="round"
-              (nzOnConfirm)="deleteFurnishingType(furnishingType.id)" (nzOnCancel)="cancel()" [nzIcon]="iconTpl" nzDanger="danger">
+              (nzOnConfirm)="deleteFurnishingType(furnishingType.id!)" (nzOnCancel)="cancel()" [nzIcon]="iconTpl" nzDanger="danger">
               <i nz-icon nzType="delete" nzTheme="outline"></i>
             </button>
             <ng-template #iconTpl>

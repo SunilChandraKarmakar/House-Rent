@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -25,7 +26,7 @@ export class AddPropertyComponent implements OnInit {
 
   // City list model
   cities: CityGridModel[] = [];
-  cascadingCities: CityModel[] = [];
+  cascadingCities: CityGridModel[] = [];
 
   // country list model
   countries: CountryGridModel[] = [];
@@ -40,7 +41,7 @@ export class AddPropertyComponent implements OnInit {
 
   constructor(private cityService: CityService, private countryService: CountryService, 
     private spinnerService: NgxSpinnerService, private toastrService: ToastrService, 
-    private propertyService: PropertyService) { }
+    private propertyService: PropertyService, private router: Router) { }
 
   ngOnInit() {
     // Get cities
@@ -136,7 +137,7 @@ export class AddPropertyComponent implements OnInit {
       this.toastrService.warning("Please, provied total floor.", "Warning");
       return false;
     }
-    else if(this.propertyModel.address.addressLineOne == undefined || this.propertyModel.carpetArea == null 
+    else if(this.propertyModel.address?.addressLineOne == undefined || this.propertyModel.carpetArea == null 
       || this.propertyModel.address.addressLineOne == "") {
       this.toastrService.warning("Please, provied address line one.", "Warning");
       return false;
@@ -278,10 +279,10 @@ export class AddPropertyComponent implements OnInit {
 
     switch(selectedValue) {
       case 1:
-        this.furnishingTypeName = FurnishingType[FurnishingType.Fully];
+        this.furnishingTypeName = "Fully Furnished";
         break;
       case 2:
-        this.furnishingTypeName = FurnishingType[FurnishingType.Semi];
+        this.furnishingTypeName = "Semi Furnished";
         break;
       default:
         this.furnishingTypeName = FurnishingType[FurnishingType.Unfurnished];
@@ -291,7 +292,7 @@ export class AddPropertyComponent implements OnInit {
 
   // Get city name based on selecte city id
   onCityModelChange(event: any): void {
-    this.cityName = this.cascadingCities.find((x: CityModel) => x.id == event)?.name;
+    this.cityName = this.cascadingCities.find((x: CityGridModel) => x.id == event)?.name;
   }
 
   submitForm(): void {
@@ -301,6 +302,7 @@ export class AddPropertyComponent implements OnInit {
     this.propertyService.upsert(this.propertyModel).subscribe(() => {
       this.spinnerService.hide();
       this.toastrService.success("Property saved.", "Successfull");
+      this.router.navigate(["/"])
     });
   }
 }
