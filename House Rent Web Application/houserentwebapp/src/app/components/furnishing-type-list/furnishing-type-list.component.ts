@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { FurnishingTypeGridModel } from 'src/app/models/api.model';
+import { FurnishingTypeGridModel, UserModel } from 'src/app/models/api.model';
 import { FurnishingTypeService } from 'src/app/services/furnishing-type.service';
 
 @Component({
@@ -19,11 +19,17 @@ export class FurnishingTypeListComponent implements OnInit {
   furnishingTypes: FurnishingTypeGridModel[] = [];
 
   ngOnInit() {
-    this.spinner.show();
-    this.furnishingTypeService.getAll().subscribe((result: FurnishingTypeGridModel[]) => {
-      this.furnishingTypes = result;
-      this.spinner.hide();
-    });
+    if(!this.checkUserLoginOrNot()) {
+      this.toastrService.info("You are not login user. Please, login first.", "Information");
+      this.router.navigate(["/user/login"]);
+    } 
+    else {
+      this.spinner.show();
+      this.furnishingTypeService.getAll().subscribe((result: FurnishingTypeGridModel[]) => {
+        this.furnishingTypes = result;
+        this.spinner.hide();
+      });
+    }
   }
 
   deleteFurnishingType(id: number): void {
@@ -41,5 +47,16 @@ export class FurnishingTypeListComponent implements OnInit {
   updateFurnishingType(id: number): void {
     this.spinner.show();
     this.router.navigate([`/furnishing-type/details/${id}`]);
+  }
+
+  // Check user login or not
+  private checkUserLoginOrNot(): boolean | undefined {
+    let loginUserInfo: UserModel = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+    if (loginUserInfo == null || loginUserInfo == undefined) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 }

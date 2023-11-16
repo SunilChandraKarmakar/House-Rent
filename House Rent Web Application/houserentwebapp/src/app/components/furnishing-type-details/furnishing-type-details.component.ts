@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { FurnishingTypeModel, FurnishingTypeViewModel } from 'src/app/models/api.model';
+import { FurnishingTypeModel, FurnishingTypeViewModel, UserModel } from 'src/app/models/api.model';
 import { FurnishingTypeService } from 'src/app/services/furnishing-type.service';
-import { CheckValidLoginUser } from 'src/app/utility/check-valid-login-user';
 
 @Component({
   selector: 'app-furnishing-type-details',
@@ -22,11 +21,12 @@ export class FurnishingTypeDetailsComponent implements OnInit {
 
   constructor(private spinnerService: NgxSpinnerService, 
   private furnishingTypeService: FurnishingTypeService, private toastrService: ToastrService, 
-  private activatedRoute: ActivatedRoute) { }
+  private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-
-
+    // Check user login or not
+    this.checkUserLoginOrNot();
+    
     this.spinnerService.show();
 
     // Get furnishing type id
@@ -72,19 +72,19 @@ export class FurnishingTypeDetailsComponent implements OnInit {
   // Ckeck from valiadition
   private fromValidation(): boolean {
     if(this.furnishingTypeUpsertModel.name == undefined || this.furnishingTypeUpsertModel.name == null) {
-      this,this.toastrService.error("Please, provied name.");
+      this.toastrService.error("Please, provied name.");
       return true;
     }
 
     return false;
   }
 
-  // Checl user is login or not
-  private checkUserIsLoginOrNot(): void {
-    let isLogin: boolean | undefined = CheckValidLoginUser.isLoginUser();
-
-    if(isLogin) {
-      return 
+  // Check user login or not
+  private checkUserLoginOrNot(): void {
+    let loginUserInfo: UserModel = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+    if (loginUserInfo == undefined) {
+      this.toastrService.info("You are not login user. Please, login first.", "Information");
+      this.router.navigate(["/"]);
     }
   }
 }

@@ -9,17 +9,20 @@ import { ApplicationBaseUrl } from '../utility/application-base-url';
   })
   
 export class CityService {
-    constructor(private httpClient: HttpClient) { }
+    // Login user info property
+    private _loginUserInfo: UserModel = new UserModel();
 
-    // Get current user token
-    private _loginUSerInfo: UserModel = JSON.parse(localStorage.getItem("_loginUserInfo")!);
-    
+    constructor(private httpClient: HttpClient) { 
+        // Get current user token
+        this._loginUserInfo = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+    }  
+
     httpOptions = {
         headers: new HttpHeaders({ 
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${ this._loginUSerInfo.token }`
+        'Content-Type': 'application/json',
+        ...(this._loginUserInfo.token != null ? { 'Authorization': `Bearer ${this._loginUserInfo.token}` } : { })
         })
-    };
+    };  
 
     // Get all city
     getAll(): Observable<CityGridModel[]> {

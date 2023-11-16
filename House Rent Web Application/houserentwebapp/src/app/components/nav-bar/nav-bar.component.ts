@@ -20,10 +20,10 @@ export class NavBarComponent implements OnInit {
   }
 
   getToken(): boolean {
-    let loginUSerInfo: UserModel = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+    let loginUserInfo: UserModel = JSON.parse(localStorage.getItem("_loginUserInfo")!);
 
-    if(loginUSerInfo != null || loginUSerInfo != undefined) {
-      this.loginUserName = loginUSerInfo.fullName;
+    if(loginUserInfo != null || loginUserInfo != undefined) {
+      this.loginUserName = loginUserInfo.fullName;
       return true;
     }
 

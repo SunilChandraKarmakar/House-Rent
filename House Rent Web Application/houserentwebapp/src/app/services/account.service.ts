@@ -12,7 +12,7 @@ export class AccountService {
 
   constructor(private httpClient: HttpClient) { }
 
-  // login method
+  // Login method
   login(loginModel: LoginModel): Observable<UserModel> {
 
     let loginUserInfo: Observable<UserModel> = 
@@ -21,7 +21,7 @@ export class AccountService {
     return loginUserInfo;
   }
 
-  // registration method
+  // Registration method
   registration(registrationModel: RegisterModel): Observable<UserModel> {
     let registrationUserInfo: Observable<UserModel> = 
       this.httpClient.post<UserModel>(ApplicationBaseUrl.baseUrl + "/api/Account/Registration", registrationModel);

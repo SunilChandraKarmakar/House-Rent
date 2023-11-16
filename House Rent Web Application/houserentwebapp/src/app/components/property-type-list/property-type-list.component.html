@@ -21,12 +21,13 @@
         <tr *ngFor="let propertyType of propertyTypeList.data">
           <td>{{ propertyType.name }}</td>
           <td>
-            <button nz-button nzType="default" nzSize="small" nzShape="round" (click)="updatePropertyType(propertyType.id)">
+            <button nz-button nzType="default" nzSize="small" nzShape="round" (click)="updatePropertyType(propertyType.id!)">
               <i nz-icon nzType="edit" nzTheme="outline"></i>
             </button>
             <button nz-popconfirm nzPopconfirmTitle="Are you sure delete this Property Types?" 
               nz-button nzType="default" nzSize="small" nzShape="round"
-              (nzOnConfirm)="deletePropertyType(propertyType.id)" (nzOnCancel)="cancel()" [nzIcon]="iconTpl" nzDanger="danger">
+              (nzOnConfirm)="deletePropertyType(propertyType.id!)" (nzOnCancel)="cancel()" [nzIcon]="iconTpl" 
+              nzDanger="danger">
               <i nz-icon nzType="delete" nzTheme="outline"></i>
             </button>
             <ng-template #iconTpl>
