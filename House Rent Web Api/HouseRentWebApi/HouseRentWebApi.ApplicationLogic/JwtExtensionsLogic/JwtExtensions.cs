@@ -1,4 +1,5 @@
 ﻿using HouseRentWebApi.ApplicationLogic.AccountLogic.Model;
+using HouseRentWebApi.ApplicationLogic.JwtExtensionsLogic.Model;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -8,27 +9,28 @@ namespace HouseRentWebApi.ApplicationLogic.JwtExtensionsLogic
 {
     public static class JwtExtensions
     {
-        public static string CreateJwt(UserModel userModel)
+        public static string CreateJwt(UserModel userModel, JwtConfig jwtConfig)
         {
-            var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("top security key..."));
-            var claims = new Claim[]
+            var jwtTokenHendler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(jwtConfig.Key);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                new Claim(ClaimTypes.Name, userModel.UserName),
-                new Claim(ClaimTypes.NameIdentifier, userModel.Id.ToString())
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.NameId, userModel.Id),
+                    new Claim(JwtRegisteredClaimNames.Email, userModel.Email),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                }),
+
+                Expires = DateTime.UtcNow.AddHours(12),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+                Issuer = jwtConfig.Issuer,
+                Audience = jwtConfig.Audience
             };
 
-            var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature);
-            var securityTokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(1),
-                SigningCredentials = signingCredentials
-            };
-
-            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-            var createToken = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
-
-            return jwtSecurityTokenHandler.WriteToken(createToken);
+            var token = jwtTokenHendler.CreateToken(tokenDescriptor);
+            return jwtTokenHendler.WriteToken(token);
         }
     }
 }

@@ -12,7 +12,7 @@ import { FurnishingTypeListComponent } from './components/furnishing-type-list/f
 import { FurnishingTypeDetailsComponent } from './components/furnishing-type-details/furnishing-type-details.component';
 
 const routes: Routes = [
-  { path: "", component: PropertyListComponent },
+  { path: "", component: UserLoginComponent },
    
   { path: "rent-property", component: PropertyListComponent, pathMatch: "full" },
 

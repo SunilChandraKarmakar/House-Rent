@@ -18,17 +18,22 @@ export class FurnishingTypeListComponent implements OnInit {
 
   furnishingTypes: FurnishingTypeGridModel[] = [];
 
-  ngOnInit() {
-    if(!this.checkUserLoginOrNot()) {
-      this.toastrService.info("You are not login user. Please, login first.", "Information");
-      this.router.navigate(["/user/login"]);
-    } 
-    else {
+  ngOnInit(): void {
+    let isUserLogin: boolean = this.checkUserLoginOrNot()!;
+
+    if(isUserLogin) {
       this.spinner.show();
       this.furnishingTypeService.getAll().subscribe((result: FurnishingTypeGridModel[]) => {
         this.furnishingTypes = result;
         this.spinner.hide();
+      },
+      (error: any) => {
+        console.log("error :- ", error);
       });
+    }
+    else {
+      this.toastrService.warning("Please, login first.", "Warning");
+      this.router.navigate(["/user/login"]);
     }
   }
 
@@ -52,6 +57,7 @@ export class FurnishingTypeListComponent implements OnInit {
   // Check user login or not
   private checkUserLoginOrNot(): boolean | undefined {
     let loginUserInfo: UserModel = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+
     if (loginUserInfo == null || loginUserInfo == undefined) {
       return false;
     }

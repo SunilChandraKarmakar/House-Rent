@@ -40,7 +40,7 @@ export class UserLoginComponent implements OnInit {
         localStorage.setItem("_loginUserInfo", JSON.stringify(result));
         this.spinner.hide();
         this.toastrService.success("Login successfull.", "Successfull.");
-        this.router.navigate(["/"]);
+        this.router.navigate(["/rent-property"]);
       });
     } 
     else {

@@ -12,23 +12,22 @@ export class PropertyTypeService {
 
   // Login user info property
   private _loginUserInfo: UserModel = new UserModel();
+  private _headers: HttpHeaders = new HttpHeaders();
 
   constructor(private httpClient: HttpClient) { 
     // Get current user token
     this._loginUserInfo = JSON.parse(localStorage.getItem("_loginUserInfo")!);
-  }  
 
-  httpOptions = {
-    headers: new HttpHeaders({ 
+    this._headers = new HttpHeaders({ 
       'Content-Type': 'application/json',
-      ...(this._loginUserInfo.token != null ? { 'Authorization': `Bearer ${this._loginUserInfo.token}` } : { })
-    })
-  };  
+      'Authorization' : `Bearer ${this._loginUserInfo.token}`
+    })  
+  }  
 
   // Get all property type
   getAll(): Observable<PropertyTypeGridModel[]> {
     let getAllPropertyTypes: Observable<PropertyTypeGridModel[]> = 
-      this.httpClient.get<PropertyTypeGridModel[]>(ApplicationBaseUrl.baseUrl + "/api/PropertyType/GetAll", this.httpOptions);
+      this.httpClient.get<PropertyTypeGridModel[]>(ApplicationBaseUrl.baseUrl + "/api/PropertyType/GetAll", { headers: this._headers });
 
     return getAllPropertyTypes;
   }
@@ -36,7 +35,7 @@ export class PropertyTypeService {
   // Get property type by id
   get(id: number): Observable<PropertyTypeViewModel> {
     let getPropertyType: Observable<PropertyTypeViewModel> = 
-      this.httpClient.get<PropertyTypeViewModel>(ApplicationBaseUrl.baseUrl + `/api/PropertyType/Get/${id}`, this.httpOptions);
+      this.httpClient.get<PropertyTypeViewModel>(ApplicationBaseUrl.baseUrl + `/api/PropertyType/Get/${id}`, { headers: this._headers });
     
     return getPropertyType;
   }
@@ -44,7 +43,7 @@ export class PropertyTypeService {
   // Upsert property type
   upsert(model: PropertyTypeModel): Observable<number> {
     let upsertPropertyType: Observable<number> = 
-      this.httpClient.post<number>(ApplicationBaseUrl.baseUrl + "/api/PropertyType/Upsert", model, this.httpOptions);
+      this.httpClient.post<number>(ApplicationBaseUrl.baseUrl + "/api/PropertyType/Upsert", model, { headers: this._headers });
 
     return upsertPropertyType;
   }
@@ -52,7 +51,7 @@ export class PropertyTypeService {
   // Delete property type by id
   delete(id: number): Observable<number> {
     let deletedPropertyType: Observable<number> = 
-      this.httpClient.delete<number>(ApplicationBaseUrl.baseUrl  + `/api/PropertyType/Delete/${id}`, this.httpOptions);
+      this.httpClient.delete<number>(ApplicationBaseUrl.baseUrl  + `/api/PropertyType/Delete/${id}`, { headers: this._headers });
 
     return deletedPropertyType;
   }

@@ -1,4 +1,5 @@
 using HouseRentWebApi.ApplicationLogic;
+using HouseRentWebApi.ApplicationLogic.JwtExtensionsLogic.Model;
 using HouseRentWebApi.Common;
 using HouseRentWebApi.Domain;
 using HouseRentWebApi.Shared.Middlewares;
@@ -9,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NSwag;
 using NSwag.Generation.Processors.Security;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,36 +20,33 @@ builder.Services.AddDbContext<HouseRentContext>(option =>
 });
 builder.Services.AddIdentity<User, IdentityRole>(option => { }).AddEntityFrameworkStores<HouseRentContext>();
 
-// Add Jwt Authencation
-var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("top security key..."));
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
-                        IssuerSigningKey = symmetricSecurityKey
-                    };
-                });
+// Add JWT
+builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JWTConfig"));
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
+{
+    byte[] key = System.Text.Encoding.ASCII.GetBytes(builder.Configuration["JWTConfig:Key"]!);
+    Console.WriteLine("JWT Key: " + Convert.ToBase64String(key));
+    string isSuer = builder.Configuration["JWTConfig:Issuer"];
+    string audience = builder.Configuration["JWTConfig:Audience"];
+
+    option.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        RequireExpirationTime = true,
+        ValidIssuer = isSuer,
+        ValidAudience = audience,
+        ValidAlgorithms = new[] { SecurityAlgorithms.HmacSha256 }
+    };
+});
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddDistributedMemoryCache();
-
-// Add CORS
-builder.Services.AddCors(option =>
-{
-    option.AddPolicy("AllowOrigin", policy =>
-    {
-        policy.AllowAnyOrigin();
-        policy.AllowAnyHeader();
-        policy.AllowAnyMethod();
-    });
-});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -71,6 +68,18 @@ builder.Services.AddOpenApiDocument((configuration =>
     configuration.OperationProcessors.Add(
         new AspNetCoreOperationSecurityScopeProcessor("Bearer"));
 }));
+
+// Add CORS
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy("AllowOrigin", policy =>
+    {
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.SetIsOriginAllowed(_ => true);
+        policy.AllowCredentials();
+    });
+});
 
 var app = builder.Build();
 
@@ -96,7 +105,11 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseCors("AllowOrigin");
+app.UseCors("CorsPolicy");
+
+app.UseCors("AllowHeaders");
+
+app.UseCors(options => options.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
 
 app.MapControllers();
 

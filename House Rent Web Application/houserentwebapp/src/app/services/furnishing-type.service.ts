@@ -9,21 +9,21 @@ import { Observable } from 'rxjs';
 })
 
 export class FurnishingTypeService {
-  
-  // Login user info property
+
   private _loginUserInfo: UserModel = new UserModel();
 
-  constructor(private httpClient: HttpClient) { 
+  constructor(private httpClient: HttpClient) {
     // Get current user token
     this._loginUserInfo = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+    console.log("LLLL :- ", this._loginUserInfo); 
   }  
 
   httpOptions = {
     headers: new HttpHeaders({ 
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this._loginUserInfo.token}` 
+      'Authorization': `Bearer ${ this._loginUserInfo.token }`
     })
-  };  
+  };
 
   // Get all furnishing type
   getAll(): Observable<FurnishingTypeGridModel[]> {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { PropertyGridModel } from 'src/app/models/api.model';
+import { PropertyGridModel, UserModel } from 'src/app/models/api.model';
 import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
@@ -23,8 +23,11 @@ export class PropertyListComponent implements OnInit {
   private spinnerService: NgxSpinnerService, private toastrService: ToastrService) { }
 
   ngOnInit() {
-    this.checkUrlIsChanged();
-    this.getProperties(this._sellRent);
+    // this.checkUrlIsChanged();
+    // this.getProperties(this._sellRent);
+
+    let isLoginUser: boolean | undefined = this.checkUserLoginOrNot();
+    console.log("Is Login User :- ", isLoginUser);
   }
 
   private getProperties(sellRentType: number): void {
@@ -42,6 +45,18 @@ export class PropertyListComponent implements OnInit {
   private checkUrlIsChanged(): void {
     if(this.activatedRoute.snapshot.url.toString()) {
       this._sellRent = 2;
+    }
+  }
+
+  // Check user login or not
+  private checkUserLoginOrNot(): boolean | undefined {
+    let loginUserInfo: UserModel = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+
+    if (loginUserInfo == null || loginUserInfo == undefined) {
+      return false;
+    }
+    else {
+      return true;
     }
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { PropertyTypeGridModel } from 'src/app/models/api.model';
+import { PropertyTypeGridModel, UserModel } from 'src/app/models/api.model';
 import { PropertyTypeService } from 'src/app/services/property-type.service';
 
 @Component({
@@ -18,12 +18,25 @@ export class PropertyTypeListComponent implements OnInit {
 
   propertyTypes: PropertyTypeGridModel[] = [];
 
+  // Login user model
+  private _loginUserInfo: UserModel = new UserModel();
+
   ngOnInit() {
-    this.spinner.show();
-    this.propertyTypeService.getAll().subscribe((result: PropertyTypeGridModel[]) => {
-      this.propertyTypes = result;
-      this.spinner.hide();
-    });
+    // Check user login or not
+    this._loginUserInfo = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+
+    console.log("Login USer Info = ", this._loginUserInfo);
+
+    // if(this._loginUserInfo.token == null) {
+    //   this.toastrService.warning("You can not login user! Please, login first.", "Warning");
+    //   this.router.navigate(["/user/login"]);
+    // }
+    
+    // this.spinner.show();
+    // this.propertyTypeService.getAll().subscribe((result: PropertyTypeGridModel[]) => {
+    //   this.propertyTypes = result;
+    //   this.spinner.hide();
+    // });
   }
 
   deletePropertyType(id: number): void {
@@ -42,4 +55,16 @@ export class PropertyTypeListComponent implements OnInit {
     this.spinner.show();
     this.router.navigate([`/property-types/details/${id}`]);
   }
+
+  // // Check user login or not 
+  // private checkUserLoginOrNot(): void {
+  //   this._loginUserInfo = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+
+  //   console.log("Login USer Info = ", this._loginUserInfo);
+
+  //   if(this._loginUserInfo.token == null) {
+  //     this.toastrService.warning("You can not login user! Please, login first.", "Warning");
+  //     this.router.navigate(["/user/login"]);
+  //   }
+  // }
 }
