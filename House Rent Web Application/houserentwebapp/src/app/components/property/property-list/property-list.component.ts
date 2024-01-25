@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { PropertyGridModel, UserModel } from 'src/app/models/api.model';
@@ -13,6 +13,9 @@ import { PropertyService } from 'src/app/services/property.service';
 
 export class PropertyListComponent implements OnInit {
 
+  // Login user info property
+  private _loginUserInfo: UserModel = new UserModel();
+
   // Properity data source
   properities: PropertyGridModel[];
 
@@ -20,14 +23,20 @@ export class PropertyListComponent implements OnInit {
   private _sellRent: number = 1;
 
   constructor(private propertyService: PropertyService, private activatedRoute: ActivatedRoute, 
-  private spinnerService: NgxSpinnerService, private toastrService: ToastrService) { }
+  private spinnerService: NgxSpinnerService, private toastrService: ToastrService, private router: Router) { }
 
   ngOnInit() {
-    // this.checkUrlIsChanged();
-    // this.getProperties(this._sellRent);
 
-    let isLoginUser: boolean | undefined = this.checkUserLoginOrNot();
-    console.log("Is Login User :- ", isLoginUser);
+    // Check user login or not
+    if(!this.isGetLoginUser()) {
+      this.spinnerService.hide();
+      this.toastrService.warning("You are not a login user! Please, login first.", "Warning");
+      this.router.navigate(["/user/login"]);
+      return;
+    }
+
+    this.checkUrlIsChanged();
+    this.getProperties(this._sellRent);
   }
 
   private getProperties(sellRentType: number): void {
@@ -48,11 +57,11 @@ export class PropertyListComponent implements OnInit {
     }
   }
 
-  // Check user login or not
-  private checkUserLoginOrNot(): boolean | undefined {
-    let loginUserInfo: UserModel = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+  private isGetLoginUser(): boolean {
+    // Get current user token
+    this._loginUserInfo = JSON.parse(localStorage.getItem("_loginUserInfo")!);
 
-    if (loginUserInfo == null || loginUserInfo == undefined) {
+    if(this._loginUserInfo == null) {
       return false;
     }
     else {

@@ -17,6 +17,9 @@ import { FurnishingType, PropertyAddTab, PropertyType } from 'src/app/utility/sy
 
 export class AddPropertyComponent implements OnInit {
 
+  // Login user info property
+  private _loginUserInfo: UserModel = new UserModel();
+
   // Set true or false value in html
   true: boolean = true;
   false: boolean = false;
@@ -44,6 +47,15 @@ export class AddPropertyComponent implements OnInit {
     private propertyService: PropertyService, private router: Router) { }
 
   ngOnInit() {
+
+    // Check user login or not
+    if(!this.isGetLoginUser()) {
+      this.spinnerService.hide();
+      this.toastrService.warning("You are not a login user! Please, login first.", "Warning");
+      this.router.navigate(["/user/login"]);
+      return;
+    }
+
     // Get cities
     this.getCities();
 
@@ -304,5 +316,17 @@ export class AddPropertyComponent implements OnInit {
       this.toastrService.success("Property saved.", "Successfull");
       this.router.navigate(["/"])
     });
+  }
+
+  private isGetLoginUser(): boolean {
+    // Get current user token
+    this._loginUserInfo = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+
+    if(this._loginUserInfo == null) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 }

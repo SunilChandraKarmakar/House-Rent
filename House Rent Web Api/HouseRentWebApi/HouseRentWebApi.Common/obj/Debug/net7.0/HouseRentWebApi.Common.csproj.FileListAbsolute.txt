@@ -8,7 +8,6 @@ D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debu
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debug\net7.0\HouseRentWebApi.Common.AssemblyInfoInputs.cache
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debug\net7.0\HouseRentWebApi.Common.AssemblyInfo.cs
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debug\net7.0\HouseRentWebApi.Common.csproj.CoreCompileInputs.cache
-D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debug\net7.0\HouseRentWebApi.Common.csproj.CopyComplete
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debug\net7.0\HouseRentWebApi.Common.dll
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debug\net7.0\refint\HouseRentWebApi.Common.dll
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debug\net7.0\HouseRentWebApi.Common.pdb
@@ -18,3 +17,4 @@ D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debu
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\bin\Debug\net7.0\HouseRentWebApi.Shared.dll
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\bin\Debug\net7.0\HouseRentWebApi.Shared.pdb
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debug\net7.0\HouseRentWebApi.Common.sourcelink.json
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi.Common\obj\Debug\net7.0\HouseRen.3641332C.Up2Date

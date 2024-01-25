@@ -13,6 +13,9 @@ import { FurnishingTypeService } from 'src/app/services/furnishing-type.service'
 
 export class FurnishingTypeDetailsComponent implements OnInit {
 
+  // Login user info property
+  private _loginUserInfo: UserModel = new UserModel();
+
   // Furnishing type upsert model
   furnishingTypeUpsertModel: FurnishingTypeModel = new FurnishingTypeModel();
 
@@ -20,14 +23,19 @@ export class FurnishingTypeDetailsComponent implements OnInit {
   upsertButtonName: string = "Save";
 
   constructor(private spinnerService: NgxSpinnerService, 
-  private furnishingTypeService: FurnishingTypeService, private toastrService: ToastrService, 
-  private activatedRoute: ActivatedRoute, private router: Router) { }
+    private furnishingTypeService: FurnishingTypeService, private toastrService: ToastrService, 
+    private activatedRoute: ActivatedRoute, private router: Router) { }
 
-  ngOnInit() {
-    // Check user login or not
-    this.checkUserLoginOrNot();
-    
+  ngOnInit() {    
     this.spinnerService.show();
+
+    // Check user login or not
+    if(!this.isGetLoginUser()) {
+      this.spinnerService.hide();
+      this.toastrService.warning("You are not a login user! Please, login first.", "Warning");
+      this.router.navigate(["/user/login"]);
+      return;
+    }
 
     // Get furnishing type id
     let furnishingTypeId: number | undefined = this.getExistFurnishingTypeId();
@@ -79,12 +87,15 @@ export class FurnishingTypeDetailsComponent implements OnInit {
     return false;
   }
 
-  // Check user login or not
-  private checkUserLoginOrNot(): void {
-    let loginUserInfo: UserModel = JSON.parse(localStorage.getItem("_loginUserInfo")!);
-    if (loginUserInfo == undefined) {
-      this.toastrService.info("You are not login user. Please, login first.", "Information");
-      this.router.navigate(["/"]);
+  private isGetLoginUser(): boolean {
+    // Get current user token
+    this._loginUserInfo = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+
+    if(this._loginUserInfo == null) {
+      return false;
+    }
+    else {
+      return true;
     }
   }
 }

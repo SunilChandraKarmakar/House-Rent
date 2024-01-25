@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { PropertyTypeModel, PropertyTypeViewModel } from 'src/app/models/api.model';
+import { PropertyTypeModel, PropertyTypeViewModel, UserModel } from 'src/app/models/api.model';
 import { PropertyTypeService } from 'src/app/services/property-type.service';
 
 @Component({
@@ -13,6 +13,9 @@ import { PropertyTypeService } from 'src/app/services/property-type.service';
 
 export class PropertyTypeDetailsComponent implements OnInit {
 
+  // Login user info property
+  private _loginUserInfo: UserModel = new UserModel();
+
   // Property type upsert model
   propertyTypeUpsertModel: PropertyTypeModel = new PropertyTypeModel();
 
@@ -20,11 +23,19 @@ export class PropertyTypeDetailsComponent implements OnInit {
   upsertButtonName: string = "Save";
 
   constructor(private spinnerService: NgxSpinnerService, 
-  private propertyTypeService: PropertyTypeService, private toastrService: ToastrService, 
-  private activatedRoute: ActivatedRoute) { }
+    private propertyTypeService: PropertyTypeService, private toastrService: ToastrService, 
+    private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.spinnerService.show();
+
+    // Check user login or not
+    if(!this.isGetLoginUser()) {
+      this.spinnerService.hide();
+      this.toastrService.warning("You are not a login user! Please, login first.", "Warning");
+      this.router.navigate(["/user/login"]);
+      return;
+    }
 
     // Get property type id
     let propertyTypeId: number | undefined = this.getExistPropertyTypeId();
@@ -74,5 +85,17 @@ export class PropertyTypeDetailsComponent implements OnInit {
     }
 
     return false;
+  }
+
+  private isGetLoginUser(): boolean {
+    // Get current user token
+    this._loginUserInfo = JSON.parse(localStorage.getItem("_loginUserInfo")!);
+
+    if(this._loginUserInfo == null) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 }

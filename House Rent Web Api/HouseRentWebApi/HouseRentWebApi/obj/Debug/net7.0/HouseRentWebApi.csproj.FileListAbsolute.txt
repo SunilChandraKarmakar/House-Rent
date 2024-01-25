@@ -25,7 +25,6 @@ D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.0\staticwebassets.build.json
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.0\staticwebassets.development.json
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.0\scopedcss\bundle\HouseRentWebApi.styles.css
-D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.0\HouseRentWebApi.csproj.CopyComplete
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.0\HouseRentWebApi.dll
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.0\refint\HouseRentWebApi.dll
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.0\HouseRentWebApi.pdb
@@ -104,3 +103,4 @@ D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.0\HouseRentWebApi.sourcelink.json
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\libman.json
 D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\House-Rent\House Rent Web Api\HouseRentWebApi\HouseRentWebApi\obj\Debug\net7.0\HouseRen.9A849A20.Up2Date
