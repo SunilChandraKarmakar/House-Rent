@@ -52,7 +52,9 @@ export class PropertyListComponent implements OnInit {
   }
 
   private checkUrlIsChanged(): void {
-    if(this.activatedRoute.snapshot.url.toString()) {
+    let routingUrl: string = this.activatedRoute.snapshot.url.toString();
+
+    if(routingUrl.match("rent-property")) {
       this._sellRent = 2;
     }
   }

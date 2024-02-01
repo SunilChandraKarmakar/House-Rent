@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: "", component: UserLoginComponent },
    
   { path: "rent-property", component: PropertyListComponent, pathMatch: "full" },
+  { path: "buy-property", component: PropertyListComponent, pathMatch: "full" },
 
   { path: "add-property", component: AddPropertyComponent, pathMatch: "full" },
   { path: "property-detail/:id", component: PropertyDetailComponent, pathMatch: "full" },

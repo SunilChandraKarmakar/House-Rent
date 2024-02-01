@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { CityGridModel, CityModel, CountryGridModel, PropertyModel, UserModel } from 'src/app/models/api.model';
+import { AddressModel, CityGridModel, CityModel, CountryGridModel, PropertyModel, UserModel } from 'src/app/models/api.model';
 import { CityService } from 'src/app/services/city.service';
 import { CountryService } from 'src/app/services/country.service';
 import { PropertyService } from 'src/app/services/property.service';
@@ -55,6 +55,9 @@ export class AddPropertyComponent implements OnInit {
       this.router.navigate(["/user/login"]);
       return;
     }
+    
+    // Initialize property model 
+    this.propertyModel.address = this.propertyModel.address ?? new AddressModel();
 
     // Get cities
     this.getCities();
@@ -196,8 +199,7 @@ export class AddPropertyComponent implements OnInit {
     const status = file.status;
     
     if (status === 'done') {
-      console.log("Done");
-      console.log("File List :- ", fileList);
+      
     } 
   }
 
